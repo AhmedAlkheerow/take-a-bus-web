@@ -15,7 +15,7 @@ jobs:
           node-version: '12'
       - name: Install Dependencies
         run: npm ci
-      - name: Run Prettier Fix
-        run: npm run fix
+      - name: Run Lint
+        run: npm run fix && "[[ -z $(git --no-pager diff -- . ':(exclude)yarn.lock' ':(exclude)yarn.lock') ]]"
       - name: Running Tests
         run: export CI=1 && npm run test
