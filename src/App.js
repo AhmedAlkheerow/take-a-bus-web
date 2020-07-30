@@ -1,9 +1,11 @@
 import React from 'react';
-import Map from './Components/MapContainer';
+// import Map from './Components/MapContainer';
+import Progress from './Components/ProgressSec';
 function App() {
   return (
     <div>
-      <Map />
+      <Progress />
+      {/* <Map /> */}
     </div>
   );
 }

@@ -609,6 +609,11 @@ video {
 
 /* purgecss end ignore */
 
+.progress-bar {
+  color: #18a0fb;
+  font-size: 2.25rem;
+}
+
 /* Override utils here*/
 
 .space-y-0 > :not(template) ~ :not(template) {
