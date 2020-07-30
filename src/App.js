@@ -1,9 +1,9 @@
 import React from 'react';
-import FromDestinationForm from './Components/FromDestinationForm';
+import Map from './Components/MapContainer';
 function App() {
   return (
     <div>
-      <FromDestinationForm />
+      <Map />
     </div>
   );
 }
