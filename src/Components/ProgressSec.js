@@ -5,6 +5,7 @@ import {
 } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import ChangingProgressProvider from './animateProvider';
+
 export default function Progress() {
   return (
     <div className="bg-blue-100 ">
@@ -14,7 +15,7 @@ export default function Progress() {
 
       <div className=" grid grid-cols-3  py-20 ">
         <div className="w-64 mx-auto">
-          <ChangingProgressProvider values={[0, 20, 40, 70]}>
+          <ChangingProgressProvider values={[0, 20, 40, 60, 70]}>
             {(percentage) => (
               <CircularProgressbarWithChildren
                 value={percentage}
@@ -51,7 +52,7 @@ export default function Progress() {
           </ChangingProgressProvider>
         </div>
         <div className="w-64 mx-auto">
-          <ChangingProgressProvider values={[0, 10, 20, 25]}>
+          <ChangingProgressProvider values={[0, 10, 15, 20, 25]}>
             {(percentage) => (
               <CircularProgressbarWithChildren
                 value={percentage}

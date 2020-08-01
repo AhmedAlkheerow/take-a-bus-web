@@ -1,11 +1,9 @@
 import React from 'react';
-// import Map from './Components/MapContainer';
-import Progress from './Components/ProgressSec';
+import About from './Components/About';
 function App() {
   return (
     <div>
-      <Progress />
-      {/* <Map /> */}
+      <About />
     </div>
   );
 }
