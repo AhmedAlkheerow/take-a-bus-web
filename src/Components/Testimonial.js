@@ -48,11 +48,9 @@ export default function Testimonial() {
             ></img>
             <div>
               <h1 className="Member-Name">Ahmed Ayad</h1>
-              <div>Lorem ipsum is placeholder </div>
-              <div>commonly used in the graphic, print,</div>
-              <div>and publishing industries for</div>
-              <div>previewing layouts and visual</div>
-              <div>mockups.</div>
+              <div>I’m 24 years old guy who makes UI/UX </div>
+              <div>design and I do web development,</div>
+              <div> science fictions are my favorite inspiration</div>
             </div>
           </div>
 
@@ -64,11 +62,9 @@ export default function Testimonial() {
             ></img>
             <div>
               <h1 className="Member-Name">Ahmed Abdul-razaq</h1>
-              <div>Lorem ipsum is placeholder </div>
-              <div>commonly used in the graphic, print,</div>
-              <div>and publishing industries for</div>
-              <div>previewing layouts and visual</div>
-              <div>mockups.</div>
+              <div> 20 years old, Software Engineer,Learner</div>
+              <div>and Enthusiastic coder utilizing</div>
+              <div> every opportunity to expand his arsenal.</div>
             </div>
           </div>
 
@@ -80,11 +76,9 @@ export default function Testimonial() {
             ></img>
             <div>
               <h1 className="Member-Name">Shna Rafeeq</h1>
-              <div>Lorem ipsum is placeholder </div>
-              <div>commonly used in the graphic, print,</div>
-              <div>and publishing industries for</div>
-              <div>previewing layouts and visual</div>
-              <div>mockups.</div>
+              <div>I am 21 years old senior software ngineer </div>
+              <div>estudent, who started her journey </div>
+              <div>for the world of web developing with Re:coded.</div>
             </div>
           </div>
           <div className="Card">
@@ -95,11 +89,11 @@ export default function Testimonial() {
             ></img>
             <div>
               <h1 className="Member-Name">Jalal Arif</h1>
-              <div>Lorem ipsum is placeholder </div>
-              <div>commonly used in the graphic, print,</div>
-              <div>and publishing industries for</div>
-              <div>previewing layouts and visual</div>
-              <div>mockups.</div>
+              <div>
+                I'm 22 years old,currently Software engineer.also trying{' '}
+              </div>
+              <div>to be Web Dev. I have started for 5 month</div>
+              <div>new experience before with Re:Coded</div>
             </div>
           </div>
         </div>
