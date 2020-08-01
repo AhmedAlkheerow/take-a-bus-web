@@ -20,12 +20,6 @@ export default function Progress() {
                 value={percentage}
                 strokeWidth={5}
                 styles={buildStyles({
-                  // How long animation takes to go from one percentage to another, in seconds
-                  pathTransitionDuration: 2,
-                  // Can specify path transition in more detail, or remove it entirely
-                  // pathTransition: 'none',
-
-                  // Colors
                   pathColor: `rgba(24, 160, 251)`,
                 })}
               >
@@ -45,12 +39,6 @@ export default function Progress() {
                 value={percentage}
                 strokeWidth={5}
                 styles={buildStyles({
-                  // How long animation takes to go from one percentage to another, in seconds
-                  pathTransitionDuration: 2,
-                  // Can specify path transition in more detail, or remove it entirely
-                  // pathTransition: 'none',
-
-                  // Colors
                   pathColor: `rgba(24, 160, 251)`,
                 })}
               >
@@ -69,12 +57,6 @@ export default function Progress() {
                 value={percentage}
                 strokeWidth={5}
                 styles={buildStyles({
-                  // How long animation takes to go from one percentage to another, in seconds
-                  pathTransitionDuration: 2,
-                  // Can specify path transition in more detail, or remove it entirely
-                  // pathTransition: 'none',
-
-                  // Colors
                   pathColor: `rgba(24, 160, 251)`,
                 })}
               >
