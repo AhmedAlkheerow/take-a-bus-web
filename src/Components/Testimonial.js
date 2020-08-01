@@ -90,7 +90,7 @@ export default function Testimonial() {
             <div>
               <h1 className="Member-Name">Jalal Arif</h1>
               <div>
-                I'm 22 years old,currently Software engineer.also trying{' '}
+                I am 22 years old,currently Software engineer.also trying
               </div>
               <div>to be Web Dev. I have started for 5 month</div>
               <div>new experience before with Re:Coded</div>
