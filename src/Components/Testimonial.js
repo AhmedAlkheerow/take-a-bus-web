@@ -33,11 +33,9 @@ export default function Testimonial() {
             ></img>
             <div>
               <h1 className="Member-Name">Hanan Dlshad</h1>
-              <div>Lorem ipsum is placeholder </div>
-              <div>commonly used in the graphic, print,</div>
-              <div>and publishing industries for</div>
-              <div>previewing layouts and visual</div>
-              <div>mockups.</div>
+              <div>I am 20 years old,I am a senior Software Engineer</div>
+              <div> student.I love coding cause I start learning</div>
+              <div>web development with awesome Bootcamp (Re: Coded)</div>
             </div>
           </div>
           <div className="Card">
@@ -76,7 +74,7 @@ export default function Testimonial() {
             ></img>
             <div>
               <h1 className="Member-Name">Shna Rafeeq</h1>
-              <div>I am 21 years old senior software ngineer </div>
+              <div>I am 21 years old senior Software Engineer </div>
               <div>estudent, who started her journey </div>
               <div>for the world of web developing with Re:coded.</div>
             </div>
