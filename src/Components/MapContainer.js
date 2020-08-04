@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactMapGL from 'react-map-gl';
-
+import LocateMeBtn from './LocateMeBtn';
 export default function Map() {
   const [viewport, setViewport] = useState({
     latitude: 36.206291,
@@ -17,8 +17,12 @@ export default function Map() {
         onViewportChange={(viewport) => {
           setViewport(viewport);
         }}
-        mapStyle="mapbox://styles/shna/ckd4x2xmy02kh1ir3hihcr36m"
-      ></ReactMapGL>
+        mapStyle="mapbox://styles/ahmadduhoki/ckdd0tsyr3o311iog0cehzy4x"
+      >
+        <div className="h-full flex flex-row-reverse items-end p-16">
+          <LocateMeBtn />
+        </div>
+      </ReactMapGL>
     </>
   );
 }
