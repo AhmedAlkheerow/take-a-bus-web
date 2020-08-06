@@ -17,7 +17,7 @@ export default function Map() {
         onViewportChange={(viewport) => {
           setViewport(viewport);
         }}
-        mapStyle="mapbox://styles/ahmadduhoki/ckdd0tsyr3o311iog0cehzy4x"
+        mapStyle="mapbox://styles/shna/ckd4x2xmy02kh1ir3hihcr36m"
       >
         <div className="h-full flex flex-row-reverse items-end p-16">
           <LocateMeBtn />
