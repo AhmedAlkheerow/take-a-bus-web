@@ -1,9 +1,9 @@
 module.exports = {
-  purge: [],
+  purge: false,
   theme: {
     extend: {
       colors: {
-        lightblue: '#18A0FB',
+        primary: '#18A0FB',
       },
     },
   },

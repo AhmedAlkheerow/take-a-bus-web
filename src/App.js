@@ -1,8 +1,10 @@
 import React from 'react';
-import Map from './Components/MapContainer';
+import Map from './components/MapContainer';
+import Navbar from './components/Navbar';
 function App() {
   return (
     <div>
+      <Navbar />
       <Map />
     </div>
   );
