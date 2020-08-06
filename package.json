@@ -16,12 +16,10 @@
   "scripts": {
     "build:css": "postcss src/tailwind.css -o src/index.css",
     "watch:css": "postcss src/tailwind.css -o src/index.css --watch",
-    "env:dev": "cross-env NODE_ENV=development",
-    "env:prod": "cross-env NODE_ENV=production",
     "react-scripts:start": "sleep 5 && react-scripts start",
     "react-scripts:build": "react-scripts build",
-    "start": "run-p env:dev watch:css react-scripts:start",
-    "build": "run-s env:prod build:css react-scripts:build",
+    "start": "cross-env NODE_ENV=development run-p watch:css react-scripts:start",
+    "build": "cross-env NODE_ENV=production run-s build:css react-scripts:build",
     "test": "react-scripts test",
     "test:nowatch": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
@@ -54,6 +52,7 @@
     "eslint-plugin-react": "^7.20.3",
     "npm-run-all": "^4.1.5",
     "postcss-cli": "^7.1.1",
+    "postcss-preset-env": "^6.7.0",
     "prettier": "^2.0.5",
     "purgecss": "^2.3.0",
     "tailwindcss": "^1.5.2"
