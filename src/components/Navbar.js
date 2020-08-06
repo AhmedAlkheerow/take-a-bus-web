@@ -12,7 +12,7 @@ export default function Navbar({ handleShowRegister, handleShowLogin }) {
           </a>
         </div>
         <div className="flex justify-between flex-grow">
-          <NavMenu className="" />
+          <NavMenu />
           <div className="mx-6">
             <button
               className="btn secondary"

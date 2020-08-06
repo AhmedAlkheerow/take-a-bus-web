@@ -2,15 +2,12 @@ import React from 'react';
 import RedXBtn from './RedXBtn';
 import OrSeperator from './OrSeperator';
 import FacebookGoogleBtn from './FacebookGoogleBtn';
-
-export default function SignIn() {
+import PropTypes from 'prop-types';
+export default function SignIn({ handleClose }) {
   const actionString = 'Login';
   return (
-    <div className="container mx-auto md:grid md:grid-cols-4 sm:flex sm:flex-col bg-white my-32 rounded-lg">
-      <div className="col-span-4 flex flex-row-reverse">
-        <RedXBtn />
-      </div>
-      <div className="col-span-2 flex flex-col justify-center xl:ml-10 xl:mt-12 lg:ml-6 md:ml-1 sm:mt-12">
+    <div className="container relative grid grid-cols-12 bg-white my-32 rounded-lg">
+      <div className="col-span-6 flex flex-col pl-10 my-auto">
         <div>
           <h1 className="text-2xl font-bold pb-4">Login Now</h1>
         </div>
@@ -34,7 +31,7 @@ export default function SignIn() {
             />
           </div>
           <div className="flex flex-row-reverse">
-            <a href="#" className="mt-2">
+            <a href="#forgetpass" className="mt-2">
               Forgot Password?
             </a>
           </div>
@@ -47,22 +44,28 @@ export default function SignIn() {
               Login
             </button>
           </div>
-          <div className="pt-2">
+          <div className="pt-6">
             <h3>
               Not on Take a Bus yet?
-              <a href="#" className="text-primary mt-2">
+              <a href="#signup" className="text-primary mt-2">
                 Sign up
               </a>
             </h3>
           </div>
         </form>
       </div>
-      <div className="col-span-1 flex justify-center py-12">
+      <div className="col-span-1 flex justify-end">
         <OrSeperator />
       </div>
-      <div className="flex flex-col justify-center xl:my-12 xl:mr-10 lg:mr-0 md:mr-1 sm:mx-auto">
+      <div className="col-span-5 flex flex-col w-100 justify-center items-start px-5">
         <FacebookGoogleBtn actionString={actionString} />
+        <div className="absolute right-0 top-0">
+          <RedXBtn onClick={handleClose} />
+        </div>
       </div>
     </div>
   );
 }
+SignIn.propTypes = {
+  handleClose: PropTypes.func,
+};
