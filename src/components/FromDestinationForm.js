@@ -2,32 +2,26 @@ import React from 'react';
 
 export default function FromDestinationForm() {
   return (
-    <div className="xl:w-1/4 lg:w-1/2 md:w-1/2">
-      <form className="flex flex-row bg-blue-400 shadow-md rounded-lg px-6 py-4 mt-4">
-        <div className="my-4 mr-1 w-full">
-          <label
-            className="block text-white font-bold mb-2 text-base"
-            htmlFor="From"
-          >
+    <div className="w-5/12">
+      <form className="flex justify-between bg-dblue shadow-md rounded-lg px-5 pt-3 pb-8">
+        <div>
+          <label className="text-white font-medium mb-1" htmlFor="from-input">
             From:
           </label>
           <input
-            className="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="From"
+            className="w-11/12 border border-gray-500 rounded-xl py-1 px-2 leading-3 text-sm focus:outline-none focus:shadow-outline"
+            id="from-input"
             type="text"
-            placeholder="Choose a Location"
+            placeholder="Choose a location"
           />
         </div>
-        <div className="my-4 ml-1 w-full">
-          <label
-            className="block text-white font-bold mb-2 text-base"
-            htmlFor="To"
-          >
+        <div>
+          <label className="text-white font-medium mb-1" htmlFor="to-input">
             To:
           </label>
           <input
-            className="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="To"
+            className="w-11/12 border border-gray-500 rounded-xl py-1 px-2 leading-3 text-sm focus:outline-none focus:shadow-outline"
+            id="to-input"
             type="text"
             placeholder="Destination"
           />
