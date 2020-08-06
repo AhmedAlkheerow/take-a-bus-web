@@ -15,13 +15,13 @@ export default function Navbar({ handleShowRegister, handleShowLogin }) {
           <NavMenu />
           <div className="mx-6">
             <button
-              className="btn secondary"
+              className="btn secondary focus:outline-none"
               onClick={() => handleShowLogin(true)}
             >
               Log in
             </button>
             <button
-              className="btn primary ml-2"
+              className="btn primary ml-2 focus:outline-none"
               onClick={() => handleShowRegister(true)}
             >
               Register
