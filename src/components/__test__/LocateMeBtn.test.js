@@ -1,9 +1,8 @@
 import React from 'react';
 import LocateMeBtn from '../LocateMeBtn';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 // Snapshot test
-test('Locate me button is renderer', () => {
-  const tree = renderer.create(<LocateMeBtn />).toJSON();
-  expect(tree).toMatchSnapshot();
+test('Locate me button is rendered', () => {
+  render(<LocateMeBtn />);
 });
