@@ -609,81 +609,6 @@ video {
 
 /* purgecss end ignore */
 
-.btn {
-  font-weight: 700;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  border-radius: 0.25rem;
-}
-
-.btn-blue {
-  --bg-opacity: 1;
-  background-color: #4299e1;
-  background-color: rgba(66, 153, 225, var(--bg-opacity));
-  --text-opacity: 1;
-  color: #fff;
-  color: rgba(255, 255, 255, var(--text-opacity));
-}
-
-.btn-blue:hover {
-  --bg-opacity: 1;
-  background-color: #2b6cb0;
-  background-color: rgba(43, 108, 176, var(--bg-opacity));
-}
-
-.btn-darkBlue {
-  --bg-opacity: 1;
-  background-color: #2c5282;
-  background-color: rgba(44, 82, 130, var(--bg-opacity));
-  --text-opacity: 1;
-  color: #fff;
-  color: rgba(255, 255, 255, var(--text-opacity));
-}
-
-.btn-darkBlue:hover {
-  --bg-opacity: 1;
-  background-color: #2b6cb0;
-  background-color: rgba(43, 108, 176, var(--bg-opacity));
-}
-
-.btn-TransparentBlue {
-  background-color: transparent;
-  --text-opacity: 1;
-  color: #000;
-  color: rgba(0, 0, 0, var(--text-opacity));
-  border-style: solid;
-  border-width: 2px;
-  --border-opacity: 1;
-  border-color: #a0aec0;
-  border-color: rgba(160, 174, 192, var(--border-opacity));
-}
-
-.btn-TransparentBlue:hover {
-  --bg-opacity: 1;
-  background-color: #edf2f7;
-  background-color: rgba(237, 242, 247, var(--bg-opacity));
-  border-style: solid;
-  border-width: 2px;
-  --border-opacity: 1;
-  border-color: #a0aec0;
-  border-color: rgba(160, 174, 192, var(--border-opacity));
-}
-
-.btn-redXBtn {
-  fill: currentColor;
-  --text-opacity: 1;
-  color: #f56565;
-  color: rgba(245, 101, 101, var(--text-opacity));
-}
-
-.btn-redXBtn:hover {
-  --text-opacity: 1;
-  color: #e53e3e;
-  color: rgba(229, 62, 62, var(--text-opacity));
-}
-
 /* Override utils here*/
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
@@ -701,6 +626,14 @@ html {
   --border-opacity: 1;
   border-color: #18A0FB;
   border-color: rgba(24, 160, 251, var(--border-opacity));
+}
+
+.btn-md {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 0.25rem;
 }
 
 .btn.primary {
@@ -749,6 +682,10 @@ html {
 
 .nav-link:hover {
   text-decoration: underline;
+}
+
+.boxshadow {
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
 }
 
 .space-y-0 > :not(template) ~ :not(template) {
