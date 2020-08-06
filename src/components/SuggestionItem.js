@@ -10,7 +10,7 @@ export default function SuggestionItem(props) {
   // eslint-disable-next-line react/prop-types
   const duration = props.duration;
   // eslint-disable-next-line react/prop-types
-  const fastest = props.isFastest || 1;
+  const fastest = props.fastest || false;
 
   return (
     <>

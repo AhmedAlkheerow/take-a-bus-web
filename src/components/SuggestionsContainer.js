@@ -7,6 +7,7 @@ const suggestions = [
     origin: 'Sami Abdulrahman',
     destination: 'Erbil Citadel',
     duration: '6:45 PM - 8:15 PM',
+    fastest: true,
   },
   {
     busNo: '473824 EBL - IRQ',
