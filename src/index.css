@@ -633,6 +633,14 @@ html {
   border-color: rgba(24, 160, 251, var(--border-opacity));
 }
 
+.btn-md {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 0.25rem;
+}
+
 .btn.primary {
   --bg-opacity: 1;
   background-color: #18A0FB;
@@ -679,6 +687,10 @@ html {
 
 .nav-link:hover {
   text-decoration: underline;
+}
+
+.boxshadow {
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
 }
 
 .space-y-0 > :not(template) ~ :not(template) {
