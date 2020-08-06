@@ -3,7 +3,7 @@
 @tailwind components;
 /* purgecss end ignore */
 .text-blue-color {
-  color: #18a0fb;
+  @apply font-bold py-2 px-4 rounded;
 }
 /* Override utils here*/
 

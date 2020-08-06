@@ -2,9 +2,7 @@
 @tailwind base;
 @tailwind components;
 /* purgecss end ignore */
-.text-blue-color {
-  color: #18a0fb;
-}
+.text-blue-color
 /* Override utils here*/
 
 /* Override utils here*/
