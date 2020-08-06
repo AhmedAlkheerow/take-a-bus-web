@@ -1,5 +1,5 @@
 import React from 'react';
-import Map from './Components/MapContainer';
+import Map from './components/MapContainer';
 function App() {
   return (
     <div>
