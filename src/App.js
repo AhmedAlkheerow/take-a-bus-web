@@ -1,11 +1,13 @@
 import React from 'react';
 import Map from './components/MapContainer';
-import Navbar from './components/Navbar';
+// import Navbar from './components/Navbar';
+import Layout from './components/Layout';
 function App() {
   return (
     <div>
-      <Navbar />
-      <Map />
+      <Layout>
+        <Map />
+      </Layout>
     </div>
   );
 }
