@@ -10,6 +10,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-icons": "^3.10.0",
     "react-map-gl": "^5.2.7",
     "react-scripts": "3.4.1"
   },
@@ -55,6 +56,7 @@
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.0.5",
     "purgecss": "^2.3.0",
+    "react-test-renderer": "^16.13.1",
     "tailwindcss": "^1.5.2"
   }
 }
