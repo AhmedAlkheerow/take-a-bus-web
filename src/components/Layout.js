@@ -9,43 +9,54 @@ const Layout = ({ children }) => {
   const [showRegister, setShowRegister] = useState(false);
   const [showModal, toggleModal] = useState(false);
 
-  const handleShowLogin = (bool) => {
-    toggleModal(bool);
-    setShowLogin(bool);
+  const showLoginF = () => {
+    setShowLogin(true);
+    showModalF();
   };
 
-  const handleShowRegister = (bool) => {
-    toggleModal(bool);
-    setShowRegister(bool);
+  const showRegisterF = () => {
+    setShowRegister(true);
+    showModalF();
+  };
+
+  const showModalF = () => {
+    toggleModal(true);
+  };
+
+  const closeModal = () => {
+    toggleModal(false);
+    setShowRegister(false);
+    setShowLogin(false);
   };
 
   return (
     <>
-      <Navbar
-        handleShowLogin={handleShowLogin}
-        handleShowRegister={handleShowRegister}
-      />
-
+      <div className="flex flex-col h-screen">
+        <div className="shadow-md z-10">
+          <Navbar onLoginClick={showLoginF} onRegisterClick={showRegisterF} />
+        </div>
+        <main className="flex-grow overflow-auto">{children}</main>
+      </div>
       {showModal && (
-        <Modal>
-          {showLogin && <SignIn handleClose={() => handleShowLogin(false)} />}
-          {showRegister && (
-            <SignUp handleClose={() => handleShowRegister(false)} />
-          )}
+        <Modal onClickOutside={closeModal}>
+          {showLogin && <SignIn onClose={closeModal} />}
+          {showRegister && <SignUp onClose={closeModal} />}
         </Modal>
       )}
-      <main>{children}</main>
     </>
   );
 };
 export default Layout;
-const Modal = ({ children }) => (
-  <>
-    <div className="flex justify-center fixed mx-auto w-3/5 inset-0 z-50 outline-none focus:outline-none">
+const Modal = ({ children, onClickOutside }) => (
+  <div className="z-50 fixed inset-0">
+    <div
+      onClick={onClickOutside}
+      className="absolute opacity-25 inset-0 bg-black"
+    ></div>
+    <div className="flex justify-center mx-auto w-3/5 outline-none focus:outline-none">
       {children}
     </div>
-    <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-  </>
+  </div>
 );
 
 Layout.propTypes = {
@@ -60,4 +71,5 @@ Modal.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  onClickOutside: PropTypes.func,
 };

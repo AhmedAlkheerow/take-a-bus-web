@@ -3,10 +3,10 @@ import RedXBtn from './RedXBtn';
 import OrSeperator from './OrSeperator';
 import FacebookGoogleBtn from './FacebookGoogleBtn';
 import PropTypes from 'prop-types';
-export default function SignIn({ handleClose }) {
+export default function SignIn({ onClose }) {
   const actionString = 'Login';
   return (
-    <div className="container relative grid grid-cols-12 bg-white my-32 rounded-lg">
+    <div className="container relative grid grid-cols-12 bg-white my-32 rounded-lg pt-16">
       <div className="col-span-6 flex flex-col pl-10 my-auto">
         <div>
           <h1 className="text-2xl font-bold pb-4">Login Now</h1>
@@ -44,13 +44,13 @@ export default function SignIn({ handleClose }) {
               Login
             </button>
           </div>
-          <div className="pt-6">
-            <h3>
-              Not on Take a Bus yet?
-              <a href="#signup" className="text-primary mt-2">
+          <div className="py-6">
+            <p className="text-sm">
+              Not on Take a Bus yet?&nbsp;
+              <a href="#signup" className="text-primary">
                 Sign up
               </a>
-            </h3>
+            </p>
           </div>
         </form>
       </div>
@@ -60,12 +60,12 @@ export default function SignIn({ handleClose }) {
       <div className="col-span-5 flex flex-col w-100 justify-center items-start px-5">
         <FacebookGoogleBtn actionString={actionString} />
         <div className="absolute right-0 top-0">
-          <RedXBtn onClick={handleClose} />
+          <RedXBtn onClick={onClose} />
         </div>
       </div>
     </div>
   );
 }
 SignIn.propTypes = {
-  handleClose: PropTypes.func,
+  onClose: PropTypes.func,
 };
