@@ -1,20 +1,24 @@
 import React from 'react';
 import Logo from '../assets/logo-200.png';
-
+import { Link } from 'react-router-dom';
 export default function Navbar() {
   return (
     <header className="shadow-sm py-1">
       <nav className="flex items-center">
         <div className="flex items-center flex-shrink-0 text-white ">
-          <a href="/">
+          <Link to="/">
             <img src={Logo} className="w-20 mx-6" alt="logo" />
-          </a>
+          </Link>
         </div>
         <div className="flex justify-between flex-grow">
           <NavMenu className="" />
           <div className="mx-6">
-            <button className="btn secondary">Log in</button>
-            <button className="btn primary ml-2">Register</button>
+            <Link to="/signin">
+              <button className="btn secondary">Log in</button>
+            </Link>
+            <Link to="/signup">
+              <button className="btn primary ml-2">Register</button>
+            </Link>
           </div>
         </div>
       </nav>
@@ -24,20 +28,20 @@ export default function Navbar() {
 
 const NavMenu = () => (
   <div className="text-sm flex flex-col md:flex-row justify-between mr-auto">
-    <a href="#home" className="nav-link">
+    <Link to="/" className="nav-link">
       Home
-    </a>
-    <a href="#about" className="nav-link">
+    </Link>
+    <Link to="/about" className="nav-link">
       About
-    </a>
-    <a href="#route-list" className="nav-link">
+    </Link>
+    <Link to="/routes" className="nav-link">
       Route List
-    </a>
-    <a href="#history" className="nav-link">
+    </Link>
+    <Link to="/me/history" className="nav-link">
       History
-    </a>
-    <a href="#fav" className="nav-link">
+    </Link>
+    <Link to="/me/favorite" className="nav-link">
       Favorite Bus
-    </a>
+    </Link>
   </div>
 );
