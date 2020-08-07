@@ -2,14 +2,12 @@ import React from 'react';
 import RedXBtn from './RedXBtn';
 import OrSeperator from './OrSeperator';
 import FacebookGoogleBtn from './FacebookGoogleBtn';
-export default function SignUp() {
+import PropTypes from 'prop-types';
+export default function SignUp({ onClose }) {
   const actionString = 'Sign Up';
   return (
-    <div className="container mx-auto md:grid md:grid-cols-4 sm:flex sm:flex-col bg-white my-32 rounded-lg">
-      <div className="col-span-4 flex flex-row-reverse">
-        <RedXBtn />
-      </div>
-      <div className="col-span-2 flex flex-col justify-center xl:ml-10 xl:mt-12 lg:ml-6 md:ml-1 sm:mt-12">
+    <div className="container relative grid grid-cols-12 bg-white my-32 rounded-lg pt-16">
+      <div className="col-span-6 flex flex-col pl-10 my-auto">
         <div>
           <h1 className="text-2xl font-bold pb-4">Sign Up Now</h1>
         </div>
@@ -61,22 +59,28 @@ export default function SignUp() {
               Register
             </button>
           </div>
-          <div className="pt-2">
-            <h3>
-              Already a Member?
-              <a href="#" className="text-primary mt-2">
+          <div className="py-6">
+            <p className="text-sm">
+              Already a Member?&nbsp;
+              <a href="#login" className="text-primary">
                 Login
               </a>
-            </h3>
+            </p>
           </div>
         </form>
       </div>
-      <div className="col-span-1 flex justify-center py-12">
+      <div className="col-span-1 flex justify-end">
         <OrSeperator />
       </div>
-      <div className="flex flex-col justify-center xl:my-12 xl:mr-10 lg:mr-0 md:mr-1 sm:mx-auto">
+      <div className="col-span-5 flex flex-col w-100 justify-center items-start px-5">
         <FacebookGoogleBtn actionString={actionString} />
+        <div className="absolute right-0 top-0">
+          <RedXBtn onClick={onClose} />
+        </div>
       </div>
     </div>
   );
 }
+SignUp.propTypes = {
+  onClose: PropTypes.func,
+};
