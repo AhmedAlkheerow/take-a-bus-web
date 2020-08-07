@@ -1,7 +1,9 @@
 import React from 'react';
 import Logo from '../assets/logo-200.png';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-export default function Navbar() {
+
+export default function Navbar({ onRegisterClick, onLoginClick }) {
   return (
     <header className="shadow-sm py-1">
       <nav className="flex items-center">
@@ -11,14 +13,20 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="flex justify-between flex-grow">
-          <NavMenu className="" />
+          <NavMenu />
           <div className="mx-6">
-            <Link to="/signin">
-              <button className="btn secondary">Log in</button>
-            </Link>
-            <Link to="/signup">
-              <button className="btn primary ml-2">Register</button>
-            </Link>
+            <button
+              className="btn secondary focus:outline-none"
+              onClick={() => onLoginClick(true)}
+            >
+              Log in
+            </button>
+            <button
+              className="btn primary ml-2 focus:outline-none"
+              onClick={() => onRegisterClick(true)}
+            >
+              Register
+            </button>
           </div>
         </div>
       </nav>
@@ -45,3 +53,7 @@ const NavMenu = () => (
     </Link>
   </div>
 );
+Navbar.propTypes = {
+  onLoginClick: PropTypes.func,
+  onRegisterClick: PropTypes.func,
+};

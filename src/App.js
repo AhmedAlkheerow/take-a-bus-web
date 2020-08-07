@@ -1,9 +1,9 @@
 import React from 'react';
 import Map from './components/MapContainer';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+// import SignIn from './components/SignIn';
+// import SignUp from './components/SignUp';
 import RouteList from './components/RouteList';
 function App() {
   return (
