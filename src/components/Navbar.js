@@ -2,7 +2,6 @@ import React from 'react';
 import Logo from '../assets/logo-200.png';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
 export default function Navbar({ onRegisterClick, onLoginClick }) {
   return (
     <header className="shadow-sm py-1">
@@ -15,25 +14,28 @@ export default function Navbar({ onRegisterClick, onLoginClick }) {
         <div className="flex justify-between flex-grow">
           <NavMenu />
           <div className="mx-6">
-            <button
-              className="btn secondary focus:outline-none"
-              onClick={() => onLoginClick(true)}
-            >
-              Log in
-            </button>
-            <button
-              className="btn primary ml-2 focus:outline-none"
-              onClick={() => onRegisterClick(true)}
-            >
-              Register
-            </button>
+            <Link to="/signin">
+              <button
+                className="btn secondary focus:outline-none"
+                onClick={() => onLoginClick(true)}
+              >
+                Log in
+              </button>
+            </Link>
+            <Link to="/signup">
+              <button
+                className="btn primary ml-2 focus:outline-none"
+                onClick={() => onRegisterClick(true)}
+              >
+                Register
+              </button>
+            </Link>
           </div>
         </div>
       </nav>
     </header>
   );
 }
-
 const NavMenu = () => (
   <div className="text-sm flex flex-col md:flex-row justify-between mr-auto">
     <Link to="/" className="nav-link">

@@ -1,31 +1,29 @@
 import React from 'react';
 import Map from './components/MapContainer';
-import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-// import SignIn from './components/SignIn';
-// import SignUp from './components/SignUp';
+import Layout, { Modal } from './components/Layout';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RouteList from './components/RouteList';
+
 function App() {
   return (
     <div>
       <Router>
-        {/* <Layout> */}
-        <Navbar />
-        <switch>
-          <Route path="/home" component={Map} />
-          <Route path="/signin" render={() => <div />} />
-          <Route path="/signup" render={() => <div />} />
-          <Route path="/route/:id" render={() => <div />} />
-          <Route path="/bus/:id" render={() => <div />} />
-          <Route path="/form/:location/to/:location" render={() => <div />} />
-          <Route path="/about" render={() => <div />} />
-          <Route path="/me" render={() => <div />} />
-          <Route path="/me/history" render={() => <div />} />
-          <Route path="/me/favorite" render={() => <div />} />
-          <Route path="/routes" component={RouteList} />
-        </switch>
-        {/* </Layout> */}
-        <Map />
+        <Layout>
+          <Switch>
+            <Route path="/signin" component={Modal} />
+            <Route path="/signup" component={Modal} />
+            <Route path="/route/:id" render={() => <div />} />
+            <Route path="/bus/:id" render={() => <div />} />
+            <Route path="/form/:location/to/:location" render={() => <div />} />
+            <Route path="/about" render={() => <div />} />
+            <Route path="/me" render={() => <div />} />
+            <Route path="/me/history" render={() => <div />} />
+            <Route path="/me/favorite" render={() => <div />} />
+            <Route path="/routes" component={RouteList} />
+            <Route exact path="/" component={Map} />
+          </Switch>
+          <Map />
+        </Layout>
       </Router>
     </div>
   );
