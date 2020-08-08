@@ -10,8 +10,8 @@ function App() {
       <Router>
         <Layout>
           <Switch>
-            <Route path="/signin" component={Modal} />
-            <Route path="/signup" component={Modal} />
+            {/* <Route path="/signin" component={Modal} />
+            <Route path="/signup" component={Modal} /> */}
             <Route path="/route/:id" render={() => <div />} />
             <Route path="/bus/:id" render={() => <div />} />
             <Route path="/form/:location/to/:location" render={() => <div />} />
@@ -22,7 +22,6 @@ function App() {
             <Route path="/routes" component={RouteList} />
             <Route exact path="/" component={Map} />
           </Switch>
-          <Map />
         </Layout>
       </Router>
     </div>

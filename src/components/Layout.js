@@ -3,12 +3,16 @@ import Navbar from './Navbar';
 import PropTypes from 'prop-types';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 const Layout = ({ children }) => {
   const history = useHistory();
-  const [showLogin, setShowLogin] = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
-  const [showModal, toggleModal] = useState(false);
+  const { pathname } = useLocation();
+
+  const [showLogin, setShowLogin] = useState(pathname === '/signin');
+  const [showRegister, setShowRegister] = useState(pathname === '/signup');
+  const [showModal, toggleModal] = useState(
+    pathname === '/signin' || pathname === '/signup'
+  );
 
   const showLoginF = () => {
     setShowLogin(true);
