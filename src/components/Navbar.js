@@ -17,7 +17,7 @@ export default function Navbar({ onRegisterClick, onLoginClick }) {
             <Link to="/signin">
               <button
                 className="btn secondary focus:outline-none"
-                onClick={() => onLoginClick(true)}
+                onClick={onLoginClick}
               >
                 Log in
               </button>
@@ -25,7 +25,7 @@ export default function Navbar({ onRegisterClick, onLoginClick }) {
             <Link to="/signup">
               <button
                 className="btn primary ml-2 focus:outline-none"
-                onClick={() => onRegisterClick(true)}
+                onClick={onRegisterClick}
               >
                 Register
               </button>
