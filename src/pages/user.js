@@ -1,4 +1,4 @@
 import React from 'react';
-export default function about() {
-  return <div>@todo return about page</div>;
+export default function user() {
+  return <div>@todo return user page</div>;
 }
