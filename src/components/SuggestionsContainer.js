@@ -1,5 +1,6 @@
 import React from 'react';
 import SuggestionItem from './SuggestionItem';
+import { motion } from 'framer-motion';
 
 const suggestions = [
   {
@@ -30,11 +31,29 @@ const suggestions = [
 ];
 
 export default function SuggestionContainer() {
+  let count = 0;
   return (
-    <div className="w-1/3">
-      {suggestions.map((s, idx) => (
-        <SuggestionItem {...s} key={idx} />
-      ))}
+    <div className="">
+      {suggestions.map((s, idx) => {
+        count += 0.3;
+        return (
+          <motion.div
+            initial={{ x: -500 }}
+            animate={{ x: 0 }}
+            transition={{
+              duration: 0.8,
+              delay: count,
+              type: 'spring',
+              damping: 300,
+            }}
+            key={idx}
+          >
+            <motion.div whileHover={{ scale: 0.95 }} whileTap={{ scale: 1 }}>
+              <SuggestionItem {...s} />
+            </motion.div>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }
