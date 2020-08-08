@@ -1,7 +1,8 @@
 import React from 'react';
 import Logo from '../assets/logo-200.png';
+import PropTypes from 'prop-types';
 
-export default function Navbar() {
+export default function Navbar({ onRegisterClick, onLoginClick }) {
   return (
     <header className="shadow-sm py-1">
       <nav className="flex items-center">
@@ -11,10 +12,20 @@ export default function Navbar() {
           </a>
         </div>
         <div className="flex justify-between flex-grow">
-          <NavMenu className="" />
+          <NavMenu />
           <div className="mx-6">
-            <button className="btn secondary">Log in</button>
-            <button className="btn primary ml-2">Register</button>
+            <button
+              className="btn secondary focus:outline-none"
+              onClick={() => onLoginClick(true)}
+            >
+              Log in
+            </button>
+            <button
+              className="btn primary ml-2 focus:outline-none"
+              onClick={() => onRegisterClick(true)}
+            >
+              Register
+            </button>
           </div>
         </div>
       </nav>
@@ -41,3 +52,7 @@ const NavMenu = () => (
     </a>
   </div>
 );
+Navbar.propTypes = {
+  onLoginClick: PropTypes.func,
+  onRegisterClick: PropTypes.func,
+};
