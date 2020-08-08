@@ -8,10 +8,14 @@ const Layout = ({ children }) => {
   const history = useHistory();
   const { pathname } = useLocation();
 
-  const [showLogin, setShowLogin] = useState(pathname === '/signin');
-  const [showRegister, setShowRegister] = useState(pathname === '/signup');
+  const [showLogin, setShowLogin] = useState(
+    window.location.hash === '#signin'
+  );
+  const [showRegister, setShowRegister] = useState(
+    window.location.hash === '#signup'
+  );
   const [showModal, toggleModal] = useState(
-    pathname === '/signin' || pathname === '/signup'
+    window.location.hash === '#signin' || window.location.hash === '#signup'
   );
 
   const showLoginF = () => {

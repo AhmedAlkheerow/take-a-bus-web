@@ -14,22 +14,22 @@ export default function Navbar({ onRegisterClick, onLoginClick }) {
         <div className="flex justify-between flex-grow">
           <NavMenu />
           <div className="mx-6">
-            <Link to="/signin">
+            <a href="#signin">
               <button
                 className="btn secondary focus:outline-none"
                 onClick={onLoginClick}
               >
                 Log in
               </button>
-            </Link>
-            <Link to="/signup">
+            </a>
+            <a href="#signup">
               <button
                 className="btn primary ml-2 focus:outline-none"
                 onClick={onRegisterClick}
               >
                 Register
               </button>
-            </Link>
+            </a>
           </div>
         </div>
       </nav>
