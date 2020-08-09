@@ -41,7 +41,7 @@ export default function SuggestionContainer() {
             initial={{ x: -500 }}
             animate={{ x: 0 }}
             transition={{
-              duration: 0.8,
+              duration: 0.6,
               delay: count,
               type: 'spring',
               damping: 300,
