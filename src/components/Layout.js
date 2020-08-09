@@ -3,11 +3,19 @@ import Navbar from './Navbar';
 import PropTypes from 'prop-types';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
-
+import { useHistory } from 'react-router-dom';
 const Layout = ({ children }) => {
-  const [showLogin, setShowLogin] = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
-  const [showModal, toggleModal] = useState(false);
+  const history = useHistory();
+
+  const [showLogin, setShowLogin] = useState(
+    window.location.hash === '#signin'
+  );
+  const [showRegister, setShowRegister] = useState(
+    window.location.hash === '#signup'
+  );
+  const [showModal, toggleModal] = useState(
+    window.location.hash === '#signin' || window.location.hash === '#signup'
+  );
 
   const showLoginF = () => {
     setShowLogin(true);
@@ -27,6 +35,7 @@ const Layout = ({ children }) => {
     toggleModal(false);
     setShowRegister(false);
     setShowLogin(false);
+    history.goBack();
   };
 
   return (
@@ -47,7 +56,7 @@ const Layout = ({ children }) => {
   );
 };
 export default Layout;
-const Modal = ({ children, onClickOutside }) => (
+export const Modal = ({ children, onClickOutside }) => (
   <div className="z-50 fixed inset-0">
     <div
       onClick={onClickOutside}
