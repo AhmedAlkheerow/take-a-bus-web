@@ -3,10 +3,9 @@ import Navbar from './Navbar';
 import PropTypes from 'prop-types';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 const Layout = ({ children }) => {
   const history = useHistory();
-  const { pathname } = useLocation();
 
   const [showLogin, setShowLogin] = useState(
     window.location.hash === '#signin'
