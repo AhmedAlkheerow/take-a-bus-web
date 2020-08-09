@@ -23,7 +23,7 @@ export function FacebookBtn({ actionString }) {
       type="button"
       className="flex items-center rounded py-2 px-1 bg-blue-800 text-white hover:bg-blue-700 w-full mb-12"
     >
-      <img src={FbIcon} className="w-10 mr-8 pl-2" alt="google logo" />
+      <img src={FbIcon} className="w-10 mr-8 pl-2" alt="Facebook Logo" />
       <p>{actionString} with Facebook</p>
     </button>
   );
@@ -40,7 +40,7 @@ export function GoogleBtn({ actionString }) {
       type="button"
       className="flex items-center rounded mt-2 py-2 bg-transparent text-black border-solid border-2 border-gray-500 hover:bg-gray-200 w-full"
     >
-      <img src={GoogleIcon} className="w-8 mr-8 pl-2" alt="google logo" />
+      <img src={GoogleIcon} className="w-8 mr-8 pl-2" alt="Google Logo" />
       <p className="px-4">{actionString} with Google</p>
     </button>
   );
