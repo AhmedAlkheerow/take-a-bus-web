@@ -1,9 +1,12 @@
 import React from 'react';
-import Map from './Components/MapContainer';
+import Map from './components/MapContainer';
+import Layout from './components/Layout';
 function App() {
   return (
     <div>
-      <Map />
+      <Layout>
+        <Map />
+      </Layout>
     </div>
   );
 }
