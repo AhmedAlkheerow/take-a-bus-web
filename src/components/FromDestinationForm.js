@@ -8,7 +8,7 @@ export default function FromDestinationForm({
   updateSearchDestination,
 }) {
   return (
-    <div className="">
+    <div>
       <form className="flex justify-between bg-dblue shadow-md rounded-lg px-5 pt-3 pb-8">
         <div>
           <label className="text-white font-medium mb-1" htmlFor="from-input">

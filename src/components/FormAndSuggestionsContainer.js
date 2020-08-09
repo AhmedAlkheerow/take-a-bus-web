@@ -17,7 +17,7 @@ export default function FormAndSuggestionsContainer() {
 
   return (
     <>
-      <div className="w-1/4 boxshadow">
+      <div className="w-1/4 boxshadow absolute z-10 rounded-lg bg-white">
         <FormDestinationForm
           searchFrom={searchFrom}
           searchDestination={searchDestination}

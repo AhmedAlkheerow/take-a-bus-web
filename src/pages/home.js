@@ -1,4 +1,11 @@
 import React from 'react';
+import Map from '../components/MapContainer';
+import FormAndSuggestionsContainer from '../components/FormAndSuggestionsContainer';
 export default function home() {
-  return <div>@todo return home page</div>;
+  return (
+    <>
+      <FormAndSuggestionsContainer />
+      <Map />
+    </>
+  );
 }

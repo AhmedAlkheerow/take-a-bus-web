@@ -1,8 +1,9 @@
 import React from 'react';
-import Map from './components/MapContainer';
+// import Map from './components/MapContainer';
 import Layout from './components/Layout';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RouteList from './components/RouteList';
+import home from './pages/home';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
             <Route path="/me/history" render={() => <div />} />
             <Route path="/me/favorite" render={() => <div />} />
             <Route path="/routes" component={RouteList} />
-            <Route exact path="/" component={Map} />
+            <Route exact path="/" component={home} />
           </Switch>
         </Layout>
       </Router>
