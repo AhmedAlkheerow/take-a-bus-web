@@ -35,20 +35,20 @@ export default function SuggestionContainer() {
   return (
     <div className="">
       {suggestions.map((s, idx) => {
-        count += 0.3;
+        count += 0.1;
         return (
           <motion.div
-            initial={{ x: -500 }}
+            initial={{ x: -400 }}
             animate={{ x: 0 }}
             transition={{
-              duration: 0.6,
+              duration: 0.2,
               delay: count,
               type: 'spring',
               damping: 300,
             }}
             key={idx}
           >
-            <motion.div whileHover={{ scale: 0.95 }} whileTap={{ scale: 1 }}>
+            <motion.div whileHover={{ scale: 0.98 }} whileTap={{ scale: 1 }}>
               <SuggestionItem {...s} />
             </motion.div>
           </motion.div>
