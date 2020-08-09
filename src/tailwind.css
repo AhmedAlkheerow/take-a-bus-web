@@ -42,5 +42,11 @@ html {
 .boxshadow {
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
 }
-
+.x-from-btn {
+  margin-left: 8.5rem;
+  margin-top: 0.35rem;
+}
+.x-destination-btn {
+  margin-top: 0.35rem;
+}
 @tailwind utilities;

@@ -15,6 +15,15 @@ export default function FormAndSuggestionsContainer() {
     setSearchDestination(event.target.value);
   }
 
+  function clearInputDestinatio(e) {
+    e.preventDefault();
+    setSearchDestination('');
+  }
+  function clearInputFrom(e) {
+    e.preventDefault();
+    setSearchFrom('');
+  }
+
   return (
     <>
       <div className="w-1/4 boxshadow absolute z-10 rounded-lg bg-white">
@@ -23,6 +32,8 @@ export default function FormAndSuggestionsContainer() {
           searchDestination={searchDestination}
           updateSearchForm={updateSearchForm}
           updateSearchDestination={updateSearchDestination}
+          clearInputDestinatio={clearInputDestinatio}
+          clearInputFrom={clearInputFrom}
         />
         {searchFrom && searchDestination && (
           <motion.div
