@@ -1,6 +1,6 @@
 import React from 'react';
-import Map from './components/MapContainer';
-import Layout from './components/Layout';
+import Map from './Components/MapContainer';
+import Layout from './Components/Layout';
 function App() {
   return (
     <div>
