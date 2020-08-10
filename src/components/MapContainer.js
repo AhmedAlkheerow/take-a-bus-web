@@ -6,6 +6,8 @@ import fromMark from '../assets/from-marker.svg';
 
 const route = {
   name: 'Havalan - Qalat',
+  start: [44.0496826171875, 36.1949017703261],
+  end: [44.01165962219238, 36.19067640168397],
   path: {
     type: 'FeatureCollection',
     features: [
@@ -67,20 +69,20 @@ function Map() {
           />
         </Source>
         <Marker
-          longitude={44.01165962219238}
-          latitude={36.19067640168397}
-          offsetLeft={-22}
-          offsetTop={-40}
-        >
-          <img className="w-10 h-10" src={destMark} />
-        </Marker>
-        <Marker
-          longitude={44.0496826171875}
-          latitude={36.1949017703261}
+          longitude={route.start[0]}
+          latitude={route.start[1]}
           offsetLeft={-15}
           offsetTop={-18}
         >
-          <img className="w-10 h-10" src={fromMark} />
+          <img className="w-10 h-10" src={fromMark} alt="from" />
+        </Marker>
+        <Marker
+          longitude={route.end[0]}
+          latitude={route.end[1]}
+          offsetLeft={-22}
+          offsetTop={-40}
+        >
+          <img className="w-10 h-10" src={destMark} alt="to" />
         </Marker>
         <div className="h-full flex flex-row-reverse items-end p-16">
           <LocateMeBtn />
