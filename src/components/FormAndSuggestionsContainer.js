@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FormDestinationForm from './FromDestinationForm';
+import FromDestinationForm from './FromDestinationForm';
 import SuggestionsContainer from './SuggestionsContainer';
 import { motion } from 'framer-motion';
 
@@ -7,7 +7,7 @@ export default function FormAndSuggestionsContainer() {
   const [searchFrom, setSearchFrom] = useState('');
   const [searchDestination, setSearchDestination] = useState('');
 
-  function updateSearchForm(event) {
+  function updateSearchFrom(event) {
     setSearchFrom(event.target.value);
   }
 
@@ -15,14 +15,25 @@ export default function FormAndSuggestionsContainer() {
     setSearchDestination(event.target.value);
   }
 
+  function clearInputDestination(e) {
+    e.preventDefault();
+    setSearchDestination('');
+  }
+  function clearInputFrom(e) {
+    e.preventDefault();
+    setSearchFrom('');
+  }
+
   return (
     <>
-      <div className="w-1/4 boxshadow">
-        <FormDestinationForm
+      <div className="boxshadow rounded-lg">
+        <FromDestinationForm
           searchFrom={searchFrom}
           searchDestination={searchDestination}
-          updateSearchForm={updateSearchForm}
+          updateSearchFrom={updateSearchFrom}
           updateSearchDestination={updateSearchDestination}
+          clearInputDestination={clearInputDestination}
+          clearInputFrom={clearInputFrom}
         />
         {searchFrom && searchDestination && (
           <motion.div
