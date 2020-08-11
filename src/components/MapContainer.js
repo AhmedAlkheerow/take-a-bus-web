@@ -29,15 +29,17 @@ export default function Map() {
   useEffect(() => {
     // Load all markers and images
     const map = _mapRef.current.getMap();
-    map.loadImage(pointMark, (error, image) => {
-      if (error) throw error;
-      if (!map.hasImage('pointMark')) map.addImage('pointMark', image);
-    });
+    if (map) {
+      map.loadImage(pointMark, (error, image) => {
+        if (error) throw error;
+        if (!map.hasImage('pointMark')) map.addImage('pointMark', image);
+      });
 
-    map.loadImage(destMark, (error, image) => {
-      if (error) throw error;
-      if (!map.hasImage('destMark')) map.addImage('destMark', image);
-    });
+      map.loadImage(destMark, (error, image) => {
+        if (error) throw error;
+        if (!map.hasImage('destMark')) map.addImage('destMark', image);
+      });
+    }
   }, [_mapRef]);
 
   return (
