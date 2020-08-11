@@ -688,15 +688,6 @@ html {
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
 }
 
-.x-from-btn {
-  margin-left: 8.5rem;
-  margin-top: 0.35rem;
-}
-
-.x-destination-btn {
-  margin-top: 0.35rem;
-}
-
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--space-y-reverse)));
@@ -6727,6 +6718,14 @@ html {
   margin: -1px;
 }
 
+.m-9\.8rem {
+  margin: 9.8rem;
+}
+
+.m-0\.35rem {
+  margin: 0.35rem;
+}
+
 .my-0 {
   margin-top: 0;
   margin-bottom: 0;
@@ -7105,6 +7104,26 @@ html {
 .-mx-px {
   margin-left: -1px;
   margin-right: -1px;
+}
+
+.my-9\.8rem {
+  margin-top: 9.8rem;
+  margin-bottom: 9.8rem;
+}
+
+.mx-9\.8rem {
+  margin-left: 9.8rem;
+  margin-right: 9.8rem;
+}
+
+.my-0\.35rem {
+  margin-top: 0.35rem;
+  margin-bottom: 0.35rem;
+}
+
+.mx-0\.35rem {
+  margin-left: 0.35rem;
+  margin-right: 0.35rem;
 }
 
 .mt-0 {
@@ -7713,6 +7732,38 @@ html {
 
 .-ml-px {
   margin-left: -1px;
+}
+
+.mt-9\.8rem {
+  margin-top: 9.8rem;
+}
+
+.mr-9\.8rem {
+  margin-right: 9.8rem;
+}
+
+.mb-9\.8rem {
+  margin-bottom: 9.8rem;
+}
+
+.ml-9\.8rem {
+  margin-left: 9.8rem;
+}
+
+.mt-0\.35rem {
+  margin-top: 0.35rem;
+}
+
+.mr-0\.35rem {
+  margin-right: 0.35rem;
+}
+
+.mb-0\.35rem {
+  margin-bottom: 0.35rem;
+}
+
+.ml-0\.35rem {
+  margin-left: 0.35rem;
 }
 
 .max-h-full {
@@ -20677,6 +20728,14 @@ html {
     margin: -1px;
   }
 
+  .sm\:m-9\.8rem {
+    margin: 9.8rem;
+  }
+
+  .sm\:m-0\.35rem {
+    margin: 0.35rem;
+  }
+
   .sm\:my-0 {
     margin-top: 0;
     margin-bottom: 0;
@@ -21055,6 +21114,26 @@ html {
   .sm\:-mx-px {
     margin-left: -1px;
     margin-right: -1px;
+  }
+
+  .sm\:my-9\.8rem {
+    margin-top: 9.8rem;
+    margin-bottom: 9.8rem;
+  }
+
+  .sm\:mx-9\.8rem {
+    margin-left: 9.8rem;
+    margin-right: 9.8rem;
+  }
+
+  .sm\:my-0\.35rem {
+    margin-top: 0.35rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .sm\:mx-0\.35rem {
+    margin-left: 0.35rem;
+    margin-right: 0.35rem;
   }
 
   .sm\:mt-0 {
@@ -21663,6 +21742,38 @@ html {
 
   .sm\:-ml-px {
     margin-left: -1px;
+  }
+
+  .sm\:mt-9\.8rem {
+    margin-top: 9.8rem;
+  }
+
+  .sm\:mr-9\.8rem {
+    margin-right: 9.8rem;
+  }
+
+  .sm\:mb-9\.8rem {
+    margin-bottom: 9.8rem;
+  }
+
+  .sm\:ml-9\.8rem {
+    margin-left: 9.8rem;
+  }
+
+  .sm\:mt-0\.35rem {
+    margin-top: 0.35rem;
+  }
+
+  .sm\:mr-0\.35rem {
+    margin-right: 0.35rem;
+  }
+
+  .sm\:mb-0\.35rem {
+    margin-bottom: 0.35rem;
+  }
+
+  .sm\:ml-0\.35rem {
+    margin-left: 0.35rem;
   }
 
   .sm\:max-h-full {
@@ -34628,6 +34739,14 @@ html {
     margin: -1px;
   }
 
+  .md\:m-9\.8rem {
+    margin: 9.8rem;
+  }
+
+  .md\:m-0\.35rem {
+    margin: 0.35rem;
+  }
+
   .md\:my-0 {
     margin-top: 0;
     margin-bottom: 0;
@@ -35006,6 +35125,26 @@ html {
   .md\:-mx-px {
     margin-left: -1px;
     margin-right: -1px;
+  }
+
+  .md\:my-9\.8rem {
+    margin-top: 9.8rem;
+    margin-bottom: 9.8rem;
+  }
+
+  .md\:mx-9\.8rem {
+    margin-left: 9.8rem;
+    margin-right: 9.8rem;
+  }
+
+  .md\:my-0\.35rem {
+    margin-top: 0.35rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .md\:mx-0\.35rem {
+    margin-left: 0.35rem;
+    margin-right: 0.35rem;
   }
 
   .md\:mt-0 {
@@ -35614,6 +35753,38 @@ html {
 
   .md\:-ml-px {
     margin-left: -1px;
+  }
+
+  .md\:mt-9\.8rem {
+    margin-top: 9.8rem;
+  }
+
+  .md\:mr-9\.8rem {
+    margin-right: 9.8rem;
+  }
+
+  .md\:mb-9\.8rem {
+    margin-bottom: 9.8rem;
+  }
+
+  .md\:ml-9\.8rem {
+    margin-left: 9.8rem;
+  }
+
+  .md\:mt-0\.35rem {
+    margin-top: 0.35rem;
+  }
+
+  .md\:mr-0\.35rem {
+    margin-right: 0.35rem;
+  }
+
+  .md\:mb-0\.35rem {
+    margin-bottom: 0.35rem;
+  }
+
+  .md\:ml-0\.35rem {
+    margin-left: 0.35rem;
   }
 
   .md\:max-h-full {
@@ -48579,6 +48750,14 @@ html {
     margin: -1px;
   }
 
+  .lg\:m-9\.8rem {
+    margin: 9.8rem;
+  }
+
+  .lg\:m-0\.35rem {
+    margin: 0.35rem;
+  }
+
   .lg\:my-0 {
     margin-top: 0;
     margin-bottom: 0;
@@ -48957,6 +49136,26 @@ html {
   .lg\:-mx-px {
     margin-left: -1px;
     margin-right: -1px;
+  }
+
+  .lg\:my-9\.8rem {
+    margin-top: 9.8rem;
+    margin-bottom: 9.8rem;
+  }
+
+  .lg\:mx-9\.8rem {
+    margin-left: 9.8rem;
+    margin-right: 9.8rem;
+  }
+
+  .lg\:my-0\.35rem {
+    margin-top: 0.35rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .lg\:mx-0\.35rem {
+    margin-left: 0.35rem;
+    margin-right: 0.35rem;
   }
 
   .lg\:mt-0 {
@@ -49565,6 +49764,38 @@ html {
 
   .lg\:-ml-px {
     margin-left: -1px;
+  }
+
+  .lg\:mt-9\.8rem {
+    margin-top: 9.8rem;
+  }
+
+  .lg\:mr-9\.8rem {
+    margin-right: 9.8rem;
+  }
+
+  .lg\:mb-9\.8rem {
+    margin-bottom: 9.8rem;
+  }
+
+  .lg\:ml-9\.8rem {
+    margin-left: 9.8rem;
+  }
+
+  .lg\:mt-0\.35rem {
+    margin-top: 0.35rem;
+  }
+
+  .lg\:mr-0\.35rem {
+    margin-right: 0.35rem;
+  }
+
+  .lg\:mb-0\.35rem {
+    margin-bottom: 0.35rem;
+  }
+
+  .lg\:ml-0\.35rem {
+    margin-left: 0.35rem;
   }
 
   .lg\:max-h-full {
@@ -62530,6 +62761,14 @@ html {
     margin: -1px;
   }
 
+  .xl\:m-9\.8rem {
+    margin: 9.8rem;
+  }
+
+  .xl\:m-0\.35rem {
+    margin: 0.35rem;
+  }
+
   .xl\:my-0 {
     margin-top: 0;
     margin-bottom: 0;
@@ -62908,6 +63147,26 @@ html {
   .xl\:-mx-px {
     margin-left: -1px;
     margin-right: -1px;
+  }
+
+  .xl\:my-9\.8rem {
+    margin-top: 9.8rem;
+    margin-bottom: 9.8rem;
+  }
+
+  .xl\:mx-9\.8rem {
+    margin-left: 9.8rem;
+    margin-right: 9.8rem;
+  }
+
+  .xl\:my-0\.35rem {
+    margin-top: 0.35rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .xl\:mx-0\.35rem {
+    margin-left: 0.35rem;
+    margin-right: 0.35rem;
   }
 
   .xl\:mt-0 {
@@ -63516,6 +63775,38 @@ html {
 
   .xl\:-ml-px {
     margin-left: -1px;
+  }
+
+  .xl\:mt-9\.8rem {
+    margin-top: 9.8rem;
+  }
+
+  .xl\:mr-9\.8rem {
+    margin-right: 9.8rem;
+  }
+
+  .xl\:mb-9\.8rem {
+    margin-bottom: 9.8rem;
+  }
+
+  .xl\:ml-9\.8rem {
+    margin-left: 9.8rem;
+  }
+
+  .xl\:mt-0\.35rem {
+    margin-top: 0.35rem;
+  }
+
+  .xl\:mr-0\.35rem {
+    margin-right: 0.35rem;
+  }
+
+  .xl\:mb-0\.35rem {
+    margin-bottom: 0.35rem;
+  }
+
+  .xl\:ml-0\.35rem {
+    margin-left: 0.35rem;
   }
 
   .xl\:max-h-full {

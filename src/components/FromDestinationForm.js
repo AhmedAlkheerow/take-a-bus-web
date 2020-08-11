@@ -7,7 +7,7 @@ export default function FromDestinationForm({
   updateSearchForm,
   updateSearchDestination,
   clearInputFrom,
-  clearInputDestinatio,
+  clearInputDestination,
 }) {
   return (
     <div>
@@ -28,7 +28,7 @@ export default function FromDestinationForm({
             {searchFrom && (
               <button
                 onClick={clearInputFrom}
-                className="absolute left-0 top-0 focus:outline-none x-from-btn"
+                className="absolute left-0 top-0 focus:outline-none ml-9.8rem mt-0.35rem"
               >
                 <FaTimes className=" text-gray-500 " />
               </button>
@@ -50,8 +50,8 @@ export default function FromDestinationForm({
             />
             {searchDestination && (
               <button
-                onClick={clearInputDestinatio}
-                className="absolute rigt-0 top-0 -ml-6 focus:outline-none x-destination-btn"
+                onClick={clearInputDestination}
+                className="absolute rigt-0 top-0 -ml-6 focus:outline-none mt-0.35rem"
               >
                 <FaTimes className=" text-gray-500 " />
               </button>
@@ -69,5 +69,5 @@ FromDestinationForm.propTypes = {
   updateSearchForm: PropTypes.func.isRequired,
   updateSearchDestination: PropTypes.func.isRequired,
   clearInputFrom: PropTypes.func.isRequired,
-  clearInputDestinatio: PropTypes.func.isRequired,
+  clearInputDestination: PropTypes.func.isRequired,
 };

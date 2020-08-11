@@ -4,7 +4,9 @@ import FormAndSuggestionsContainer from '../components/FormAndSuggestionsContain
 export default function home() {
   return (
     <>
-      <FormAndSuggestionsContainer />
+      <div className="absolute z-10 rounded-lg bg-white">
+        <FormAndSuggestionsContainer />
+      </div>
       <Map />
     </>
   );

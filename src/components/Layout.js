@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <div className="flex flex-col h-screen">
-        <div className="shadow-md z-10 relative">
+        <div className="shadow-md z-10">
           <Navbar onLoginClick={showLoginF} onRegisterClick={showRegisterF} />
         </div>
         <main className="flex-grow overflow-auto">{children}</main>
