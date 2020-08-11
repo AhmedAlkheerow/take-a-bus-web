@@ -9,6 +9,10 @@ module.exports = {
       borderRadius: {
         xl: '0.625rem',
       },
+      margin: {
+        '9.8rem': '9.8rem',
+        '0.35rem': '0.35rem',
+      },
     },
   },
   variants: {},
