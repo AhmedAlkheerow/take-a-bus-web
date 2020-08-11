@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
-import ReactMapGL, { Source, Layer } from 'react-map-gl';
+import ReactMapGL, { Source, Layer, Marker } from 'react-map-gl';
 import LocateMeBtn from './LocateMeBtn';
 import data from '../data/map-points.json';
 import pointMark from '../assets/point-marker.png';
 import destMark from '../assets/destination-marker.png';
+import location from '../assets/location.png';
+import Geocoder from 'react-map-gl-geocoder';
+import PropTypes from 'prop-types';
 
-export default function Map() {
+export default function Map({ RefFrom, RefDestination }) {
   const [viewport, setViewport] = useState({
     latitude: 36.206291,
     longitude: 44.008869,
@@ -41,7 +44,7 @@ export default function Map() {
       });
     }
   }, [_mapRef]);
-
+  const [markers, setMarkers] = useState([]);
   return (
     <>
       <ReactMapGL
@@ -111,9 +114,64 @@ export default function Map() {
             </Source>
           </>
         )}
+        {markers.map((place) => {
+          return (
+            <Marker
+              key={'marker' + place.properties.ID}
+              latitude={place.geometry.coordinates[1]}
+              longitude={place.geometry.coordinates[0]}
+            >
+              <button className="focus:outline-none">
+                <img src={location} alt="location" />
+              </button>
+            </Marker>
+          );
+        })}
         <div className="h-full flex flex-row-reverse items-end p-16">
           <LocateMeBtn />
         </div>
+        <Geocoder
+          mapRef={_mapRef}
+          containerRef={RefFrom}
+          // onResult={(event) => console.log(event.result.geometry)}
+          onViewportChange={(viewport) => {
+            setMarkers((oldMarkers) => {
+              const newMarkers = [...oldMarkers];
+              newMarkers[0] = {
+                type: 'Feature',
+                properties: { ID: 0 },
+                geometry: {
+                  type: 'Point',
+                  coordinates: [viewport.longitude, viewport.latitude],
+                },
+              };
+              return newMarkers;
+            });
+            setViewport({ ...viewport, width: '100%', height: '100%' });
+          }}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        />
+        <Geocoder
+          mapRef={_mapRef}
+          containerRef={RefDestination}
+          // onResult={(event) => console.log(event.result.geometry)}
+          onViewportChange={(viewport) => {
+            setMarkers((oldMarkers) => {
+              const newMarkers = [...oldMarkers];
+              newMarkers[1] = {
+                type: 'Feature',
+                properties: { ID: 1 },
+                geometry: {
+                  type: 'Point',
+                  coordinates: [viewport.longitude, viewport.latitude],
+                },
+              };
+              return newMarkers;
+            });
+            setViewport({ ...viewport, width: '100%', height: '100%' });
+          }}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        />
       </ReactMapGL>
     </>
   );
@@ -160,4 +218,14 @@ const routeObj = {
       },
     ],
   },
+};
+Map.propTypes = {
+  RefFrom: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  RefDestination: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };

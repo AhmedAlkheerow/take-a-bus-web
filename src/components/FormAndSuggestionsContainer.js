@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import FromDestinationForm from './FromDestinationForm';
 import SuggestionsContainer from './SuggestionsContainer';
 import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
 
-export default function FormAndSuggestionsContainer() {
+export default function FormAndSuggestionsContainer({
+  RefFrom,
+  RefDestination,
+}) {
   const [searchFrom, setSearchFrom] = useState('');
   const [searchDestination, setSearchDestination] = useState('');
 
-  function updateSearchFrom(event) {
+  function updateSearchForm(event) {
     setSearchFrom(event.target.value);
   }
 
@@ -28,9 +32,11 @@ export default function FormAndSuggestionsContainer() {
     <>
       <div className="boxshadow rounded-lg">
         <FromDestinationForm
+          RefFrom={RefFrom}
+          RefDestination={RefDestination}
           searchFrom={searchFrom}
           searchDestination={searchDestination}
-          updateSearchFrom={updateSearchFrom}
+          updateSearchForm={updateSearchForm}
           updateSearchDestination={updateSearchDestination}
           clearInputDestination={clearInputDestination}
           clearInputFrom={clearInputFrom}
@@ -50,3 +56,13 @@ export default function FormAndSuggestionsContainer() {
     </>
   );
 }
+FormAndSuggestionsContainer.propTypes = {
+  RefFrom: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  RefDestination: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+};
