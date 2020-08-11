@@ -15,8 +15,13 @@ export default function Map() {
   });
 
   // Toggle this to show route or points
+
+  // @JalalArif TODO: remove eslint disabling below once you implement your issue
+  // eslint-disable-next-line no-unused-vars
   const [showRoute, toggleRoute] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [route, setRoute] = useState(routeObj);
+  // eslint-disable-next-line no-unused-vars
   const [destinations, setDestinations] = useState(data);
 
   const _mapRef = useRef();
