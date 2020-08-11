@@ -102,22 +102,6 @@ export default function Map() {
                 filter={['==', 'type', 'end']}
               />
             </Source>
-            {/* <Marker
-              longitude={route.start[0]}
-              latitude={route.start[1]}
-              offsetLeft={-15}
-              offsetTop={-18}
-            >
-              <img className="w-10 h-10" src={point} alt="from" />
-            </Marker>
-            <Marker
-              longitude={route.end[0]}
-              latitude={route.end[1]}
-              offsetLeft={-22}
-              offsetTop={-40}
-            >
-              <img className="w-10 h-10" src={destMark} alt="to" />
-            </Marker> */}
           </>
         )}
         <div className="h-full flex flex-row-reverse items-end p-16">
