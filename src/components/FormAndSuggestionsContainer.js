@@ -7,7 +7,7 @@ export default function FormAndSuggestionsContainer() {
   const [searchFrom, setSearchFrom] = useState('');
   const [searchDestination, setSearchDestination] = useState('');
 
-  function updateSearchForm(event) {
+  function updateSearchFrom(event) {
     setSearchFrom(event.target.value);
   }
 
@@ -30,7 +30,7 @@ export default function FormAndSuggestionsContainer() {
         <FromDestinationForm
           searchFrom={searchFrom}
           searchDestination={searchDestination}
-          updateSearchForm={updateSearchForm}
+          updateSearchFrom={updateSearchFrom}
           updateSearchDestination={updateSearchDestination}
           clearInputDestination={clearInputDestination}
           clearInputFrom={clearInputFrom}

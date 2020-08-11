@@ -4,7 +4,7 @@ import { FaTimes } from 'react-icons/fa';
 export default function FromDestinationForm({
   searchFrom,
   searchDestination,
-  updateSearchForm,
+  updateSearchFrom,
   updateSearchDestination,
   clearInputFrom,
   clearInputDestination,
@@ -19,7 +19,7 @@ export default function FromDestinationForm({
           <div className="relative">
             <input
               value={searchFrom}
-              onChange={updateSearchForm}
+              onChange={updateSearchFrom}
               className="w-full border border-gray-500 rounded-xl py-1 px-1 leading-3 text-sm focus:outline-none focus:shadow-outline"
               id="from-input"
               type="text"
@@ -66,7 +66,7 @@ export default function FromDestinationForm({
 FromDestinationForm.propTypes = {
   searchFrom: PropTypes.string.isRequired,
   searchDestination: PropTypes.string.isRequired,
-  updateSearchForm: PropTypes.func.isRequired,
+  updateSearchFrom: PropTypes.func.isRequired,
   updateSearchDestination: PropTypes.func.isRequired,
   clearInputFrom: PropTypes.func.isRequired,
   clearInputDestination: PropTypes.func.isRequired,
