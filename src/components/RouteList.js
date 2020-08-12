@@ -24,9 +24,11 @@ const RouteList = () => {
       <table className="w-full table-auto">
         <thead>
           <tr>
-            <td colSpan="2">Route Lists</td>
+            <td colSpan="2" className="pl-8 text-primary font-semibold">
+              Route Lists
+            </td>
             <td colSpan="2">
-              <div className="text-gray-600 p-2">
+              <div className="text-gray-600 p-2 float-right">
                 <svg
                   className="absolute mt-3 text-gray-600 h-4 w-4 ml-2 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +45,7 @@ const RouteList = () => {
                 </svg>
 
                 <input
-                  className="w-full border-2 border-gray-300 bg-white h-10 pl-8 pr-2 rounded-lg text-sm focus:outline-none"
+                  className="w-full border-2 border-gray-300 bg-white h-10 pl-8 pr-2 mr-20 rounded-lg text-sm focus:outline-none"
                   type="search"
                   name="search"
                   placeholder="Search"
@@ -51,7 +53,7 @@ const RouteList = () => {
               </div>
             </td>
           </tr>
-          <tr className="bg-gray-400">
+          <tr className="bg-gray-300">
             <th>Route</th>
             <th>Route Way</th>
             <th>Available time</th>
@@ -68,18 +70,14 @@ const RouteList = () => {
                   <WayLine way={route.way} />
                 </td>
                 <td>{route.time}</td>
-                <td className="">
+                <td className="fill-current text-primary hover:text-blue-700 cursor-pointer">
                   <svg
                     width="21"
                     height="13"
                     viewBox="0 0 21 13"
-                    fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path
-                      d="M3 0L10.5 8.125L18 0L21 1.625L10.5 13L0 1.625L3 0Z"
-                      fill="#18A0FB"
-                    />
+                    <path d="M3 0L10.5 8.125L18 0L21 1.625L10.5 13L0 1.625L3 0Z" />
                   </svg>
                 </td>
               </tr>
