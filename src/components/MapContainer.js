@@ -4,11 +4,13 @@ import LocateMeBtn from './LocateMeBtn';
 import data from '../data/map-points.json';
 import pointMark from '../assets/point-marker.png';
 import destMark from '../assets/destination-marker.png';
-import location from '../assets/location.png';
 import Geocoder from 'react-map-gl-geocoder';
 import PropTypes from 'prop-types';
-
+import { TiLocation } from 'react-icons/ti';
 export default function Map({ RefFrom, RefDestination }) {
+  const [markers, setMarkers] = useState([]);
+  const [location, setLocation] = useState([44.008869, 36.206291]);
+  const [nearBy, setNearBy] = useState('');
   const [viewport, setViewport] = useState({
     latitude: 36.206291,
     longitude: 44.008869,
@@ -28,6 +30,20 @@ export default function Map({ RefFrom, RefDestination }) {
   const [destinations, setDestinations] = useState(data);
 
   const _mapRef = useRef();
+  const URL = `https://api.mapbox.com/geocoding/v5/mapbox.places/${location[0]},${location[1]}.json?types=poi&access_token=pk.eyJ1Ijoic2huYSIsImEiOiJja2Q0dnp1cWkwYjk4Mnluem0xN3Z5OHd1In0.aM9jnQtRoElex2rqY0zePQ`;
+
+  useEffect(() => {
+    fetch(URL)
+      .then((res) => res.json())
+      .then((data) => {
+        const placeName = data.features.map((place) => {
+          return ` nearby:${place.place_name}`;
+        });
+
+        setNearBy(placeName.toString());
+        console.log(nearBy);
+      });
+  }, [location]);
 
   useEffect(() => {
     // Load all markers and images
@@ -44,10 +60,14 @@ export default function Map({ RefFrom, RefDestination }) {
       });
     }
   }, [_mapRef]);
-  const [markers, setMarkers] = useState([]);
+
   return (
     <>
       <ReactMapGL
+        onClick={(e) => {
+          e.preventDefault();
+          setLocation(e.lngLat);
+        }}
         {...viewport}
         ref={_mapRef}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -114,6 +134,15 @@ export default function Map({ RefFrom, RefDestination }) {
             </Source>
           </>
         )}
+        {location.map((item) => {
+          return (
+            <Marker key={item} latitude={location[1]} longitude={location[0]}>
+              <button className="focus:outline-none">
+                <TiLocation className="text-5xl text-orange-500" />
+              </button>
+            </Marker>
+          );
+        })}
         {markers.map((place) => {
           return (
             <Marker
@@ -122,7 +151,7 @@ export default function Map({ RefFrom, RefDestination }) {
               longitude={place.geometry.coordinates[0]}
             >
               <button className="focus:outline-none">
-                <img src={location} alt="location" />
+                <TiLocation className="text-5xl text-blue-500" />
               </button>
             </Marker>
           );
@@ -133,7 +162,8 @@ export default function Map({ RefFrom, RefDestination }) {
         <Geocoder
           mapRef={_mapRef}
           containerRef={RefFrom}
-          // onResult={(event) => console.log(event.result.geometry)}
+          countries={'iq'}
+          placeholder={'Choose location'}
           onViewportChange={(viewport) => {
             setMarkers((oldMarkers) => {
               const newMarkers = [...oldMarkers];
@@ -154,7 +184,9 @@ export default function Map({ RefFrom, RefDestination }) {
         <Geocoder
           mapRef={_mapRef}
           containerRef={RefDestination}
-          // onResult={(event) => console.log(event.result.geometry)}
+          countries={'iq'}
+          placeholder={'Destination'}
+          inputValue={nearBy}
           onViewportChange={(viewport) => {
             setMarkers((oldMarkers) => {
               const newMarkers = [...oldMarkers];
@@ -220,12 +252,6 @@ const routeObj = {
   },
 };
 Map.propTypes = {
-  RefFrom: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-  RefDestination: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
+  RefFrom: PropTypes.object.isRequired,
+  RefDestination: PropTypes.object.isRequired,
 };

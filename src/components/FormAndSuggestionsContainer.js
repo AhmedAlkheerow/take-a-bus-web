@@ -57,12 +57,6 @@ export default function FormAndSuggestionsContainer({
   );
 }
 FormAndSuggestionsContainer.propTypes = {
-  RefFrom: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-  RefDestination: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
+  RefFrom: PropTypes.object.isRequired,
+  RefDestination: PropTypes.object.isRequired,
 };

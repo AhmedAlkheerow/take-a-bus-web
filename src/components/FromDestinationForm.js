@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 export default function FromDestinationForm({
   // searchFrom,
   // searchDestination,
-  // updateSearchForm,
-  // updateSearchDestination,
+  updateSearchForm,
+  updateSearchDestination,
   // clearInputFrom,
   // clearInputDestination,
   RefFrom,
@@ -18,7 +18,7 @@ export default function FromDestinationForm({
           From:
         </label>
         <div className="relative">
-          <div className="py-1" ref={RefFrom} />
+          <div onInput={updateSearchForm} className="py-1" ref={RefFrom} />
           {/* <input
               value={searchFrom}
               onChange={updateSearchForm}
@@ -42,7 +42,11 @@ export default function FromDestinationForm({
           To:
         </label>
         <div className="relative ml-1">
-          <div className="py-1" ref={RefDestination} />
+          <div
+            onInput={updateSearchDestination}
+            className="py-1"
+            ref={RefDestination}
+          />
           {/* <input
               value={searchDestination}
               onChange={updateSearchDestination}
@@ -72,12 +76,6 @@ FromDestinationForm.propTypes = {
   updateSearchDestination: PropTypes.func.isRequired,
   clearInputFrom: PropTypes.func.isRequired,
   clearInputDestination: PropTypes.func.isRequired,
-  RefFrom: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-  RefDestination: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
+  RefFrom: PropTypes.object.isRequired,
+  RefDestination: PropTypes.object.isRequired,
 };
