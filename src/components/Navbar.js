@@ -1,8 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Logo from '../assets/logo-200.png';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { usersRef, auth } from './../api/firebase';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from './../actions';
+
 export default function Navbar({ onRegisterClick, onLoginClick }) {
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    auth.onAuthStateChanged(async (authUser) => {
+      console.log(authUser);
+      if (authUser) {
+        try {
+          const userData = await usersRef.doc(authUser.uid).get();
+          const user = userData.data();
+          // const user = { isSigned: true, uid: authUser.uid };
+          user.isSigned = true;
+          dispatch(setUser(user));
+        } catch (e) {
+          console.log(e.message);
+          dispatch(setUser({ isSigned: false }));
+        }
+      } else {
+        dispatch(setUser({ isSigned: false }));
+      }
+    });
+  }, []);
+  const onLogout = () => {
+    console.log('logout');
+    auth.signOut();
+  };
   return (
     <header className="shadow-sm py-1">
       <nav className="flex items-center">
@@ -13,24 +42,39 @@ export default function Navbar({ onRegisterClick, onLoginClick }) {
         </div>
         <div className="flex justify-between flex-grow">
           <NavMenu />
-          <div className="mx-6">
-            <a href="#signin">
+          {user.isSigned && (
+            <div className="mx-6">
+              <a href="#me" className="btn primary focus:outline-none">
+                Welcome {user.firstName}
+              </a>
               <button
-                className="btn secondary focus:outline-none"
-                onClick={onLoginClick}
+                className="btn secondary ml-2 focus:outline-none"
+                onClick={onLogout}
               >
-                Log in
+                Log out
               </button>
-            </a>
-            <a href="#signup">
-              <button
-                className="btn primary ml-2 focus:outline-none"
-                onClick={onRegisterClick}
-              >
-                Register
-              </button>
-            </a>
-          </div>
+            </div>
+          )}
+          {!user.isSigned && (
+            <div className="mx-6">
+              <a href="#signin">
+                <button
+                  className="btn secondary focus:outline-none"
+                  onClick={onLoginClick}
+                >
+                  Log in
+                </button>
+              </a>
+              <a href="#signup">
+                <button
+                  className="btn primary ml-2 focus:outline-none"
+                  onClick={onRegisterClick}
+                >
+                  Register
+                </button>
+              </a>
+            </div>
+          )}
         </div>
       </nav>
     </header>
