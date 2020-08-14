@@ -7,27 +7,13 @@ import PropTypes from 'prop-types';
 export default function FormAndSuggestionsContainer({
   RefFrom,
   RefDestination,
+  searchFrom,
+  searchDestination,
+  updateSearchForm,
+  updateSearchDestination,
+  // clearInputDestination,
+  // clearInputFrom,
 }) {
-  const [searchFrom, setSearchFrom] = useState('');
-  const [searchDestination, setSearchDestination] = useState('');
-
-  function updateSearchForm(event) {
-    setSearchFrom(event.target.value);
-  }
-
-  function updateSearchDestination(event) {
-    setSearchDestination(event.target.value);
-  }
-
-  function clearInputDestination(e) {
-    e.preventDefault();
-    setSearchDestination('');
-  }
-  function clearInputFrom(e) {
-    e.preventDefault();
-    setSearchFrom('');
-  }
-
   return (
     <>
       <div className="boxshadow rounded-lg">
@@ -38,8 +24,8 @@ export default function FormAndSuggestionsContainer({
           searchDestination={searchDestination}
           updateSearchForm={updateSearchForm}
           updateSearchDestination={updateSearchDestination}
-          clearInputDestination={clearInputDestination}
-          clearInputFrom={clearInputFrom}
+          // clearInputDestination={clearInputDestination}
+          // clearInputFrom={clearInputFrom}
         />
         {searchFrom && searchDestination && (
           <motion.div
@@ -57,6 +43,12 @@ export default function FormAndSuggestionsContainer({
   );
 }
 FormAndSuggestionsContainer.propTypes = {
+  searchFrom: PropTypes.string.isRequired,
+  searchDestination: PropTypes.string.isRequired,
+  updateSearchForm: PropTypes.func.isRequired,
+  updateSearchDestination: PropTypes.func.isRequired,
+  // clearInputFrom: PropTypes.func.isRequired,
+  // clearInputDestination: PropTypes.func.isRequired,
   RefFrom: PropTypes.object.isRequired,
   RefDestination: PropTypes.object.isRequired,
 };

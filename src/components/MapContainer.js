@@ -7,10 +7,17 @@ import destMark from '../assets/destination-marker.png';
 import Geocoder from 'react-map-gl-geocoder';
 import PropTypes from 'prop-types';
 import { TiLocation } from 'react-icons/ti';
-export default function Map({ RefFrom, RefDestination }) {
-  const [markers, setMarkers] = useState([]);
-  const [location, setLocation] = useState([44.008869, 36.206291]);
-  const [nearBy, setNearBy] = useState('');
+export default function Map({
+  RefFrom,
+  RefDestination,
+  clearInputFrom,
+  clearInputDestination,
+}) {
+  const markers = [];
+  const [locations, setLocation] = useState({
+    add: 0,
+    locations: [],
+  });
   const [viewport, setViewport] = useState({
     latitude: 36.206291,
     longitude: 44.008869,
@@ -30,21 +37,44 @@ export default function Map({ RefFrom, RefDestination }) {
   const [destinations, setDestinations] = useState(data);
 
   const _mapRef = useRef();
-  const URL = `https://api.mapbox.com/geocoding/v5/mapbox.places/${location[0]},${location[1]}.json?types=poi&access_token=pk.eyJ1Ijoic2huYSIsImEiOiJja2Q0dnp1cWkwYjk4Mnluem0xN3Z5OHd1In0.aM9jnQtRoElex2rqY0zePQ`;
-
-  useEffect(() => {
-    fetch(URL)
-      .then((res) => res.json())
-      .then((data) => {
-        const placeName = data.features.map((place) => {
-          return ` nearby:${place.place_name}`;
-        });
-
-        setNearBy(placeName.toString());
-        console.log(nearBy);
+  const clearLoaction = (i) => {
+    setLocation((oldLocations) => {
+      const object = { ...oldLocations };
+      object.locations[i] = {
+        lngLat: [],
+        name: null,
+      };
+      object.add = i;
+      return object;
+    });
+  };
+  const addLoaction = async (location, i) => {
+    const URL = `https://api.mapbox.com/geocoding/v5/mapbox.places/${location[0]},${location[1]}.json?types=poi&access_token=pk.eyJ1Ijoic2huYSIsImEiOiJja2Q0dnp1cWkwYjk4Mnluem0xN3Z5OHd1In0.aM9jnQtRoElex2rqY0zePQ`;
+    console.log(location);
+    let placeName = [null];
+    if (i === undefined) {
+      const res = await fetch(URL);
+      const data = await res.json();
+      placeName = data.features.map((place) => {
+        return i !== undefined
+          ? place.place_name
+          : `nearby:${place.place_name}`;
       });
-  }, [location]);
-
+    }
+    console.log(placeName);
+    setLocation((oldLocations) => {
+      let index = i ? i : oldLocations.add;
+      const object = { ...oldLocations };
+      object.locations[index] = {
+        lngLat: location,
+        name: placeName[0],
+      };
+      index++;
+      object.add = index > 1 ? 0 : index;
+      console.log(object);
+      return object;
+    });
+  };
   useEffect(() => {
     // Load all markers and images
     const map = _mapRef.current.getMap();
@@ -66,7 +96,7 @@ export default function Map({ RefFrom, RefDestination }) {
       <ReactMapGL
         onClick={(e) => {
           e.preventDefault();
-          setLocation(e.lngLat);
+          addLoaction(e.lngLat);
         }}
         {...viewport}
         ref={_mapRef}
@@ -134,14 +164,20 @@ export default function Map({ RefFrom, RefDestination }) {
             </Source>
           </>
         )}
-        {location.map((item) => {
-          return (
-            <Marker key={item} latitude={location[1]} longitude={location[0]}>
-              <button className="focus:outline-none">
-                <TiLocation className="text-5xl text-orange-500" />
-              </button>
-            </Marker>
-          );
+        {locations.locations.map((location, index) => {
+          if (location.lngLat.length > 0)
+            return (
+              <Marker
+                key={'location' + index}
+                latitude={location.lngLat[1]}
+                longitude={location.lngLat[0]}
+                offsetTop={-48}
+                offsetLeft={-24}
+              >
+                <TiLocation className="text-5xl text-orange-500 m-0 p-0" />
+              </Marker>
+            );
+          return null;
         })}
         {markers.map((place) => {
           return (
@@ -164,19 +200,25 @@ export default function Map({ RefFrom, RefDestination }) {
           containerRef={RefFrom}
           countries={'iq'}
           placeholder={'Choose location'}
+          onClear={() => clearLoaction(0)}
+          inputValue={
+            locations.locations[0] ? locations.locations[0].name : null
+          }
           onViewportChange={(viewport) => {
-            setMarkers((oldMarkers) => {
-              const newMarkers = [...oldMarkers];
-              newMarkers[0] = {
-                type: 'Feature',
-                properties: { ID: 0 },
-                geometry: {
-                  type: 'Point',
-                  coordinates: [viewport.longitude, viewport.latitude],
-                },
-              };
-              return newMarkers;
-            });
+            addLoaction([viewport.longitude, viewport.latitude], 0);
+
+            // setMarkers((oldMarkers) => {
+            //   const newMarkers = [...oldMarkers];
+            //   newMarkers[0] = {
+            //     type: 'Feature',
+            //     properties: { ID: 0 },
+            //     geometry: {
+            //       type: 'Point',
+            //       coordinates: [viewport.longitude, viewport.latitude],
+            //     },
+            //   };
+            //   return newMarkers;
+            // });
             setViewport({ ...viewport, width: '100%', height: '100%' });
           }}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -186,20 +228,25 @@ export default function Map({ RefFrom, RefDestination }) {
           containerRef={RefDestination}
           countries={'iq'}
           placeholder={'Destination'}
-          inputValue={nearBy}
+          inputValue={
+            locations.locations[1] ? locations.locations[1].name : null
+          }
+          onClear={() => clearLoaction(1)}
           onViewportChange={(viewport) => {
-            setMarkers((oldMarkers) => {
-              const newMarkers = [...oldMarkers];
-              newMarkers[1] = {
-                type: 'Feature',
-                properties: { ID: 1 },
-                geometry: {
-                  type: 'Point',
-                  coordinates: [viewport.longitude, viewport.latitude],
-                },
-              };
-              return newMarkers;
-            });
+            addLoaction([viewport.longitude, viewport.latitude], 1);
+
+            // setMarkers((oldMarkers) => {
+            //   const newMarkers = [...oldMarkers];
+            //   newMarkers[1] = {
+            //     type: 'Feature',
+            //     properties: { ID: 1 },
+            //     geometry: {
+            //       type: 'Point',
+            //       coordinates: [viewport.longitude, viewport.latitude],
+            //     },
+            //   };
+            //   return newMarkers;
+            // });
             setViewport({ ...viewport, width: '100%', height: '100%' });
           }}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -254,4 +301,7 @@ const routeObj = {
 Map.propTypes = {
   RefFrom: PropTypes.object.isRequired,
   RefDestination: PropTypes.object.isRequired,
+  clearInputFrom: PropTypes.func.isRequired,
+  clearInputDestination: PropTypes.func.isRequired,
+  searchFrom: PropTypes.string.isRequired,
 };

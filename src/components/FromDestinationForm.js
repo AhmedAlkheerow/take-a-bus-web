@@ -1,16 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import { FaTimes } from 'react-icons/fa';
-export default function FromDestinationForm({
-  // searchFrom,
-  // searchDestination,
-  updateSearchForm,
-  updateSearchDestination,
-  // clearInputFrom,
-  // clearInputDestination,
-  RefFrom,
-  RefDestination,
-}) {
+export default function FromDestinationForm({ RefFrom, RefDestination }) {
   return (
     <form className="flex justify-between bg-dblue shadow-md rounded-lg px-5 pt-3 pb-8">
       <div>
@@ -18,7 +9,7 @@ export default function FromDestinationForm({
           From:
         </label>
         <div className="relative">
-          <div onInput={updateSearchForm} className="py-1" ref={RefFrom} />
+          <div className="py-1" ref={RefFrom} />
           {/* <input
               value={searchFrom}
               onChange={updateSearchForm}
@@ -42,11 +33,7 @@ export default function FromDestinationForm({
           To:
         </label>
         <div className="relative ml-1">
-          <div
-            onInput={updateSearchDestination}
-            className="py-1"
-            ref={RefDestination}
-          />
+          <div className="py-1" ref={RefDestination} />
           {/* <input
               value={searchDestination}
               onChange={updateSearchDestination}
@@ -70,12 +57,12 @@ export default function FromDestinationForm({
 }
 
 FromDestinationForm.propTypes = {
-  searchFrom: PropTypes.string.isRequired,
-  searchDestination: PropTypes.string.isRequired,
+  // searchFrom: PropTypes.string.isRequired,
+  // searchDestination: PropTypes.string.isRequired,
   updateSearchForm: PropTypes.func.isRequired,
   updateSearchDestination: PropTypes.func.isRequired,
-  clearInputFrom: PropTypes.func.isRequired,
-  clearInputDestination: PropTypes.func.isRequired,
+  // clearInputFrom: PropTypes.func.isRequired,
+  // clearInputDestination: PropTypes.func.isRequired,
   RefFrom: PropTypes.object.isRequired,
   RefDestination: PropTypes.object.isRequired,
 };
