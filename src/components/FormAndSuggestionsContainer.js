@@ -26,7 +26,7 @@ export default function FormAndSuggestionsContainer() {
 
   return (
     <>
-      <div className="boxshadow rounded-lg">
+      <div className="boxshadow rounded-lg overflow-hidden">
         <FromDestinationForm
           searchFrom={searchFrom}
           searchDestination={searchDestination}
@@ -45,7 +45,11 @@ export default function FormAndSuggestionsContainer() {
             <h2 className="text-white py-3 px-5 ">Available Routes</h2>
           </motion.div>
         )}
-        {searchFrom && searchDestination && <SuggestionsContainer />}
+        {searchFrom && searchDestination && (
+          <div className="overflow-auto h-halfscreen">
+            <SuggestionsContainer />
+          </div>
+        )}
       </div>
     </>
   );
