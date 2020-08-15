@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { clickItemDraw } from '../pages/Home';
+import PropTypes from 'prop-types';
 
 export default function SuggestionItem(props) {
+  SuggestionItem.propTypes = {
+    path: PropTypes.array,
+  };
+  const { setCoords, setShowRoute, showRoute } = useContext(clickItemDraw);
   // eslint-disable-next-line react/prop-types
   const busNo = props.busNo;
   // eslint-disable-next-line react/prop-types
@@ -12,9 +18,13 @@ export default function SuggestionItem(props) {
   // eslint-disable-next-line react/prop-types
   const fastest = props.fastest || false;
 
+  function handleClick() {
+    setCoords(props.path.features[0].geometry.coordinates);
+    setShowRoute(!showRoute);
+  }
   return (
-    <>
-      <div className="pt-6 px-6 pb-2">
+    <div>
+      <div className="pt-6 px-6 pb-2" onClick={handleClick}>
         <div
           className="w-full flex justify-between items-baseline"
           data-testid="bus-no"
@@ -70,6 +80,6 @@ export default function SuggestionItem(props) {
         </div>
       </div>
       <hr className="border-b-2 border-gray-400"></hr>
-    </>
+    </div>
   );
 }
