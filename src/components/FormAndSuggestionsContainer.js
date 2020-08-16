@@ -33,5 +33,5 @@ export default function FormAndSuggestionsContainer({
 FormAndSuggestionsContainer.propTypes = {
   RefFrom: PropTypes.object.isRequired,
   RefDestination: PropTypes.object.isRequired,
-  showResults: PropTypes.string.isRequired,
+  showResults: PropTypes.bool.isRequired,
 };
