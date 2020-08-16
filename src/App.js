@@ -1,13 +1,11 @@
 import React from 'react';
-import Map from './Components/MapContainer';
-import Navbar from './Components/Navbar';
-import BusList from './Components/AvailableBusesList';
+import Map from './components/MapContainer';
+import Navbar from './components/Navbar';
 function App() {
   return (
     <div>
-      {/* <Navbar />
-      <Map /> */}
-      <BusList />
+      <Navbar />
+      <Map />
     </div>
   );
 }
