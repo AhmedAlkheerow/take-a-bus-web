@@ -7,13 +7,7 @@ import destMark from '../assets/destination-marker.png';
 import Geocoder from 'react-map-gl-geocoder';
 import PropTypes from 'prop-types';
 import { TiLocation } from 'react-icons/ti';
-export default function Map({
-  RefFrom,
-  RefDestination,
-  clearInputFrom,
-  clearInputDestination,
-}) {
-  const markers = [];
+export default function Map({ RefFrom, RefDestination, setShowResults }) {
   const [locations, setLocation] = useState({
     add: 0,
     locations: [],
@@ -50,7 +44,7 @@ export default function Map({
   };
   const addLoaction = async (location, i) => {
     const URL = `https://api.mapbox.com/geocoding/v5/mapbox.places/${location[0]},${location[1]}.json?types=poi&access_token=pk.eyJ1Ijoic2huYSIsImEiOiJja2Q0dnp1cWkwYjk4Mnluem0xN3Z5OHd1In0.aM9jnQtRoElex2rqY0zePQ`;
-    console.log(location);
+
     let placeName = [null];
     if (i === undefined) {
       const res = await fetch(URL);
@@ -61,7 +55,6 @@ export default function Map({
           : `nearby:${place.place_name}`;
       });
     }
-    console.log(placeName);
     setLocation((oldLocations) => {
       let index = i ? i : oldLocations.add;
       const object = { ...oldLocations };
@@ -71,10 +64,18 @@ export default function Map({
       };
       index++;
       object.add = index > 1 ? 0 : index;
-      console.log(object);
       return object;
     });
   };
+  useEffect(() => {
+    const showResults =
+      locations.locations.length === 2 &&
+      locations.locations.reduce(
+        (preValue, value) => preValue && value.lngLat.length === 2,
+        true
+      );
+    setShowResults(showResults);
+  }, [locations]);
   useEffect(() => {
     // Load all markers and images
     const map = _mapRef.current.getMap();
@@ -179,19 +180,6 @@ export default function Map({
             );
           return null;
         })}
-        {markers.map((place) => {
-          return (
-            <Marker
-              key={'marker' + place.properties.ID}
-              latitude={place.geometry.coordinates[1]}
-              longitude={place.geometry.coordinates[0]}
-            >
-              <button className="focus:outline-none">
-                <TiLocation className="text-5xl text-blue-500" />
-              </button>
-            </Marker>
-          );
-        })}
         <div className="h-full flex flex-row-reverse items-end p-16">
           <LocateMeBtn />
         </div>
@@ -206,19 +194,6 @@ export default function Map({
           }
           onViewportChange={(viewport) => {
             addLoaction([viewport.longitude, viewport.latitude], 0);
-
-            // setMarkers((oldMarkers) => {
-            //   const newMarkers = [...oldMarkers];
-            //   newMarkers[0] = {
-            //     type: 'Feature',
-            //     properties: { ID: 0 },
-            //     geometry: {
-            //       type: 'Point',
-            //       coordinates: [viewport.longitude, viewport.latitude],
-            //     },
-            //   };
-            //   return newMarkers;
-            // });
             setViewport({ ...viewport, width: '100%', height: '100%' });
           }}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -234,19 +209,6 @@ export default function Map({
           onClear={() => clearLoaction(1)}
           onViewportChange={(viewport) => {
             addLoaction([viewport.longitude, viewport.latitude], 1);
-
-            // setMarkers((oldMarkers) => {
-            //   const newMarkers = [...oldMarkers];
-            //   newMarkers[1] = {
-            //     type: 'Feature',
-            //     properties: { ID: 1 },
-            //     geometry: {
-            //       type: 'Point',
-            //       coordinates: [viewport.longitude, viewport.latitude],
-            //     },
-            //   };
-            //   return newMarkers;
-            // });
             setViewport({ ...viewport, width: '100%', height: '100%' });
           }}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -301,7 +263,5 @@ const routeObj = {
 Map.propTypes = {
   RefFrom: PropTypes.object.isRequired,
   RefDestination: PropTypes.object.isRequired,
-  clearInputFrom: PropTypes.func.isRequired,
-  clearInputDestination: PropTypes.func.isRequired,
-  searchFrom: PropTypes.string.isRequired,
+  setShowResults: PropTypes.func.isRequired,
 };

@@ -1,27 +1,11 @@
 import React, { useRef, useState } from 'react';
 import Map from '../components/MapContainer';
 import FormAndSuggestionsContainer from '../components/FormAndSuggestionsContainer';
+
 export default function Home() {
   const RefFrom = useRef();
   const RefDestination = useRef();
-
-  const [searchFrom, setSearchFrom] = useState('');
-  const [searchDestination, setSearchDestination] = useState('');
-
-  function updateSearchForm(event) {
-    setSearchFrom(event.target.value);
-  }
-
-  function updateSearchDestination(event) {
-    setSearchDestination(event.target.value);
-  }
-
-  function clearInputDestination() {
-    setSearchDestination('');
-  }
-  function clearInputFrom() {
-    setSearchFrom('');
-  }
+  const [showResults, setShowResults] = useState(false);
 
   return (
     <>
@@ -29,20 +13,13 @@ export default function Home() {
         <FormAndSuggestionsContainer
           RefFrom={RefFrom}
           RefDestination={RefDestination}
-          searchFrom={searchFrom}
-          searchDestination={searchDestination}
-          updateSearchForm={updateSearchForm}
-          updateSearchDestination={updateSearchDestination}
-          // clearInputDestination={clearInputDestination}
-          // clearInputFrom={clearInputFrom}
+          showResults={showResults}
         />
       </div>
       <Map
         RefFrom={RefFrom}
         RefDestination={RefDestination}
-        clearInputDestination={clearInputDestination}
-        clearInputFrom={clearInputFrom}
-        searchFrom={searchFrom}
+        setShowResults={setShowResults}
       />
     </>
   );
