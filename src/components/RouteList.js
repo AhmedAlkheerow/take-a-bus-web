@@ -1,24 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import RouteListJson from '../data/RouteList.json';
 import WayLine from './WayLine';
+import Fuse from 'fuse.js';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
-const RouteList = () => {
-  const routes = Array(5)
-    .fill({})
-    .map((e, index) =>
-      Object.assign({
-        id: index,
-        name: '100 Meter St.',
-        way: [
-          { id: 0, isStart: true, name: '32 peak' },
-          { id: 1, name: 'Italian Village' },
-          { id: 2, name: 'Park View' },
-          { id: 3, name: 'Naz Naz' },
-          { id: 4, name: 'Empire' },
-          { id: 5, name: 'Ankawa', isEnd: true },
-        ],
-        time: '6:00 AM - 9:00 PM',
-      })
-    );
+const RouteList = ({ handleSetPath }) => {
+  const [showAvailableBuses, setShowAvailableBuses] = useState(null);
+  const [query, setQuery] = useState('');
+
+  const handleShowAvailableBuses = (id) => {
+    setShowAvailableBuses((oldId) => (oldId === id ? null : id));
+    handleSetPath(RouteListJson[id].path);
+  };
+
+  const handleOnSearch = (event) => {
+    setQuery(event.target.value);
+  };
+
+  const options = {
+    includeScore: true,
+    keys: ['name', 'way.name', 'time', 'availableBuses.busNumber'],
+  };
+
+  const fuse = new Fuse(RouteListJson, options);
+  const results = fuse.search(query);
+  const RouteResults = query
+    ? results.map((result) => result.item)
+    : RouteListJson;
+
   return (
     <>
       <table className="w-full table-auto">
@@ -47,6 +57,8 @@ const RouteList = () => {
                 <input
                   className="w-full border-2 border-gray-300 bg-white h-10 pl-8 pr-2 mr-20 rounded-lg text-sm focus:outline-none"
                   type="search"
+                  value={query}
+                  onChange={handleOnSearch}
                   name="search"
                   placeholder="Search"
                 ></input>
@@ -61,27 +73,38 @@ const RouteList = () => {
           </tr>
         </thead>
         <tbody align="center">
-          {routes &&
-            routes.length &&
-            routes.map((route) => (
-              <tr key={route.id} className="border-b">
-                <td>{route.name}</td>
-                <td>
-                  <WayLine way={route.way} />
-                </td>
-                <td>{route.time}</td>
-                <td className="fill-current text-primary hover:text-blue-700 cursor-pointer">
-                  <svg
-                    width="21"
-                    height="13"
-                    viewBox="0 0 21 13"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M3 0L10.5 8.125L18 0L21 1.625L10.5 13L0 1.625L3 0Z" />
-                  </svg>
-                </td>
-              </tr>
-            ))}
+          {RouteListJson &&
+            RouteListJson.length &&
+            RouteResults.map((route) => {
+              const { id, name, way, time, availableBuses } = route;
+              return (
+                <>
+                  <tr key={id} className="border-b">
+                    <td>{name}</td>
+                    <td>
+                      <WayLine way={way} />
+                    </td>
+                    <td>{time}</td>
+                    <td
+                      className="fill-current text-primary hover:text-blue-700 cursor-pointer"
+                      onClick={() => handleShowAvailableBuses(id)}
+                    >
+                      {showAvailableBuses === id ? (
+                        <IoIosArrowUp size="40" />
+                      ) : (
+                        <IoIosArrowDown size="40" />
+                      )}
+                    </td>
+                  </tr>
+                  {showAvailableBuses === id ? (
+                    <tr>
+                      <td>{availableBuses[0].busNumber}</td>
+                      <td>@JalalArif todo:add busList component here</td>
+                    </tr>
+                  ) : null}
+                </>
+              );
+            })}
         </tbody>
       </table>
     </>
@@ -89,3 +112,7 @@ const RouteList = () => {
 };
 
 export default RouteList;
+
+RouteList.propTypes = {
+  handleSetPath: PropTypes.func.isRequired,
+};

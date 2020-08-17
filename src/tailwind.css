@@ -20,6 +20,7 @@ html {
 
 .btn.primary {
   @apply bg-primary text-white;
+
   &:hover {
     @apply bg-blue-500 text-white;
   }
@@ -27,6 +28,7 @@ html {
 
 .btn.secondary {
   @apply bg-white text-primary;
+
   &:hover {
     @apply bg-blue-100 text-primary;
   }
@@ -34,6 +36,7 @@ html {
 
 .nav-link {
   @apply font-medium text-primary m-2;
+
   &:hover {
     @apply underline;
   }
