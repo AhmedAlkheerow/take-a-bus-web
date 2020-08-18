@@ -1,21 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 export default function ChangingProgressProvider(props) {
-  // const defaultProps = {
-  //   interval: 1000,
-  // };
   let [valuesIndex, setvaluesIndex] = useState(0);
-  let [interval, setIntervalState] = useState(1000);
 
-  useEffect(() => {
-    setIntervalState(
-      setInterval(() => {
-        setvaluesIndex(valuesIndex++ % props.values.length);
-      }, interval)
-    );
-  }, []);
+  const clear = useInterval(() => {
+    setvaluesIndex(valuesIndex++ % props.values.length);
+  }, 300);
 
-  // if (valuesIndex == props.values.length - 1) {
-  //   clearInterval(interval);
-  // }
+  if (valuesIndex === props.values.length - 1) clear();
+
   return props.children(props.values[valuesIndex]);
 }
+
+const useInterval = (callback, delay) => {
+  const savedCallback = useRef();
+  const id = useRef();
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    const handler = (...args) => savedCallback.current(...args);
+
+    if (delay !== null) {
+      id.current = setInterval(handler, delay);
+      return () => clearInterval(id.current);
+    }
+  }, [delay]);
+
+  return () => clearInterval(id.current);
+};
