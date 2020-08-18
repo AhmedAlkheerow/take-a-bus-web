@@ -44,7 +44,7 @@ const Layout = ({ children }) => {
         <div className="shadow-md z-10">
           <Navbar onLoginClick={showLoginF} onRegisterClick={showRegisterF} />
         </div>
-        <main className="flex-grow overflow-auto">{children}</main>
+        <main className="flex-grow overflow-auto relative">{children}</main>
       </div>
       {showModal && (
         <Modal onClickOutside={closeModal}>
