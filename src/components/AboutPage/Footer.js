@@ -17,8 +17,8 @@ export default function Footer() {
     <div className="color">
       {/* first row */}
       <div className=" container mx-auto grid grid-cols-2 py-4">
-        <div className="flex content-start">
-          <img src={logo} className="w-32 h-24" alt="logo" />
+        <div className="flex content-start w-24">
+          <img src={logo} alt="logo" />
         </div>
         <div className="mt-5">
           <a href="https://github.com/7ananDlshad" className="float-right">

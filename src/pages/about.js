@@ -6,8 +6,6 @@ import Service from '../components/AboutPage/Service';
 import Footer from '../components/AboutPage/Footer';
 import Testimonial from '../components/AboutPage/Testimonial';
 
-import '../tailwind.css';
-
 export default function AboutUs() {
   return (
     <>

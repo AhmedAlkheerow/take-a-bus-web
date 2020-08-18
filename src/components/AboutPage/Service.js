@@ -7,7 +7,7 @@ import takeBus from '../../assets/takeBus.png';
 
 export default function Service() {
   return (
-    <>
+    <div className="relative">
       <div className="text-center">
         <div className="border-b w-2/5 m-auto mt-16">
           <h1 className="font-bold text-5xl "> What do we give you?</h1>
@@ -98,11 +98,11 @@ export default function Service() {
               />
             </svg>
           </div>
-          <div className="absolute right-0">
-            <img src={takeBus} alt=" take a bus pic " className="service-pic" />
+          <div className="absolute right-0 bottom-0">
+            <img src={takeBus} alt=" take a bus pic " />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

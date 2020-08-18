@@ -19,12 +19,10 @@ export default function Testimonial() {
           <div className="Card">
             <img className="Team-Pro boxshadow " src={wisam} alt="wissam"></img>
             <div>
-              <h1 className="Member-Name">Wissam Naji</h1>
+              <h1 className="Member-Name">Wisam Naji</h1>
               <div>Lorem ipsum is placeholder </div>
               <div>commonly used in the graphic, print,</div>
-              <div>and publishing industries for</div>
-              <div>previewing layouts and visual</div>
-              <div>mockups.</div>
+              <div>and publishing industries.</div>
             </div>
           </div>
 

@@ -2,6 +2,10 @@
 @tailwind base;
 @tailwind components;
 /* purgecss end ignore */
+
+/* Override utils here*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
 .progress-bar {
   color: #18a0fb;
   font-size: 2.25rem;
@@ -24,14 +28,6 @@
 .bg-input {
   background: #dedede;
 }
-.header-bus {
-  margin-top: 12.7rem;
-}
-.service-pic {
-  margin-top: 10.7rem;
-}
-/* Override utils here*/
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
 html {
   font-family: 'Montserrat', sans-serif;
