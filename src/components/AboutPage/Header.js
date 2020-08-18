@@ -1,4 +1,5 @@
 import React from 'react';
+import bus from '../../assets/bus.png';
 
 export default function Header() {
   return (
@@ -44,11 +45,7 @@ export default function Header() {
           />
         </svg>
         <div className="absolute right-0 top-0 header-bus">
-          <img
-            src={require('../images/bus.png')}
-            alt="take a bus pic"
-            className="w-full h-full"
-          />
+          <img src={bus} alt="take a bus pic" className="w-full h-full" />
         </div>
       </div>
 

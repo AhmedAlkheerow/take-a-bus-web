@@ -1,5 +1,12 @@
 import React from 'react';
 
+import wisam from '../../assets/wissam.png';
+import hanan from '../../assets/hanan.jpg';
+import kheerow from '../../assets/Kherow.png';
+import duhoki from '../../assets/duhoki.png';
+import shna from '../../assets/shna.png';
+import jalal from '../../assets/jalal.png';
+
 export default function Testimonial() {
   return (
     <>
@@ -10,11 +17,7 @@ export default function Testimonial() {
 
         <div className="grid grid-cols-3 mt-10">
           <div className="Card">
-            <img
-              className="Team-Pro boxshadow "
-              src={require('../images/wissam.png')}
-              alt="wissam"
-            ></img>
+            <img className="Team-Pro boxshadow " src={wisam} alt="wissam"></img>
             <div>
               <h1 className="Member-Name">Wissam Naji</h1>
               <div>Lorem ipsum is placeholder </div>
@@ -26,11 +29,7 @@ export default function Testimonial() {
           </div>
 
           <div className="Card">
-            <img
-              className="Team-Pro boxshadow "
-              src={require('../images/hanan.jpg')}
-              alt="hanan"
-            ></img>
+            <img className="Team-Pro boxshadow " src={hanan} alt="hanan"></img>
             <div>
               <h1 className="Member-Name">Hanan Dlshad</h1>
               <div>I am 20 years old,I am a senior Software Engineer</div>
@@ -41,7 +40,7 @@ export default function Testimonial() {
           <div className="Card">
             <img
               className="Team-Pro boxshadow "
-              src={require('../images/Kherow.png')}
+              src={kheerow}
               alt="Ahmed Ayad"
             ></img>
             <div>
@@ -55,7 +54,7 @@ export default function Testimonial() {
           <div className="Card">
             <img
               className="Team-Pro boxshadow "
-              src={require('../images/duhoki.png')}
+              src={duhoki}
               alt="Ahmed duhoki"
             ></img>
             <div>
@@ -67,11 +66,7 @@ export default function Testimonial() {
           </div>
 
           <div className="Card">
-            <img
-              className="Team-Pro boxshadow "
-              src={require('../images/shna.png')}
-              alt="shna"
-            ></img>
+            <img className="Team-Pro boxshadow " src={shna} alt="shna"></img>
             <div>
               <h1 className="Member-Name">Shna Rafeeq</h1>
               <div>I am 21 years old senior Software Engineer </div>
@@ -80,11 +75,7 @@ export default function Testimonial() {
             </div>
           </div>
           <div className="Card">
-            <img
-              className="Team-Pro boxshadow "
-              src={require('../images/jalal.png')}
-              alt="jalal"
-            ></img>
+            <img className="Team-Pro boxshadow " src={jalal} alt="jalal"></img>
             <div>
               <h1 className="Member-Name">Jalal Arif</h1>
               <div>

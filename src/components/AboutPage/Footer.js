@@ -10,17 +10,15 @@ import {
   faCommentDots,
 } from '@fortawesome/free-solid-svg-icons';
 
+import logo from '../../assets/logo.png';
+
 export default function Footer() {
   return (
     <div className="color">
       {/* first row */}
       <div className=" container mx-auto grid grid-cols-2 py-4">
         <div className="flex content-start">
-          <img
-            src={require('../images/logo.png')}
-            className="w-32 h-24"
-            alt="logo"
-          />
+          <img src={logo} className="w-32 h-24" alt="logo" />
         </div>
         <div className="mt-5">
           <a href="https://github.com/7ananDlshad" className="float-right">

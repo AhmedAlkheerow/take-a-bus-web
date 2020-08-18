@@ -1,5 +1,10 @@
 import React from 'react';
 
+import time from '../../assets/time.png';
+import route from '../../assets/route.png';
+import destination from '../../assets/destination.png';
+import takeBus from '../../assets/takeBus.png';
+
 export default function Service() {
   return (
     <>
@@ -12,11 +17,7 @@ export default function Service() {
           <div className="grid grid-cols-2 mt-32">
             <div className="ml-56">
               <div className="absolute">
-                <img
-                  src={require('../images/time.png')}
-                  alt="time"
-                  className="w-24 h-24 pl-2"
-                />
+                <img src={time} alt="time" className="w-24 h-24 pl-2" />
               </div>
               <svg
                 width="110"
@@ -33,11 +34,7 @@ export default function Service() {
                 />
               </svg>
               <div className="absolute">
-                <img
-                  src={require('../images/route.png')}
-                  alt="time"
-                  className="w-24 h-24 pl-4"
-                />
+                <img src={route} alt="time" className="w-24 h-24 pl-4" />
               </div>
               <svg
                 width="110"
@@ -54,11 +51,7 @@ export default function Service() {
                 />
               </svg>
               <div className="absolute">
-                <img
-                  src={require('../images/destination.png')}
-                  alt="time"
-                  className="w-24 h-24 pl-3"
-                />
+                <img src={destination} alt="time" className="w-24 h-24 pl-3" />
               </div>
               <svg
                 width="110"
@@ -106,11 +99,7 @@ export default function Service() {
             </svg>
           </div>
           <div className="absolute right-0">
-            <img
-              src={require('../images/takeBus.png')}
-              alt=" take a bus pic "
-              className="service-pic"
-            />
+            <img src={takeBus} alt=" take a bus pic " className="service-pic" />
           </div>
         </div>
       </div>
