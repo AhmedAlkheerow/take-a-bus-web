@@ -1,8 +1,8 @@
 import React from 'react';
-import BusIcon from './BusIcon';
-import WifiIcon from './WifiIcon';
-import BatteryIcon from './BatteryIcon';
-import AirConditionerIcon from './AirConditionerIcon';
+import BusIcon from '../assets/icon-bus.svg';
+import WifiIcon from '../assets/icon-wifi.svg';
+import BatteryIcon from '../assets/icon-battery.svg';
+import AirConditionerIcon from '../assets/icon-ac.svg';
 import BusInformations from './BusInformations';
 import VerticalLineDivide from './VerticalLineDivide';
 import BusNumberHeader from './BusNumberHeader';
@@ -24,20 +24,24 @@ export default function BusDetailPopUp() {
         <h3 className="pl-8 text-lg font-semibold">Informations: </h3>
       </div>
       <div className="w-full flex">
-        <div className="mt-4 pl-8 flex flex-col ">
-          <div>
-            <BusIcon />
+        <div className="mt-4 flex flex-col items-center mx-8">
+          <div className="w-24">
+            <img role="icon" alt="bus icon" src={BusIcon} />
           </div>
           <div className="text-gray-700 pl-2 pt-2">6:22 PM - 7:09 PM</div>
-          <div className="flex pl-8 py-2">
-            <div>
-              <WifiIcon />
+          <div className="flex justify-center my-2">
+            <div className="w-6">
+              <img role="icon" alt="Wifi available" src={WifiIcon} />
             </div>
-            <div className="pl-2">
-              <BatteryIcon />
+            <div className="ml-2 w-5">
+              <img role="icon" alt="Charger available" src={BatteryIcon} />
             </div>
-            <div className="pl-2">
-              <AirConditionerIcon />
+            <div className="ml-2 w-6">
+              <img
+                role="icon"
+                alt="Air conditioning available"
+                src={AirConditionerIcon}
+              />
             </div>
           </div>
         </div>
