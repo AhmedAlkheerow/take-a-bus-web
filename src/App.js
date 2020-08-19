@@ -3,8 +3,6 @@ import Map from './components/MapContainer';
 import Layout from './components/Layout';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RouteList from './components/RouteList';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
 function App() {
   return (

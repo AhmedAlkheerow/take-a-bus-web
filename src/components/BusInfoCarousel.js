@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import BusInfoContainer from './BusInfoContainer';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export default class BusInfoCarousel extends Component {
   constructor(props) {
