@@ -19,7 +19,9 @@
     "react-icons": "^3.10.0",
     "react-map-gl": "^5.2.7",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-slick": "^0.27.4",
+    "slick-carousel": "^1.8.1"
   },
   "scripts": {
     "build:css": "postcss src/tailwind.css -o src/index.css",
