@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="absolute z-10 rounded-lg bg-white">
+      <div className="absolute z-10 inset-y-0">
         <FormAndSuggestionsContainer
           RefFrom={RefFrom}
           RefDestination={RefDestination}

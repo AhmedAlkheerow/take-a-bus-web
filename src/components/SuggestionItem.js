@@ -64,7 +64,7 @@ export default function SuggestionItem(props) {
         </div>
 
         <div className="text-right text-xs">
-          <a href="#" className="text-dblue">
+          <a href="#details" className="text-dblue">
             See Details
           </a>
         </div>

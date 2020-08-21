@@ -6,6 +6,29 @@
 /* Override utils here*/
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
+.progress-bar {
+  color: #18a0fb;
+  font-size: 2.25rem;
+}
+.Team-Pro {
+  @apply rounded-full  h-32 w-32 m-auto;
+}
+.Member-Name {
+  @apply text-xl font-bold text-blue-500;
+}
+.Card {
+  @apply flex-1 px-4 py-6 m-2;
+}
+.color {
+  background-color: #f9f9f9;
+}
+.boxshadow {
+  box-shadow: 3px 3px 6px rgba(12, 20, 74, 0.3);
+}
+.bg-input {
+  background: #dedede;
+}
+
 html {
   font-family: 'Montserrat', sans-serif;
 }
@@ -40,7 +63,7 @@ html {
 }
 
 .boxshadow {
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.25);
 }
 
 @tailwind utilities;
