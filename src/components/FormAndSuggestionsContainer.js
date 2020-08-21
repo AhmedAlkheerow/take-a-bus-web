@@ -24,9 +24,11 @@ export default function FormAndSuggestionsContainer() {
     setSearchFrom('');
   }
 
+  const showSuggestions = searchFrom && searchDestination;
+
   return (
     <>
-      <div className="boxshadow rounded-lg overflow-hidden">
+      <div className="flex flex-col h-full">
         <FromDestinationForm
           searchFrom={searchFrom}
           searchDestination={searchDestination}
@@ -35,22 +37,34 @@ export default function FormAndSuggestionsContainer() {
           clearInputDestination={clearInputDestination}
           clearInputFrom={clearInputFrom}
         />
-        {searchFrom && searchDestination && (
-          <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.1 }}
-            className="rounded-sm bg-gray-600 h-12 -mt-2 z-0"
-          >
-            <h2 className="text-white py-3 px-5 ">Available Routes</h2>
-          </motion.div>
-        )}
-        {searchFrom && searchDestination && (
-          <div className="overflow-auto h-halfscreen">
-            <SuggestionsContainer />
-          </div>
+        {showSuggestions && (
+          <>
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.1 }}
+              className="bg-gray-600 h-12 -mt-2 z-10 boxshadow"
+            >
+              <h2 className="text-white py-3 px-5 ">Available Routes</h2>
+            </motion.div>
+            <div className="overflow-auto flex-grow boxshadow bg-white z-10 rounded-b-lg">
+              <SuggestionsContainer />
+            </div>
+            <ShowMore />
+          </>
         )}
       </div>
     </>
   );
 }
+
+const ShowMore = (props) => (
+  <div
+    {...props}
+    className="flex justify-center font-medium text-sm mb-6  border-white text-primary z-10"
+  >
+    <div className="boxshadow px-4 py-2 rounded-b-lg bg-white">
+      View More &gt;
+    </div>
+  </div>
+);

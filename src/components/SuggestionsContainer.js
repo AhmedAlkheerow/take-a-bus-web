@@ -51,7 +51,7 @@ const suggestions = [
 export default function SuggestionContainer() {
   let count = 0;
   return (
-    <div className="">
+    <>
       {suggestions.map((s, idx) => {
         count += 0.1;
         return (
@@ -72,6 +72,6 @@ export default function SuggestionContainer() {
           </motion.div>
         );
       })}
-    </div>
+    </>
   );
 }
