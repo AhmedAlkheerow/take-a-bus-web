@@ -28,12 +28,30 @@ const suggestions = [
     destination: 'Erbil Citadel',
     duration: '6:45 PM - 8:15 PM',
   },
+  {
+    busNo: '473824 EBL - IRQ',
+    origin: 'Sami Abdulrahman',
+    destination: 'Erbil Citadel',
+    duration: '6:45 PM - 8:15 PM',
+  },
+  {
+    busNo: '473824 EBL - IRQ',
+    origin: 'Sami Abdulrahman',
+    destination: 'Erbil Citadel',
+    duration: '6:45 PM - 8:15 PM',
+  },
+  {
+    busNo: '473824 EBL - IRQ',
+    origin: 'Sami Abdulrahman',
+    destination: 'Erbil Citadel',
+    duration: '6:45 PM - 8:15 PM',
+  },
 ];
 
 export default function SuggestionContainer() {
   let count = 0;
   return (
-    <div className="">
+    <>
       {suggestions.map((s, idx) => {
         count += 0.1;
         return (
@@ -54,6 +72,6 @@ export default function SuggestionContainer() {
           </motion.div>
         );
       })}
-    </div>
+    </>
   );
 }
