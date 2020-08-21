@@ -1,37 +1,28 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import RedXBtn from './RedXBtn';
 import OrSeperator from './OrSeperator';
 import FacebookGoogleBtn from './FacebookGoogleBtn';
 import PropTypes from 'prop-types';
-import { usersRef, auth } from './../api/firebase';
+import AuthContext from '../providers/AuthProvider';
 export default function SignUp({ onClose }) {
   const actionString = 'Sign Up';
   const formRef = useRef();
-  const handleSignup = async (e) => {
+
+  const { user, signUp, authInProgress, authError } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (user) onClose();
+  }, [user, onClose]);
+
+  const handleSignup = (e) => {
     e.preventDefault();
     const form = new FormData(formRef.current);
-    const newUser = {
-      firstName: form.get('firstName'),
-      lastName: form.get('lastName'),
-      email: form.get('email'),
-      password: form.get('password'),
-    };
-    try {
-      const userCredential = await auth.createUserWithEmailAndPassword(
-        newUser.email,
-        newUser.password
-      );
-      const newUserFirebase = {
-        uid: userCredential.user.uid,
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        email: newUser.email,
-      };
-      await usersRef.doc(newUserFirebase.uid).set(newUserFirebase);
-      onClose();
-    } catch (e) {
-      console.log(e.message);
-    }
+
+    signUp(
+      form.get('email'),
+      form.get('password'),
+      `${form.get('firstName')} ${form.get('lastName')}`
+    );
   };
 
   return (
@@ -41,6 +32,9 @@ export default function SignUp({ onClose }) {
           <h1 className="text-2xl font-bold pb-4">Sign Up Now</h1>
         </div>
         <form ref={formRef} onSubmit={handleSignup}>
+          <div className="text-xs text-red-500">
+            {authError ? authError.message : ''}
+          </div>
           <div className="flex justify-between">
             <div className="w-1/2 mr-1">
               <input
@@ -68,7 +62,7 @@ export default function SignUp({ onClose }) {
               className="mt-8 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-solid border-2 border-gray-500"
               aria-label="Email-Address"
               name="email"
-              type="text"
+              type="email"
               placeholder="Email Address"
               required
             />
@@ -76,10 +70,10 @@ export default function SignUp({ onClose }) {
           <div>
             <input
               className="mt-8 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-solid border-2 border-gray-500"
-              aria-label="Create-Password"
+              aria-label="Account Password"
               name="password"
               type="password"
-              placeholder="Create Password"
+              placeholder="Account Password"
               required
             />
           </div>
@@ -89,7 +83,8 @@ export default function SignUp({ onClose }) {
               type="submit"
               className="btn-md btn primary boxshadow"
               // onClick={handleSignup}
-              value="Register"
+              value={authInProgress ? '...' : 'Register'}
+              disabled={authInProgress}
             />
           </div>
           <div className="py-6">

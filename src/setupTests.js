@@ -13,3 +13,5 @@ window.matchMedia =
       removeListener: function () {},
     };
   };
+
+window.isJest = true;

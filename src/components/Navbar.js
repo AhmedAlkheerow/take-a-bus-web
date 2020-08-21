@@ -1,36 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import Logo from '../assets/logo-200.png';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { usersRef, auth } from './../api/firebase';
-import { useSelector, useDispatch } from 'react-redux';
-import { setUser } from './../actions';
+// import { usersRef, auth } from './../api/firebase';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { setUser } from './../actions';
+import AuthContext from '../providers/AuthProvider';
 
 export default function Navbar({ onRegisterClick, onLoginClick }) {
-  const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    auth.onAuthStateChanged(async (authUser) => {
-      console.log(authUser);
-      if (authUser) {
-        try {
-          const userData = await usersRef.doc(authUser.uid).get();
-          const user = userData.data();
-          // const user = { isSigned: true, uid: authUser.uid };
-          user.isSigned = true;
-          dispatch(setUser(user));
-        } catch (e) {
-          console.log(e.message);
-          dispatch(setUser({ isSigned: false }));
-        }
-      } else {
-        dispatch(setUser({ isSigned: false }));
-      }
-    });
-  }, []);
+  const { user, logOut } = useContext(AuthContext);
+
   const onLogout = () => {
     console.log('logout');
-    auth.signOut();
+    logOut();
   };
   return (
     <header className="shadow-sm py-1">
@@ -42,10 +24,13 @@ export default function Navbar({ onRegisterClick, onLoginClick }) {
         </div>
         <div className="flex justify-between flex-grow">
           <NavMenu />
-          {user.isSigned && (
+          {user && (
             <div className="mx-6">
-              <a href="#me" className="btn primary focus:outline-none">
-                Welcome {user.firstName}
+              <a
+                href="#me"
+                className="p-2 mx-5 border border-black rounded-sm focus:outline-none"
+              >
+                Welcome {user.displayName}!
               </a>
               <button
                 className="btn secondary ml-2 focus:outline-none"
@@ -55,7 +40,7 @@ export default function Navbar({ onRegisterClick, onLoginClick }) {
               </button>
             </div>
           )}
-          {!user.isSigned && (
+          {!user && (
             <div className="mx-6">
               <a href="#signin">
                 <button

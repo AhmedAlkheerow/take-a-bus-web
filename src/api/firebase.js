@@ -20,5 +20,8 @@ const db = firebase.firestore();
 export const usersRef = db.collection('users');
 
 export const auth = firebase.auth();
+if (!window.isJest) {
+  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+}
 export const googleAuth = new firebase.auth.GoogleAuthProvider();
 export default firebase;

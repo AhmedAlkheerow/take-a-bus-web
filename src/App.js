@@ -4,17 +4,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RouteList from './components/RouteList';
 import home from './pages/home';
 import about from './pages/about';
-
-import allReducers from './reducers';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-
-const store = createStore(allReducers);
+import { AuthProvider } from './providers/AuthProvider';
 
 function App() {
   return (
     <div>
-      <Provider store={store}>
+      <AuthProvider>
         <Router>
           <Layout>
             <Switch>
@@ -35,7 +30,7 @@ function App() {
             </Switch>
           </Layout>
         </Router>
-      </Provider>
+      </AuthProvider>
     </div>
   );
 }
