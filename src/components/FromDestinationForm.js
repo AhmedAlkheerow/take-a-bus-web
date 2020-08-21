@@ -11,7 +11,7 @@ export default function FromDestinationForm({
 }) {
   return (
     <div>
-      <form className="flex justify-between bg-dblue shadow-md rounded-lg px-5 pt-3 pb-8">
+      <form className="flex justify-between bg-dblue boxshadow rounded-lg px-5 pt-3 pb-8">
         <div>
           <label className="text-white font-medium mb-1" htmlFor="from-input">
             From:

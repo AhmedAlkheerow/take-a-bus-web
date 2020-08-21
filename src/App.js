@@ -3,6 +3,8 @@ import Layout from './components/Layout';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RouteList from './components/RouteList';
 import home from './pages/home';
+import about from './pages/about';
+
 import allReducers from './reducers';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -24,7 +26,7 @@ function App() {
                 path="/form/:location/to/:location"
                 render={() => <div />}
               />
-              <Route path="/about" render={() => <div />} />
+              <Route path="/about" component={about} />
               <Route path="/me" render={() => <div />} />
               <Route path="/me/history" render={() => <div />} />
               <Route path="/me/favorite" render={() => <div />} />
