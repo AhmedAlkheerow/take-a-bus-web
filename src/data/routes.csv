@@ -1,4 +1,4 @@
-Route Name ,Route Way,Available Time,GeoJson
+name,way,availability,path
 40 meter st.,"Mufti, Mamostayan, Xabat, Lnaga, Rizgari Hospital, Brayati st., Raparin, Kwestan, Kani QR, Nusaran, Baxtyari, Sami Abdulrahman, Nishtiman Rizgari, Kuran, AZADI, Ronaki",6:30 am - 6:00 pm,"{
   ""type"": ""FeatureCollection"",
   ""features"": [
