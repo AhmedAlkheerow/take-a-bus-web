@@ -88,7 +88,7 @@ export default function BusInfoContainer({ dontShowTakeIt, fillHeart }) {
             <button
               aria-label="Took it"
               type="button"
-              className="boxshadow btn btn-md primary font-semibold"
+              className="boxshadow btn btn-md primary font-semibold ml-40 mt-16"
             >
               Took it
             </button>
