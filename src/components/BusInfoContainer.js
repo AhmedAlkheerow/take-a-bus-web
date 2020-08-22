@@ -1,8 +1,16 @@
 import React from 'react';
 import { FiHeart } from 'react-icons/fi';
+import { AiFillHeart } from 'react-icons/ai';
 import WayLine from './WayLine';
+import BusIcon from '../assets/icon-bus.svg';
+import WifiIcon from '../assets/icon-wifi.svg';
+import BatteryIcon from '../assets/icon-battery.svg';
+import AirConditionerIcon from '../assets/icon-ac.svg';
+import BusInformations from './BusInformations';
+import VerticalLineDivide from './VerticalLineDivide';
+import PropTypes from 'prop-types';
 
-export default function BusInfoContainer() {
+export default function BusInfoContainer({ dontShowTakeIt, fillHeart }) {
   const way = [
     { id: 0, isStart: true, name: '32 peak' },
     { id: 1, name: 'Italian Village' },
@@ -21,7 +29,15 @@ export default function BusInfoContainer() {
           </strong>
         </div>
         <div className="pr-10">
-          <FiHeart className="w-8 h-8 text-red-600" />
+          {!fillHeart ? (
+            <button>
+              <FiHeart className="w-8 h-8 text-red-600" />
+            </button>
+          ) : (
+            <button>
+              <AiFillHeart className="w-8 h-8 text-red-600" />
+            </button>
+          )}
         </div>
       </div>
       <div className="mt-4 p-2">
@@ -36,33 +52,53 @@ export default function BusInfoContainer() {
       </div>
 
       <div className="w-full flex">
-        <div className="mt-4 pl-8 flex flex-col ">
-          <div>@todo BusIcon from bust detail pop up component</div>
+        <div className="mt-4 flex flex-col items-center mx-8">
+          <div className="w-24">
+            <img role="icon" alt="bus icon" src={BusIcon} />
+          </div>
           <div className="text-gray-700 pl-2 pt-2">6:22 PM - 7:09 PM</div>
-          <div className="flex pl-8 py-2">
-            <div>@todo WifiIcon from bust detail pop up component</div>
-            <div className="pl-2">
-              @todo BatteryIcon from bust detail pop up component
+          <div className="flex justify-center my-2">
+            <div className="w-6">
+              <img role="icon" alt="Wifi available" src={WifiIcon} />
             </div>
-            <div className="pl-2">
-              @todo AirConditionerIcon from bust detail pop up component
+            <div className="ml-2 w-5">
+              <img role="icon" alt="Charger available" src={BatteryIcon} />
+            </div>
+            <div className="ml-2 w-6">
+              <img
+                role="icon"
+                alt="Air conditioning available"
+                src={AirConditionerIcon}
+              />
             </div>
           </div>
         </div>
-        @todo VerticalLine Component from bust detail pop up component
+        <VerticalLineDivide />
         <div className="flex flex-col ml-2">
-          @todo BusInformations Component from bust detail pop up component
+          <BusInformations />
         </div>
-        <div className="mr-8">
-          <button
-            aria-label="Took it"
-            type="button"
-            className="boxshadow btn btn-md primary font-semibold"
-          >
-            Took it
-          </button>
+        <VerticalLineDivide />
+        <div className="flex flex-col ml-2">
+          <div className="text-gray-700 pl-1 pt-6">
+            <h2>Work days: Saturday - Thusday</h2>
+          </div>
         </div>
+        {!dontShowTakeIt && (
+          <div className="mr-8">
+            <button
+              aria-label="Took it"
+              type="button"
+              className="boxshadow btn btn-md primary font-semibold"
+            >
+              Took it
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
 }
+BusInfoContainer.propTypes = {
+  dontShowTakeIt: PropTypes.bool.isRequired,
+  fillHeart: PropTypes.bool.isRequired,
+};

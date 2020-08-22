@@ -18,6 +18,7 @@ firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 const db = firebase.firestore();
 export const usersRef = db.collection('users');
+export const favRef = db.collection('favorites');
 
 export const auth = firebase.auth();
 if (!window.isJest) {
