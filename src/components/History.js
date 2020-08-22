@@ -3,12 +3,14 @@ import React from 'react';
 export default function History() {
   return (
     <>
-      <table className="container mx-auto w-full table-auto">
+      <table className="w-full table-auto rounded-lg shadow-lg">
         <thead>
           <tr>
-            <td colSpan="2">Recent Report</td>
-            <td colSpan="2">
-              <div className="text-gray-600 p-2">
+            <td colSpan="5" className="pl-4">
+              Recent Report
+            </td>
+            <td colSpan="2" className="w-1/6">
+              <div className="text-gray-600 p-2 ">
                 <svg
                   className="absolute mt-3 text-gray-600 h-4 w-4 ml-2 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
@@ -28,12 +30,12 @@ export default function History() {
                   className="w-full border-2 border-gray-300 bg-white h-10 pl-8 pr-2 rounded-lg text-sm focus:outline-none"
                   type="search"
                   name="search"
-                  placeholder="Search"
+                  placeholder="Search Keyword"
                 ></input>
               </div>
             </td>
           </tr>
-          <tr className="bg-gray-400">
+          <tr className="bg-gray-200">
             <th>No.</th>
             <th>Bus Number</th>
             <th>From</th>
@@ -42,14 +44,30 @@ export default function History() {
             <th>Date</th>
           </tr>
         </thead>
-        <tbody align="center">
+        <tbody align="center" className="space-y-64">
           <tr>
-            <td>1</td>
-            <td>4568742</td>
-            <td>havallan</td>
-            <td>Citadle</td>
-            <td>17:20</td>
-            <td>5/8/2020</td>
+            <td className="py-4">1</td>
+            <td className="py-4">4548742</td>
+            <td className="py-4">Havallan</td>
+            <td className="py-4">Citadle</td>
+            <td className="py-4">14:30 - 16:30</td>
+            <td className="py-4">5/8/2020</td>
+          </tr>
+          <tr>
+            <td className="py-4">2</td>
+            <td className="py-4">8943154</td>
+            <td className="py-4">Citadle</td>
+            <td className="py-4">Daratu</td>
+            <td className="py-4">12:30 - 13:30</td>
+            <td className="py-4">3/1/2020</td>
+          </tr>
+          <tr>
+            <td className="py-4">2</td>
+            <td className="py-4">8943154</td>
+            <td className="py-4">Citadle</td>
+            <td className="py-4">Daratu</td>
+            <td className="py-4">12:30 - 13:30</td>
+            <td className="py-4">3/1/2020</td>
           </tr>
         </tbody>
       </table>
