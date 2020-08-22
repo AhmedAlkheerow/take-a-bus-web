@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from './components/Layout';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import RouteListContainer from './components/RouteListContainer';
+import routes from './pages/routes';
 import home from './pages/home';
 import about from './pages/about';
 import { AuthProvider } from './providers/AuthProvider';
@@ -25,7 +25,7 @@ function App() {
               <Route path="/me" render={() => <div />} />
               <Route path="/me/history" render={() => <div />} />
               <Route path="/me/favorite" render={() => <div />} />
-              <Route path="/routes" component={RouteListContainer} />
+              <Route path="/routes" component={routes} />
               <Route exact path="/" component={home} />
             </Switch>
           </Layout>

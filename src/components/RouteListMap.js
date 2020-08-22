@@ -36,7 +36,6 @@ export default function RouteListMap({ path }) {
                 'line-color': '#36AF47',
                 'line-width': 8,
               }}
-              filter={['==', '$type', 'LineString']}
             />
           </Source>
         )}
@@ -46,5 +45,5 @@ export default function RouteListMap({ path }) {
 }
 
 RouteListMap.propTypes = {
-  path: PropTypes.func.isRequired,
+  path: PropTypes.func,
 };
