@@ -13,6 +13,9 @@ module.exports = {
         '9.8rem': '9.8rem',
         '0.35rem': '0.35rem',
       },
+      height: {
+        '28rem': '28.125rem',
+      },
     },
   },
   variants: {},

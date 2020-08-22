@@ -1,4 +1,6 @@
 import React from 'react';
-export default function routes() {
-  return <div>@todo return routes list page</div>;
+import RouteListContainer from '../components/RouteListContainer';
+
+export default function Routes() {
+  return <RouteListContainer />;
 }
