@@ -1,4 +1,10 @@
 import React from 'react';
+import History from '../components/History';
+
 export default function home() {
-  return <div>@todo return history page</div>;
+  return (
+    <>
+      <History />
+    </>
+  );
 }
