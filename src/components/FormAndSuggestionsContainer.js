@@ -1,21 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FromDestinationForm from './FromDestinationForm';
 import SuggestionsContainer from './SuggestionsContainer';
 import { motion } from 'framer-motion';
-import PropTypes from 'prop-types';
-export default function FormAndSuggestionsContainer({
-  RefFrom,
-  RefDestination,
-  showResults,
-}) {
+export default function FormAndSuggestionsContainer() {
+  const [results, setResults] = useState([]);
   return (
     <>
       <div className="flex flex-col h-full">
-        <FromDestinationForm
-          RefFrom={RefFrom}
-          RefDestination={RefDestination}
-        />
-        {showResults && (
+        <FromDestinationForm setRoutes={setResults} />
+        {results.length > 0 && (
           <>
             <motion.div
               initial={{ scale: 0.8 }}
@@ -23,10 +16,10 @@ export default function FormAndSuggestionsContainer({
               transition={{ duration: 0.1 }}
               className="bg-gray-600 h-12 -mt-2 z-10 boxshadow"
             >
-              <h2 className="text-white py-3 px-5 ">Available Routes</h2>
+              <h2 className="text-white py-3 px-5">Available Routes</h2>
             </motion.div>
             <div className="overflow-auto flex-grow boxshadow bg-white z-10 rounded-b-lg">
-              <SuggestionsContainer />
+              <SuggestionsContainer results={results} />
             </div>
             <ShowMore />
           </>
@@ -35,11 +28,6 @@ export default function FormAndSuggestionsContainer({
     </>
   );
 }
-FormAndSuggestionsContainer.propTypes = {
-  RefFrom: PropTypes.object.isRequired,
-  RefDestination: PropTypes.object.isRequired,
-  showResults: PropTypes.bool.isRequired,
-};
 
 const ShowMore = (props) => (
   <div

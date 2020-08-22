@@ -1,26 +1,14 @@
-import React, { useRef, useState } from 'react';
-import Map from '../components/MapContainer';
+import React from 'react';
+// import Map from '../components/MapContainer';
 import FormAndSuggestionsContainer from '../components/FormAndSuggestionsContainer';
+import { MapProvider } from '../providers/MapProvider';
 
 export default function Home() {
-  const RefFrom = useRef();
-  const RefDestination = useRef();
-  const [showResults, setShowResults] = useState(false);
-
   return (
-    <>
+    <MapProvider>
       <div className="absolute z-10 inset-y-0">
-        <FormAndSuggestionsContainer
-          RefFrom={RefFrom}
-          RefDestination={RefDestination}
-          showResults={showResults}
-        />
+        <FormAndSuggestionsContainer />
       </div>
-      <Map
-        RefFrom={RefFrom}
-        RefDestination={RefDestination}
-        setShowResults={setShowResults}
-      />
-    </>
+    </MapProvider>
   );
 }
