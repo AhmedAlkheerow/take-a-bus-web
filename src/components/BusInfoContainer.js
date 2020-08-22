@@ -54,22 +54,18 @@ export default function BusInfoContainer({ dontShowTakeIt, fillHeart }) {
       <div className="w-full flex">
         <div className="mt-4 flex flex-col items-center mx-8">
           <div className="w-24">
-            <img role="icon" alt="bus icon" src={BusIcon} />
+            <img alt="bus icon" src={BusIcon} />
           </div>
           <div className="text-gray-700 pl-2 pt-2">6:22 PM - 7:09 PM</div>
           <div className="flex justify-center my-2">
             <div className="w-6">
-              <img role="icon" alt="Wifi available" src={WifiIcon} />
+              <img alt="Wifi available" src={WifiIcon} />
             </div>
             <div className="ml-2 w-5">
-              <img role="icon" alt="Charger available" src={BatteryIcon} />
+              <img alt="Charger available" src={BatteryIcon} />
             </div>
             <div className="ml-2 w-6">
-              <img
-                role="icon"
-                alt="Air conditioning available"
-                src={AirConditionerIcon}
-              />
+              <img alt="Air conditioning available" src={AirConditionerIcon} />
             </div>
           </div>
         </div>
