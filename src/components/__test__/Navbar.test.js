@@ -1,12 +1,15 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import Navbar from '../Navbar';
+import { MockProvider as AuthProvider } from '../../providers/AuthProvider';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 test('renders the navbar', () => {
-  const { container } = render(
+  let { container } = render(
     <Router>
-      <Navbar />
+      <AuthProvider>
+        <Navbar />
+      </AuthProvider>
     </Router>
   );
   const navbarContainer = container.querySelector('div');

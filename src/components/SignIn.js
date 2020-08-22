@@ -1,23 +1,40 @@
-import React from 'react';
+import React, { useRef, useContext, useEffect } from 'react';
 import RedXBtn from './RedXBtn';
 import OrSeperator from './OrSeperator';
 import FacebookGoogleBtn from './FacebookGoogleBtn';
+import AuthContext from '../providers/AuthProvider';
 import PropTypes from 'prop-types';
 export default function SignIn({ onClose }) {
   const actionString = 'Login';
+  const formRef = useRef();
+  const { user, signIn, authInProgress, authError } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (user) onClose();
+  }, [user, onClose]);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = new FormData(formRef.current);
+    signIn(form.get('email'), form.get('password'));
+  };
   return (
     <div className="container relative grid grid-cols-12 bg-white my-32 rounded-lg pt-16">
       <div className="col-span-6 flex flex-col pl-10 my-auto">
         <div>
           <h1 className="text-2xl font-bold pb-4">Login Now</h1>
         </div>
-        <form>
+        <form ref={formRef} onSubmit={handleLogin}>
           <div>
+            <div className="text-xs text-red-500">
+              {authError ? authError.message : ''}
+            </div>
             <input
               className="mt-8 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-solid border-2 border-gray-500"
               aria-label="Email Address"
-              type="text"
+              type="email"
               placeholder="Email Address"
+              name="email"
               required
             />
           </div>
@@ -27,6 +44,7 @@ export default function SignIn({ onClose }) {
               aria-label="Password"
               type="password"
               placeholder="Password"
+              name="password"
               required
             />
           </div>
@@ -40,8 +58,10 @@ export default function SignIn({ onClose }) {
               aria-label="Login"
               type="submit"
               className="btn-md btn primary boxshadow"
+              disabled={authInProgress}
             >
-              Login
+              {!authInProgress && 'Login'}
+              {authInProgress && '...'}
             </button>
           </div>
           <div className="py-6">
