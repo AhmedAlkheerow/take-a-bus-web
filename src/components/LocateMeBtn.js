@@ -5,7 +5,7 @@ export default function LocateMeBtn() {
     <div className="btn btn-blue w-16 h-16 bg-blue-500 rounded-full flex flex-col justify-center items-center">
       <GeolocateControl
         positionOptions={{ enableHighAccuracy: true }}
-        trackUserLocation={true}
+        trackUserLocation={false}
       />
     </div>
   );
