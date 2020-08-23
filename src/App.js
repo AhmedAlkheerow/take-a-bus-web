@@ -5,6 +5,7 @@ import RouteList from './components/RouteList';
 import home from './pages/home';
 import about from './pages/about';
 import { AuthProvider } from './providers/AuthProvider';
+import routedetails from './pages/routedetails';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="/me/history" render={() => <div />} />
               <Route path="/me/favorite" render={() => <div />} />
               <Route path="/routes" component={RouteList} />
+              <Route path="/routedetails/:id" component={routedetails} />
               <Route exact path="/" component={home} />
             </Switch>
           </Layout>
