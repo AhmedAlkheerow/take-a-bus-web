@@ -18,7 +18,7 @@ firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 const db = firebase.firestore();
 export const usersRef = db.collection('users');
-
+export const routesRef = db.collection('routes');
 export const auth = firebase.auth();
 if (!window.isJest) {
   auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
