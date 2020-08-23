@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Logo from '../assets/logo-200.png';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+// import { usersRef, auth } from './../api/firebase';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { setUser } from './../actions';
+import AuthContext from '../providers/AuthProvider';
+
 export default function Navbar({ onRegisterClick, onLoginClick }) {
+  const { user, logOut } = useContext(AuthContext);
+
+  const onLogout = () => {
+    console.log('logout');
+    logOut();
+  };
   return (
     <header className="shadow-sm py-1">
       <nav className="flex items-center">
@@ -13,24 +24,42 @@ export default function Navbar({ onRegisterClick, onLoginClick }) {
         </div>
         <div className="flex justify-between flex-grow">
           <NavMenu />
-          <div className="mx-6">
-            <a href="#signin">
-              <button
-                className="btn secondary focus:outline-none"
-                onClick={onLoginClick}
+          {user && (
+            <div className="mx-6">
+              <a
+                href="#me"
+                className="p-2 mx-5 border border-black rounded-sm focus:outline-none"
               >
-                Log in
-              </button>
-            </a>
-            <a href="#signup">
+                Welcome {user.displayName}!
+              </a>
               <button
-                className="btn primary ml-2 focus:outline-none"
-                onClick={onRegisterClick}
+                className="btn secondary ml-2 focus:outline-none"
+                onClick={onLogout}
               >
-                Register
+                Log out
               </button>
-            </a>
-          </div>
+            </div>
+          )}
+          {!user && (
+            <div className="mx-6">
+              <a href="#signin">
+                <button
+                  className="btn secondary focus:outline-none"
+                  onClick={onLoginClick}
+                >
+                  Log in
+                </button>
+              </a>
+              <a href="#signup">
+                <button
+                  className="btn primary ml-2 focus:outline-none"
+                  onClick={onRegisterClick}
+                >
+                  Register
+                </button>
+              </a>
+            </div>
+          )}
         </div>
       </nav>
     </header>

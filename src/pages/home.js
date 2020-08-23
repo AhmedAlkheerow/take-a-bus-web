@@ -1,13 +1,14 @@
 import React from 'react';
-import Map from '../components/MapContainer';
+// import Map from '../components/MapContainer';
 import FormAndSuggestionsContainer from '../components/FormAndSuggestionsContainer';
-export default function home() {
+import { MapProvider } from '../providers/MapProvider';
+
+export default function Home() {
   return (
-    <>
-      <div className="absolute z-10 rounded-lg bg-white">
+    <MapProvider>
+      <div className="absolute z-10 inset-y-0">
         <FormAndSuggestionsContainer />
       </div>
-      <Map />
-    </>
+    </MapProvider>
   );
 }

@@ -1,73 +1,158 @@
-import React from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
-import { FaTimes } from 'react-icons/fa';
-export default function FromDestinationForm({
-  searchFrom,
-  searchDestination,
-  updateSearchFrom,
-  updateSearchDestination,
-  clearInputFrom,
-  clearInputDestination,
-}) {
+
+import MapContext from '../providers/MapProvider';
+import Geocoder from 'react-map-gl-geocoder';
+
+const positionOptions = {
+  enableHighAccuracy: true,
+};
+
+export default function FromDestinationForm({ setRoutes }) {
+  const {
+    map,
+    token,
+    setViewport,
+    bbox,
+    setOrigin,
+    origin,
+    setDestination,
+    destination,
+    supportsGeolocation,
+  } = useContext(MapContext);
+
+  const originContainerRef = useRef();
+  const destContainerRef = useRef();
+
+  const originGeocoder = useRef();
+  const destGeocoder = useRef();
+
+  const [trackCurrentPosition, setTrackCurrentPosition] = useState(false);
+  const _positionWatcher = useRef();
+
+  const clearWatcher = useCallback(() => {
+    if (supportsGeolocation) {
+      navigator.geolocation.clearWatch(_positionWatcher.current);
+      _positionWatcher.current = null;
+    }
+  }, [supportsGeolocation]);
+
+  const watchCurrentPostition = useCallback(() => {
+    if (supportsGeolocation) {
+      setTrackCurrentPosition(true);
+      _positionWatcher.current = navigator.geolocation.watchPosition(
+        (position) => {
+          const coords = position.coords;
+          if (coords.accuracy <= 500) {
+            setOrigin([coords.longitude, coords.latitude]);
+            setTrackCurrentPosition(true);
+            originGeocoder.current.query(
+              [coords.latitude, coords.longitude].join(',')
+            );
+          } else {
+            setTrackCurrentPosition(false);
+          }
+        },
+        //onError
+        console.log,
+        positionOptions
+      );
+    }
+  }, [supportsGeolocation, setOrigin]);
+
+  useEffect(() => {
+    watchCurrentPostition();
+    return clearWatcher;
+  }, [watchCurrentPostition, clearWatcher]);
+
+  const geocoderProps = {
+    mapRef: map,
+    bbox,
+    reverseGeocode: true,
+    countries: 'iq',
+    onViewportChange: (vp) =>
+      setViewport({
+        ...vp,
+        longitude: vp.longitude - 0.01,
+        transitionDuration: 1000,
+        zoom: vp.zoom > 11 ? 11 : vp.zoom,
+      }),
+    mapboxApiAccessToken: token,
+    enableEventLogging: false,
+  };
+
+  const fetchRoutes = (origin, dest) => {
+    setRoutes([origin, dest]);
+  };
+
   return (
-    <div>
-      <form className="flex justify-between bg-dblue shadow-md rounded-lg px-5 pt-3 pb-8">
-        <div>
-          <label className="text-white font-medium mb-1" htmlFor="from-input">
-            From:
-          </label>
-          <div className="relative">
-            <input
-              value={searchFrom}
-              onChange={updateSearchFrom}
-              className="w-full border border-gray-500 rounded-xl py-1 px-1 leading-3 text-sm focus:outline-none focus:shadow-outline"
-              id="from-input"
-              type="text"
-              placeholder="Choose a location"
+    <form className="flex justify-between bg-dblue boxshadow rounded-lg px-5 pt-3 pb-8">
+      <div>
+        <label className="text-white font-medium mb-1" htmlFor="from-input">
+          From:
+        </label>
+        <div className="relative">
+          <div className="py-1" ref={originContainerRef}>
+            <Geocoder
+              {...geocoderProps}
+              containerRef={originContainerRef}
+              onResult={(res) => {
+                !trackCurrentPosition && setOrigin(res.result.center);
+              }}
+              onClear={() => {
+                if (trackCurrentPosition) {
+                  setTrackCurrentPosition(false);
+                  clearWatcher();
+                }
+                setOrigin(null);
+              }}
+              placeholder={
+                trackCurrentPosition ? 'Getting location...' : 'Choose origin'
+              }
+              onInit={(geocoder) => {
+                originGeocoder.current = geocoder;
+              }}
             />
-            {searchFrom && (
-              <button
-                onClick={clearInputFrom}
-                className="absolute left-0 top-0 focus:outline-none ml-9.8rem mt-0.35rem"
-              >
-                <FaTimes className=" text-gray-500 " />
-              </button>
-            )}
           </div>
         </div>
-        <div>
-          <label className="text-white font-medium mb-1" htmlFor="to-input">
-            To:
-          </label>
-          <div className="relative ml-3">
-            <input
-              value={searchDestination}
-              onChange={updateSearchDestination}
-              className="w-11/12 border border-gray-500 rounded-xl py-1 px-3 leading-3 text-sm focus:outline-none focus:shadow-outline"
-              id="to-input"
-              type="text"
-              placeholder="Destination"
+      </div>
+
+      <div>
+        <label className="text-white font-medium mb-1" htmlFor="to-input">
+          To:
+        </label>
+        <div className="relative ml-1">
+          <div className="py-1" ref={destContainerRef}>
+            <Geocoder
+              {...geocoderProps}
+              containerRef={destContainerRef}
+              onResult={(res) => {
+                setDestination(res.result.center);
+                fetchRoutes(origin, destination);
+              }}
+              onClear={() => {
+                setDestination(null);
+              }}
+              placeholder={'Choose destination'}
+              onInit={(geocoder) => {
+                destGeocoder.current = geocoder;
+                if (origin && !geocoder._inputEl.value)
+                  geocoder._inputEl.focus();
+              }}
             />
-            {searchDestination && (
-              <button
-                onClick={clearInputDestination}
-                className="absolute rigt-0 top-0 -ml-6 focus:outline-none mt-0.35rem"
-              >
-                <FaTimes className=" text-gray-500 " />
-              </button>
-            )}
           </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 }
 
 FromDestinationForm.propTypes = {
-  searchFrom: PropTypes.string.isRequired,
-  searchDestination: PropTypes.string.isRequired,
-  updateSearchFrom: PropTypes.func.isRequired,
-  updateSearchDestination: PropTypes.func.isRequired,
-  clearInputFrom: PropTypes.func.isRequired,
-  clearInputDestination: PropTypes.func.isRequired,
+  setRoutes: PropTypes.func.isRequired,
 };

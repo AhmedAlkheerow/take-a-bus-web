@@ -58,10 +58,26 @@ export default class BusInfoCarousel extends Component {
             {...settings}
             className="rounded-lg boxshadow"
           >
-            <BusInfoContainer key={1} />
-            <BusInfoContainer key={2} />
-            <BusInfoContainer key={3} />
-            <BusInfoContainer key={4} />
+            <BusInfoContainer
+              key={1}
+              fillHeart={false}
+              dontShowTakeIt={false}
+            />
+            <BusInfoContainer
+              key={2}
+              fillHeart={false}
+              dontShowTakeIt={false}
+            />
+            <BusInfoContainer
+              key={3}
+              fillHeart={false}
+              dontShowTakeIt={false}
+            />
+            <BusInfoContainer
+              key={4}
+              fillHeart={false}
+              dontShowTakeIt={false}
+            />
           </Slider>
         </div>
         <div className="flex justify-center">

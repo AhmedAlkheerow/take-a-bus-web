@@ -43,6 +43,7 @@ html {
 
 .btn.primary {
   @apply bg-primary text-white;
+
   &:hover {
     @apply bg-blue-500 text-white;
   }
@@ -50,6 +51,7 @@ html {
 
 .btn.secondary {
   @apply bg-white text-primary;
+
   &:hover {
     @apply bg-blue-100 text-primary;
   }
@@ -57,13 +59,14 @@ html {
 
 .nav-link {
   @apply font-medium text-primary m-2;
+
   &:hover {
     @apply underline;
   }
 }
 
 .boxshadow {
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.25);
 }
 
 @tailwind utilities;

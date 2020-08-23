@@ -1,4 +1,10 @@
 import React from 'react';
+import Favorite from '../components/Favorite';
+
 export default function favorite() {
-  return <div>@todo return favorite page</div>;
+  return (
+    <div className="container mx-auto">
+      <Favorite />
+    </div>
+  );
 }
