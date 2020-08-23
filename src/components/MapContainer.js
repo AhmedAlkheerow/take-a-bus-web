@@ -1,11 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
-import ReactMapGL, { Source, Layer } from 'react-map-gl';
+import ReactMapGL, { Source, Layer, Marker } from 'react-map-gl';
 import LocateMeBtn from './LocateMeBtn';
 import data from '../data/map-points.json';
 import pointMark from '../assets/point-marker.png';
 import destMark from '../assets/destination-marker.png';
-
-export default function Map() {
+import Geocoder from 'react-map-gl-geocoder';
+import PropTypes from 'prop-types';
+import { TiLocation } from 'react-icons/ti';
+export default function Map({ RefFrom, RefDestination, setShowResults }) {
+  const [locations, setLocation] = useState({
+    add: 0,
+    locations: [],
+  });
   const [viewport, setViewport] = useState({
     latitude: 36.206291,
     longitude: 44.008869,
@@ -25,7 +31,51 @@ export default function Map() {
   const [destinations, setDestinations] = useState(data);
 
   const _mapRef = useRef();
+  const clearLoaction = (i) => {
+    setLocation((oldLocations) => {
+      const object = { ...oldLocations };
+      object.locations[i] = {
+        lngLat: [],
+        name: null,
+      };
+      object.add = i;
+      return object;
+    });
+  };
+  const addLoaction = async (location, i) => {
+    const URL = `https://api.mapbox.com/geocoding/v5/mapbox.places/${location[0]},${location[1]}.json?types=poi&access_token=pk.eyJ1Ijoic2huYSIsImEiOiJja2Q0dnp1cWkwYjk4Mnluem0xN3Z5OHd1In0.aM9jnQtRoElex2rqY0zePQ`;
 
+    let placeName = [null];
+    if (i === undefined) {
+      const res = await fetch(URL);
+      const data = await res.json();
+      placeName = data.features.map((place) => {
+        return i !== undefined
+          ? place.place_name
+          : `nearby:${place.place_name}`;
+      });
+    }
+    setLocation((oldLocations) => {
+      let index = i ? i : oldLocations.add;
+      const object = { ...oldLocations };
+      object.locations[index] = {
+        lngLat: location,
+        name: placeName[0],
+      };
+      index++;
+      object.add = index > 1 ? 0 : index;
+      return object;
+    });
+  };
+  useEffect(() => {
+    const showResults =
+      locations.locations.length === 2 &&
+      locations.locations.reduce(
+        (preValue, value) => preValue && value.lngLat.length === 2,
+        true
+      );
+    setShowResults(showResults);
+  }, [locations]);
   useEffect(() => {
     // Load all markers and images
     const map = _mapRef.current.getMap();
@@ -45,6 +95,10 @@ export default function Map() {
   return (
     <>
       <ReactMapGL
+        onClick={(e) => {
+          e.preventDefault();
+          addLoaction(e.lngLat);
+        }}
         {...viewport}
         ref={_mapRef}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -111,9 +165,54 @@ export default function Map() {
             </Source>
           </>
         )}
+        {locations.locations.map((location, index) => {
+          if (location.lngLat.length > 0)
+            return (
+              <Marker
+                key={'location' + index}
+                latitude={location.lngLat[1]}
+                longitude={location.lngLat[0]}
+                offsetTop={-48}
+                offsetLeft={-24}
+              >
+                <TiLocation className="text-5xl text-orange-500 m-0 p-0" />
+              </Marker>
+            );
+          return null;
+        })}
         <div className="h-full flex flex-row-reverse items-end p-16">
           <LocateMeBtn />
         </div>
+        <Geocoder
+          mapRef={_mapRef}
+          containerRef={RefFrom}
+          countries={'iq'}
+          placeholder={'Choose location'}
+          onClear={() => clearLoaction(0)}
+          inputValue={
+            locations.locations[0] ? locations.locations[0].name : null
+          }
+          onViewportChange={(viewport) => {
+            addLoaction([viewport.longitude, viewport.latitude], 0);
+            setViewport({ ...viewport, width: '100%', height: '100%' });
+          }}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        />
+        <Geocoder
+          mapRef={_mapRef}
+          containerRef={RefDestination}
+          countries={'iq'}
+          placeholder={'Destination'}
+          inputValue={
+            locations.locations[1] ? locations.locations[1].name : null
+          }
+          onClear={() => clearLoaction(1)}
+          onViewportChange={(viewport) => {
+            addLoaction([viewport.longitude, viewport.latitude], 1);
+            setViewport({ ...viewport, width: '100%', height: '100%' });
+          }}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        />
       </ReactMapGL>
     </>
   );
@@ -160,4 +259,9 @@ const routeObj = {
       },
     ],
   },
+};
+Map.propTypes = {
+  RefFrom: PropTypes.object.isRequired,
+  RefDestination: PropTypes.object.isRequired,
+  setShowResults: PropTypes.func.isRequired,
 };
