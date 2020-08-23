@@ -14,7 +14,7 @@ const positionOptions = {
   enableHighAccuracy: true,
 };
 
-export default function FromDestinationForm({ setRoutes }) {
+export default function FromDestinationForm({ setRoutes, setEndPointData }) {
   const {
     map,
     token,
@@ -88,7 +88,27 @@ export default function FromDestinationForm({ setRoutes }) {
   };
 
   const fetchRoutes = (origin, dest) => {
-    setRoutes([origin, dest]);
+    const post = {
+      lat: 44,
+      long: 36,
+    };
+
+    fetch(
+      'https://us-central1-mapsproject-228715.cloudfunctions.net/helloWorld',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(post),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setEndPointData(data);
+        console.log(data);
+        setRoutes([origin, dest]);
+      });
   };
 
   return (

@@ -4,11 +4,16 @@ import SuggestionsContainer from './SuggestionsContainer';
 import { motion } from 'framer-motion';
 export default function FormAndSuggestionsContainer() {
   const [results, setResults] = useState([]);
+  const [endPointData, setEndPointData] = useState(null);
+  endPointData && console.log(endPointData.route.path);
   return (
     <>
       <div className="flex flex-col h-full">
-        <FromDestinationForm setRoutes={setResults} />
-        {results.length > 0 && (
+        <FromDestinationForm
+          setRoutes={setResults}
+          setEndPointData={setEndPointData}
+        />
+        {results.length > 0 && endPointData && (
           <>
             <motion.div
               initial={{ scale: 0.8 }}
@@ -19,7 +24,10 @@ export default function FormAndSuggestionsContainer() {
               <h2 className="text-white py-3 px-5">Available Routes</h2>
             </motion.div>
             <div className="overflow-auto flex-grow boxshadow bg-white z-10 rounded-b-lg">
-              <SuggestionsContainer results={results} />
+              <SuggestionsContainer
+                results={results}
+                pathhh={endPointData.route}
+              />
             </div>
             <ShowMore />
           </>
