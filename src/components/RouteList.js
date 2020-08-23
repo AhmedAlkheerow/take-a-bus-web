@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import WayLine from './WayLine';
 import Fuse from 'fuse.js';
@@ -12,27 +12,34 @@ const RouteList = ({ handleSetPath }) => {
   const [routes, setRoutes] = useState([]);
   const [busses, setBusses] = useState([]);
 
-  const getRoutes = async () => {
-    const snapshot = await routesRef.get();
+  const getRoutes = useCallback(async () => {
+    const snapshot = await routesRef.get().catch(console.log);
     const routes = [];
     snapshot.forEach((doc) => {
       routes.push({ ...doc.data(), id: doc.id });
     });
     setRoutes(routes);
-  };
+  }, [setRoutes]);
 
-  const getBusses = async (routeId) => {
-    const snapshot = await bussesRef.where('route_id', '==', routeId).get();
-    const busses = [];
-    snapshot.forEach((doc) => {
-      busses.push({ ...doc.data(), id: doc.id });
-    });
-    setBusses(busses);
-  };
+  const getBusses = useCallback(
+    async (routeId) => {
+      const snapshot = await bussesRef
+        .where('route_id', '==', routeId)
+        .get()
+        .catch(console.log);
+
+      const busses = [];
+      snapshot.forEach((doc) => {
+        busses.push({ ...doc.data(), id: doc.id });
+      });
+      setBusses(busses);
+    },
+    [setBusses]
+  );
 
   useEffect(() => {
     getRoutes();
-  });
+  }, [getRoutes]);
 
   const handleShowAvailableBuses = (id) => {
     setShowAvailableBuses((oldId) => (oldId === id ? null : id));
