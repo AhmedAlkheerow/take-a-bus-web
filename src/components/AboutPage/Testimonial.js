@@ -20,9 +20,9 @@ export default function Testimonial() {
             <img className="Team-Pro boxshadow " src={wisam} alt="wissam"></img>
             <div>
               <h1 className="Member-Name">Wisam Naji</h1>
-              <div>Lorem ipsum is placeholder </div>
-              <div>commonly used in the graphic, print,</div>
-              <div>and publishing industries.</div>
+              <div>A lead trainer with Re:Coded</div>
+              <div>Love developing products</div>
+              <div>that contribute to the community.</div>
             </div>
           </div>
 
