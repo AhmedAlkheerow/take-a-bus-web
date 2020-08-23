@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function BusInformations() {
   return (
-    <div>
+    <div className="mr-8">
       <div className="text-gray-700 pl-1">
         <h2>No. Seats: 12 Seats</h2>
       </div>
