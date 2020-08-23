@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function BusInformations() {
+export default function BusInformations({ time }) {
   return (
     <div className="mr-8">
       <div className="text-gray-700 pl-1">
@@ -10,8 +11,12 @@ export default function BusInformations() {
         <h2>Date: 23/07/2020</h2>
       </div>
       <div className="text-gray-700 pl-1">
-        <h2>Work time: 9:00 Am - 9:00 PM</h2>
+        <h2>Work time: {time}</h2>
       </div>
     </div>
   );
 }
+
+BusInformations.propTypes = {
+  time: PropTypes.string,
+};

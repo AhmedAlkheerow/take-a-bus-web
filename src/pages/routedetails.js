@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactMapGL, { Source, Layer } from 'react-map-gl';
 import BusInfoContainer from '../components/BusInfoContainer';
 import { useParams } from 'react-router-dom';
-import { routesRef } from '../api/firebase';
+import { routesRef, bussesRef } from '../api/firebase';
 import pointMark from '../assets/point-marker.png';
 import destMark from '../assets/destination-marker.png';
 
@@ -22,46 +22,76 @@ export default function Routedetails() {
       .get()
       .then((document) => {
         const route = document.data();
-        route.path =
-          //JSON.parse(route.path);
-          {
-            type: 'FeatureCollection',
-            features: [
-              {
-                type: 'Feature',
-                properties: {},
-                geometry: {
-                  type: 'LineString',
-                  coordinates: [
-                    [44.00972843170166, 36.210035031115694],
-                    [44.00852680206299, 36.19753385192636],
-                    [44.01170253753662, 36.19043395558332],
-                    [44.01994228363037, 36.18936025668664],
-                    [44.01994228363037, 36.20044289180151],
-                    [44.01547908782959, 36.20106624342554],
-                    [44.014620780944824, 36.19878059653753],
-                  ],
-                },
-              },
-              {
-                type: 'start',
-                properties: {},
-                geometry: {
-                  type: 'Point',
-                  coordinates: [44.014577865600586, 36.198745965010886],
-                },
-              },
-              {
-                type: 'end',
-                properties: {},
-                geometry: {
-                  type: 'Point',
-                  coordinates: [44.0097713470459, 36.21000040456822],
-                },
-              },
-            ],
-          };
-        setRoute(route);
+        const path = JSON.parse(route.path);
+        const coordinates = path.geometry.coordinates;
+        const start = {
+          type: 'Feature',
+          properties: { type: 'start' },
+          geometry: {
+            type: 'Point',
+            coordinates: coordinates[0],
+          },
+        };
+        const end = {
+          type: 'Feature',
+          properties: { type: 'end' },
+          geometry: {
+            type: 'Point',
+            coordinates: coordinates[coordinates.length - 1],
+          },
+        };
+        route.path = {
+          type: 'FeatureCollection',
+          features: [path, start, end],
+        };
+        // route.path =
+        //   {
+        //     type: 'FeatureCollection',
+        //     features: [
+        //       {
+        //         type: 'Feature',
+        //         properties: {},
+        //         geometry: {
+        //           type: 'LineString',
+        //           coordinates: [
+        //             [44.00972843170166, 36.210035031115694],
+        //             [44.00852680206299, 36.19753385192636],
+        //             [44.01170253753662, 36.19043395558332],
+        //             [44.01994228363037, 36.18936025668664],
+        //             [44.01994228363037, 36.20044289180151],
+        //             [44.01547908782959, 36.20106624342554],
+        //             [44.014620780944824, 36.19878059653753],
+        //           ],
+        //         },
+        //       },
+        //       {
+        //         type: 'Feature',
+        //         properties: { type: 'start' },
+        //         geometry: {
+        //           type: 'Point',
+        //           coordinates: [44.014577865600586, 36.198745965010886],
+        //         },
+        //       },
+        //       {
+        //         type: 'Feature',
+        //         properties: { type: 'end' },
+        //         geometry: {
+        //           type: 'Point',
+        //           coordinates: [44.0097713470459, 36.21000040456822],
+        //         },
+        //       },
+        //     ],
+        //   };
+        bussesRef
+          .where('route_id', '==', id)
+          .limit(1)
+          .get()
+          .then((document) => {
+            const bus = document.docs[0].data();
+            route.bus = bus;
+            console.log(JSON.stringify(route));
+            setRoute(route);
+          });
       });
   }, []);
   const _mapRef = useRef();
@@ -109,6 +139,7 @@ export default function Routedetails() {
         )} */}
 
         {/* Show Route */}
+
         {route && (
           <Source id="polylineLayer" type="geojson" data={route.path}>
             <Layer
@@ -134,7 +165,7 @@ export default function Routedetails() {
                 'icon-size': 1 / 4,
                 'icon-offset': [5, 0],
               }}
-              filter={['==', '$type', 'start']}
+              filter={['==', 'type', 'start']}
             />
 
             <Layer
@@ -145,14 +176,14 @@ export default function Routedetails() {
                 'icon-size': 1 / 2,
                 'icon-offset': [-5, -30],
               }}
-              filter={['==', '$type', 'end']}
+              filter={['==', 'type', 'end']}
             />
           </Source>
         )}
       </ReactMapGL>
       {route && (
-        <div className="flex-grow-0">
-          <BusInfoContainer way={route.way}></BusInfoContainer>
+        <div className="flex-grow-0 mx-auto shadow-xl mb-2">
+          <BusInfoContainer route={route}></BusInfoContainer>
         </div>
       )}
     </div>

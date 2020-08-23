@@ -10,22 +10,22 @@ import BusInformations from './BusInformations';
 import VerticalLineDivide from './VerticalLineDivide';
 import PropTypes from 'prop-types';
 
-export default function BusInfoContainer({ dontShowTakeIt, fillHeart }) {
-  const way = [
-    { id: 0, isStart: true, name: '32 peak' },
-    { id: 1, name: 'Italian Village' },
-    { id: 2, name: 'Park View' },
-    { id: 3, name: 'Naz Naz' },
-    { id: 4, name: 'Empire' },
-    { id: 5, name: 'Ankawa', isEnd: true },
-  ];
-
+export default function BusInfoContainer({
+  route = {},
+  dontShowTakeIt,
+  fillHeart,
+}) {
+  const { way = [], bus = { working_hours: ' ', working_days: [] } } = route;
+  const time = bus.working_hours[0]
+    .split('-')
+    .map((time) => time.substr(0, 2) + ':' + time.substr(2))
+    .join('  -  ');
   return (
     <div className="w-full">
       <div className="mt-4 p-2 w-full bg-gray-300 rounded-md flex justify-between">
         <div className="pl-12">
           <strong className="text-xl text-primary">
-            Bus No. (473824 EBL - IRQ)
+            Bus No. ({bus.plate_number} EBL - IRQ)
           </strong>
         </div>
         <div className="pr-10">
@@ -56,7 +56,7 @@ export default function BusInfoContainer({ dontShowTakeIt, fillHeart }) {
           <div className="w-24">
             <img alt="bus icon" src={BusIcon} />
           </div>
-          <div className="text-gray-700 pl-2 pt-2">6:22 PM - 7:09 PM</div>
+          <div className="text-gray-700 pl-2 pt-2">{time}</div>
           <div className="flex justify-center my-2">
             <div className="w-6">
               <img alt="Wifi available" src={WifiIcon} />
@@ -71,12 +71,12 @@ export default function BusInfoContainer({ dontShowTakeIt, fillHeart }) {
         </div>
         <VerticalLineDivide />
         <div className="flex flex-col ml-2">
-          <BusInformations />
+          <BusInformations time={time} />
         </div>
         <VerticalLineDivide />
         <div className="flex flex-col ml-2">
           <div className="text-gray-700 pl-1 pt-6">
-            <h2>Work days: Saturday - Thusday</h2>
+            <h2>Work days: {bus.working_days.join(', ')}.</h2>
           </div>
         </div>
         {!dontShowTakeIt && (
@@ -95,6 +95,7 @@ export default function BusInfoContainer({ dontShowTakeIt, fillHeart }) {
   );
 }
 BusInfoContainer.propTypes = {
+  route: PropTypes.node,
   dontShowTakeIt: PropTypes.bool.isRequired,
   fillHeart: PropTypes.bool.isRequired,
 };
