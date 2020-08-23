@@ -14,39 +14,84 @@ const firebaseConfig = {
 
 admin.initializeApp(firebaseConfig);
 const turf = require('@turf/turf');
-const lodash = require('lodash');
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
-exports.helloWorld = functions.https.onRequest(async (request, response) => {
+exports.getRoutes = functions.https.onRequest(async (request, response) => {
   cors(request, response, async () => {
+    // Only POST
     if (request.method === 'POST') {
-      let routes = [];
-      const lat = request.body.lat;
-      const long = request.body.long;
-      const point = turf.point([lat, long]);
-      const snapshot = await admin.firestore().collection('routes').get();
-      const docs = snapshot.docs;
-      docs.forEach((doc) => {
-        const docData = doc.data();
-        const pathObject = JSON.parse(docData.path);
-        const lineArray = pathObject.geometry.coordinates;
-        const line = turf.lineString(lineArray);
-        routes.push({
-          ...docData,
-          path: pathObject,
-          distance: turf.pointToLineDistance(point, line, { units: 'meters' }),
-        });
-      });
-      const sortedRoutes = lodash.sortBy(routes, ['distance'], ['asc']);
-      response.send({
-        route: sortedRoutes[0],
-        lat,
-        long,
-      });
+      const { origin, destination } = request.body;
+      const routes = await getRoutes(origin, destination);
+      response.send(routes);
     } else {
       response.send('Unknown Method');
     }
   });
 });
+
+async function getRoutes(origin, destination) {
+  const originP = turf.point(origin);
+  const destP = turf.point(destination);
+
+  const distanceThreshold = 0.5; //kilometers
+
+  const options = { units: 'kilometers' };
+
+  const routes = [];
+  const routesSnapshot = await admin.firestore().collection('routes').get();
+  routesSnapshot.forEach((doc) => {
+    const route = { id: doc.id, ...doc.data() };
+    if (typeof route.path === 'string') route.path = JSON.parse(route.path);
+    const path = route.path;
+    const originDistance = turf.pointToLineDistance(originP, path, options);
+    const destDistance = turf.pointToLineDistance(destP, path, options);
+    const getInPoint = turf.nearestPointOnLine(path, originP, options);
+    const getOutPoint = turf.nearestPointOnLine(path, destP, options);
+    getInPoint.properties.type = 'start';
+    getOutPoint.properties.type = 'end';
+
+    if (
+      originDistance <= distanceThreshold &&
+      destDistance <= distanceThreshold
+    ) {
+      routes.push({
+        name: route.name,
+        availability: route.availability,
+        id: route.id,
+        path: turf.featureCollection([route.path, getInPoint, getOutPoint]),
+        originDistance,
+        destDistance,
+        totalDistance: originDistance + destDistance,
+        units: options.units,
+      });
+    }
+  });
+
+  for (const route of routes) {
+    const { id } = route;
+    const buses = await getBuses(id);
+    route.buses = buses;
+  }
+
+  routes.sort((a, b) => a.totalDistance - b.totalDistance);
+  routes[0].fastest = true;
+
+  return routes;
+}
+
+async function getBuses(routeId) {
+  const buses = [];
+  const busesSnapshot = await admin
+    .firestore()
+    .collection('busses')
+    .where('route_id', '==', routeId)
+    .get();
+  busesSnapshot.forEach((doc) => {
+    const bus = { id: doc.id, ...doc.data() };
+    buses.push(bus);
+  });
+
+  return buses;
+}
