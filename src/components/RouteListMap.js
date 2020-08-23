@@ -12,38 +12,36 @@ export default function RouteListMap({ path }) {
   });
 
   return (
-    <>
-      <ReactMapGL
-        {...viewport}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        onViewportChange={(viewport) => {
-          setViewport({ ...viewport, width: '100%', height: '100%' });
-        }}
-        mapStyle="mapbox://styles/shna/ckd4x2xmy02kh1ir3hihcr36m"
-      >
-        {path && (
-          <Source id="polylineLayer" type="geojson" data={path}>
-            <Layer
-              minzoom={9.8}
-              id="lineLayer"
-              type="line"
-              source="my-data"
-              layout={{
-                'line-join': 'round',
-                'line-cap': 'round',
-              }}
-              paint={{
-                'line-color': '#36AF47',
-                'line-width': 8,
-              }}
-            />
-          </Source>
-        )}
-      </ReactMapGL>
-    </>
+    <ReactMapGL
+      {...viewport}
+      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+      onViewportChange={(viewport) => {
+        setViewport({ ...viewport, width: '100%', height: '100%' });
+      }}
+      mapStyle="mapbox://styles/shna/ckd4x2xmy02kh1ir3hihcr36m"
+    >
+      {path && (
+        <Source id="polylineLayer" type="geojson" data={path}>
+          <Layer
+            minzoom={9.8}
+            id="lineLayer"
+            type="line"
+            source="my-data"
+            layout={{
+              'line-join': 'round',
+              'line-cap': 'round',
+            }}
+            paint={{
+              'line-color': '#36AF47',
+              'line-width': 8,
+            }}
+          />
+        </Source>
+      )}
+    </ReactMapGL>
   );
 }
 
 RouteListMap.propTypes = {
-  path: PropTypes.func,
+  path: PropTypes.object,
 };

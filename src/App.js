@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import routes from './pages/routes';
 import home from './pages/home';
 import about from './pages/about';
+import favorite from './pages/favorite';
 import history from './pages/history';
 import { AuthProvider } from './providers/AuthProvider';
 
@@ -25,7 +26,7 @@ function App() {
               <Route path="/about" component={about} />
               <Route exact path="/me" render={() => <div />} />
               <Route path="/me/history" component={history} />
-              <Route path="/me/favorite" render={() => <div />} />
+              <Route path="/me/favorite" component={favorite} />
               <Route path="/routes" component={routes} />
               <Route exact path="/" component={home} />
             </Switch>
