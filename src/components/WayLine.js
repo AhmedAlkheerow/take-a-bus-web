@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const WayLine = ({ way }) => {
   return (
-    <table className="w-10/12 table-auto mt-4">
+    <table className="w-full table-auto mt-4">
       <thead align="center">
         <tr>
           <td colSpan={way.length.toString()}>

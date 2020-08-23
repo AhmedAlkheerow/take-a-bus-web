@@ -1,9 +1,10 @@
 import React from 'react';
 import Layout from './components/Layout';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import RouteList from './components/RouteList';
+import routes from './pages/routes';
 import home from './pages/home';
 import about from './pages/about';
+import history from './pages/history';
 import { AuthProvider } from './providers/AuthProvider';
 import routedetails from './pages/routedetails';
 
@@ -23,11 +24,11 @@ function App() {
                 render={() => <div />}
               />
               <Route path="/about" component={about} />
-              <Route path="/me" render={() => <div />} />
-              <Route path="/me/history" render={() => <div />} />
+              <Route exact path="/me" render={() => <div />} />
+              <Route path="/me/history" component={history} />
               <Route path="/me/favorite" render={() => <div />} />
-              <Route path="/routes" component={RouteList} />
               <Route path="/routedetails/:id" component={routedetails} />
+              <Route path="/routes" component={routes} />
               <Route exact path="/" component={home} />
             </Switch>
           </Layout>
