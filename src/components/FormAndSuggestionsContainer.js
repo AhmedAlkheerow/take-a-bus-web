@@ -17,7 +17,7 @@ export default function FormAndSuggestionsContainer() {
             className="bg-gray-600 h-12 -mt-2 z-10 boxshadow"
           >
             <h2 className="text-white py-3 px-5">
-              {fetching ? 'Available' : 'Loading'} Routes
+              {fetching ? 'Loading' : 'Available'} Routes
             </h2>
           </motion.div>
         )}
