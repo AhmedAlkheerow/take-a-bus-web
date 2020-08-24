@@ -4,22 +4,27 @@ import SuggestionsContainer from './SuggestionsContainer';
 import { motion } from 'framer-motion';
 export default function FormAndSuggestionsContainer() {
   const [results, setResults] = useState([]);
+  const [fetching, setFetching] = useState(false);
   return (
     <>
       <div className="flex flex-col h-full">
-        <FromDestinationForm setRoutes={setResults} />
+        <FromDestinationForm setRoutes={setResults} setFetching={setFetching} />
+        {(fetching || results.length > 0) && (
+          <motion.div
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.1 }}
+            className="bg-gray-600 h-12 -mt-2 z-10 boxshadow"
+          >
+            <h2 className="text-white py-3 px-5">
+              {fetching ? 'Loading' : 'Available'} Routes
+            </h2>
+          </motion.div>
+        )}
         {results.length > 0 && (
           <>
-            <motion.div
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.1 }}
-              className="bg-gray-600 h-12 -mt-2 z-10 boxshadow"
-            >
-              <h2 className="text-white py-3 px-5">Available Routes</h2>
-            </motion.div>
             <div className="overflow-auto flex-grow boxshadow bg-white z-10 rounded-b-lg">
-              <SuggestionsContainer results={results} />
+              <SuggestionsContainer suggestions={results} />
             </div>
             <ShowMore />
           </>
