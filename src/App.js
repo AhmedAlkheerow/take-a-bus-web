@@ -7,7 +7,7 @@ import about from './pages/about';
 import favorite from './pages/favorite';
 import history from './pages/history';
 import { AuthProvider } from './providers/AuthProvider';
-import routedetails from './pages/routedetails';
+import route from './pages/routedetails';
 
 function App() {
   return (
@@ -18,7 +18,6 @@ function App() {
             <Switch>
               {/* <Route path="/signin" component={Modal} />
             <Route path="/signup" component={Modal} /> */}
-              <Route path="/route/:id" render={() => <div />} />
               <Route path="/bus/:id" render={() => <div />} />
               <Route
                 path="/form/:location/to/:location"
@@ -27,7 +26,7 @@ function App() {
               <Route path="/about" component={about} />
               <Route exact path="/me" render={() => <div />} />
               <Route path="/me/history" component={history} />
-              <Route path="/routedetails/:id" component={routedetails} />
+              <Route path="/route/:id" component={route} />
               <Route path="/me/favorite" component={favorite} />
               <Route path="/routes" component={routes} />
               <Route exact path="/" component={home} />
