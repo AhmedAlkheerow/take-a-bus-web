@@ -2,14 +2,16 @@ import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import WayLine from './WayLine';
 import Fuse from 'fuse.js';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { GrSearch } from 'react-icons/gr';
 import { bussesRef, routesRef } from '../api/firebase';
+import moment from 'moment/moment.js';
+import drawingOnMap from '../assets/drawingOnMap.png';
 
 const RouteList = ({ handleSetPath }) => {
   const [showAvailableBuses, setShowAvailableBuses] = useState(null);
   const [query, setQuery] = useState('');
   const [routes, setRoutes] = useState([]);
+  // eslint-disable-next-line
   const [busses, setBusses] = useState([]);
 
   const getRoutes = useCallback(async () => {
@@ -62,6 +64,21 @@ const RouteList = ({ handleSetPath }) => {
   const results = fuse.search(query);
   const RouteResults = query ? results.map((result) => result.item) : routes;
 
+  const timeParse = (duration) => {
+    console.log(duration);
+    if (duration) {
+      // eslint-disable-next-line react/prop-types
+      const timeFrom = duration.substring(0, 4);
+      // eslint-disable-next-line react/prop-types
+      const timeTo = duration.substring(4, 8);
+      // eslint-disable-next-line react/prop-types
+      return `
+    ${moment(timeFrom, 'hhmm').format('HH:mm')}-${moment(timeTo, 'hhmm').format(
+        'HH:mm'
+      )}`;
+    }
+  };
+
   return (
     <>
       <table className="w-full table-auto">
@@ -84,8 +101,10 @@ const RouteList = ({ handleSetPath }) => {
               </div>
             </td>
           </tr>
-          <tr className="bg-gray-300">
-            <th>Route</th>
+          <tr className="bg-gray-200 h-12">
+            <th align="left" className="pl-16">
+              Route
+            </th>
             <th>Route Way</th>
             <th>Available time</th>
             <th></th>
@@ -93,33 +112,31 @@ const RouteList = ({ handleSetPath }) => {
         </thead>
         <tbody align="center">
           {RouteResults.map((route) => {
-            const { id, name, way, availablity } = route;
+            const { id, name, way, availability } = route;
             return (
               <React.Fragment key={id}>
                 <tr key={id} className="border-b">
-                  <td>{name}</td>
+                  <td align="left" className="text-lg pl-16">
+                    {name}
+                  </td>
                   <td>
                     <WayLine way={way} />
                   </td>
-                  <td>{availablity}</td>
+                  <td>{timeParse(availability)}</td>
                   <td
                     className="fill-current text-primary hover:text-blue-700 cursor-pointer"
                     onClick={() => handleShowAvailableBuses(id)}
                   >
-                    {showAvailableBuses === id ? (
-                      <IoIosArrowUp size="40" />
-                    ) : (
-                      <IoIosArrowDown size="40" />
-                    )}
+                    <img className="w-8" src={drawingOnMap} alt="draw on map" />
                   </td>
                 </tr>
-                {showAvailableBuses === id
+                {/* {showAvailableBuses === id
                   ? // <tr>
                     //   <td>{availableBuses[0].busNumber}</td>
                     //   <td>@JalalArif todo:add busList component here</td>
                     // </tr>
                     busses.map((bus) => <tr key={bus.id}>{bus.driver_name}</tr>)
-                  : null}
+                  : null} */}
               </React.Fragment>
             );
           })}

@@ -16,9 +16,9 @@ const WayLine = ({ way }) => {
               return (
                 <td key={busStop.id}>
                   <div className="-my-4 flex">
-                    <div className="flex-auto bg-white"> </div>
+                    {/* <div className="flex-auto bg-white"> </div> */}
                     <div className="flex-initial rounded-full border-4 border-primary bg-white h-6 w-6"></div>
-                    <div className="flex-auto"></div>
+                    {/* <div className="flex-auto"></div> */}
                   </div>
                 </td>
               );
