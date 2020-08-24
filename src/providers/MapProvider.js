@@ -217,7 +217,7 @@ function Route({ route, lineColor = '#36AF47' }) {
         }}
         filter={['==', '$type', 'LineString']}
       />
-      <Layer
+      {/* <Layer
         type="symbol"
         minzoom={10}
         layout={{
@@ -237,7 +237,7 @@ function Route({ route, lineColor = '#36AF47' }) {
           'icon-offset': [-5, -30],
         }}
         filter={['==', 'type', 'end']}
-      />
+      /> */}
     </Source>
   );
 }
