@@ -13,7 +13,9 @@ const RouteList = ({ handleSetPath }) => {
   const [busses, setBusses] = useState([]);
 
   const getRoutes = useCallback(async () => {
-    const snapshot = await routesRef.get().catch(console.log);
+    const snapshot = window.isJest
+      ? []
+      : await routesRef.get().catch(console.log);
     const routes = [];
     snapshot.forEach((doc) => {
       routes.push({ ...doc.data(), id: doc.id });

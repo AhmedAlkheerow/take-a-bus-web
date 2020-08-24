@@ -14,7 +14,7 @@ const positionOptions = {
   enableHighAccuracy: true,
 };
 
-export default function FromDestinationForm({ setRoutes }) {
+export default function FromDestinationForm({ setRoutes, setFetching }) {
   const {
     map,
     token,
@@ -23,7 +23,6 @@ export default function FromDestinationForm({ setRoutes }) {
     setOrigin,
     origin,
     setDestination,
-    destination,
     supportsGeolocation,
   } = useContext(MapContext);
 
@@ -87,8 +86,31 @@ export default function FromDestinationForm({ setRoutes }) {
     enableEventLogging: false,
   };
 
-  const fetchRoutes = (origin, dest) => {
-    setRoutes([origin, dest]);
+  const fetchRoutes = (origin, destination) => {
+    setFetching(true);
+    const options = {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        accept: 'application/json',
+      },
+      body: JSON.stringify({ origin, destination }),
+    };
+    fetch(
+      'https://us-central1-mapsproject-228715.cloudfunctions.net/getRoutes',
+      // 'http://localhost:5001/mapsproject-228715/us-central1/getRoutes',
+      options
+    )
+      .then((res) => res.json())
+      .then((routes) => {
+        console.log(routes);
+        routes.length && setRoutes(routes);
+        setFetching(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setFetching(false);
+      });
   };
 
   return (
@@ -122,7 +144,6 @@ export default function FromDestinationForm({ setRoutes }) {
           </div>
         </div>
       </div>
-
       <div>
         <label className="text-white font-medium mb-1" htmlFor="to-input">
           To:
@@ -134,7 +155,7 @@ export default function FromDestinationForm({ setRoutes }) {
               containerRef={destContainerRef}
               onResult={(res) => {
                 setDestination(res.result.center);
-                fetchRoutes(origin, destination);
+                fetchRoutes(origin, res.result.center);
               }}
               onClear={() => {
                 setDestination(null);
@@ -155,4 +176,5 @@ export default function FromDestinationForm({ setRoutes }) {
 
 FromDestinationForm.propTypes = {
   setRoutes: PropTypes.func.isRequired,
+  setFetching: PropTypes.func,
 };

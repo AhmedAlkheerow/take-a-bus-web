@@ -1,16 +1,33 @@
 import React from 'react';
+import moment from 'moment/moment.js';
 
 export default function SuggestionItem(props) {
   // eslint-disable-next-line react/prop-types
-  const busNo = props.busNo;
+  const busNo = props.plate_number;
   // eslint-disable-next-line react/prop-types
-  const origin = props.origin;
+  const plateRegion = props.plate_region;
   // eslint-disable-next-line react/prop-types
-  const destination = props.destination;
+  const origin = props.origin || 'Citadel';
   // eslint-disable-next-line react/prop-types
-  const duration = props.duration;
+  const destination = props.destination || 'Sami';
   // eslint-disable-next-line react/prop-types
-  const fastest = props.fastest || false;
+  const duration = props.working_hours;
+  // eslint-disable-next-line react/prop-types
+  const fastest = props.fastest;
+
+  const timeParse = (duration) => {
+    if (duration) {
+      // eslint-disable-next-line react/prop-types
+      const timeFrom = duration[0].substring(0, 4);
+      // eslint-disable-next-line react/prop-types
+      const timeTo = duration[0].substring(4, 8);
+      // eslint-disable-next-line react/prop-types
+      return `
+    ${moment(timeFrom, 'hhmm').format('HH:mm')}-${moment(timeTo, 'hhmm').format(
+        'HH:mm'
+      )}`;
+    }
+  };
 
   return (
     <>
@@ -20,7 +37,7 @@ export default function SuggestionItem(props) {
           data-testid="bus-no"
         >
           <span>
-            <strong>Bus No.</strong> {`(${busNo})`}
+            <strong>Bus No.</strong> {`(${busNo} ${plateRegion} - IRQ)`}
           </span>
           {fastest && (
             <span className="text-right text-green-400 text-xs">
@@ -29,7 +46,9 @@ export default function SuggestionItem(props) {
           )}
         </div>
         <div className="flex justify-between items-center text-xs">
-          <div data-testid="origin">{origin}</div>
+          <div data-testid="origin" className="font-semibold text-lg">
+            {origin}
+          </div>
           <div className="text-gray-600 ml-8 mr-6 mt-6">
             <svg
               width="143"
@@ -56,11 +75,13 @@ export default function SuggestionItem(props) {
                 fill="#395185"
               />
             </svg>
-            <div className="text-center pt-2" data-testid="duration">
-              {duration}
+            <div className="text-center pt-2 text-sm" data-testid="duration">
+              {timeParse(duration)}
             </div>
           </div>
-          <div data-testid="destination">{destination}</div>
+          <div data-testid="destination" className="font-semibold text-lg">
+            {destination}
+          </div>
         </div>
 
         <div className="text-right text-xs">
