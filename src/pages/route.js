@@ -11,89 +11,27 @@ export default function Routedetails() {
   const [viewport, setViewport] = useState({
     latitude: 36.206291,
     longitude: 44.008869,
-    // width: '100%',
-    // height: '100%',
+    width: '100%',
+    height: '250px',
     zoom: 11,
   });
+
   const [route, setRoute] = useState();
+
   useEffect(() => {
-    routesRef
-      .doc(id)
-      .get()
-      .then((document) => {
-        const route = document.data();
-        const path = JSON.parse(route.path);
-        const coordinates = path.geometry.coordinates;
-        const start = {
-          type: 'Feature',
-          properties: { type: 'start' },
-          geometry: {
-            type: 'Point',
-            coordinates: coordinates[0],
-          },
-        };
-        const end = {
-          type: 'Feature',
-          properties: { type: 'end' },
-          geometry: {
-            type: 'Point',
-            coordinates: coordinates[coordinates.length - 1],
-          },
-        };
-        route.path = {
-          type: 'FeatureCollection',
-          features: [path, start, end],
-        };
-        // route.path =
-        //   {
-        //     type: 'FeatureCollection',
-        //     features: [
-        //       {
-        //         type: 'Feature',
-        //         properties: {},
-        //         geometry: {
-        //           type: 'LineString',
-        //           coordinates: [
-        //             [44.00972843170166, 36.210035031115694],
-        //             [44.00852680206299, 36.19753385192636],
-        //             [44.01170253753662, 36.19043395558332],
-        //             [44.01994228363037, 36.18936025668664],
-        //             [44.01994228363037, 36.20044289180151],
-        //             [44.01547908782959, 36.20106624342554],
-        //             [44.014620780944824, 36.19878059653753],
-        //           ],
-        //         },
-        //       },
-        //       {
-        //         type: 'Feature',
-        //         properties: { type: 'start' },
-        //         geometry: {
-        //           type: 'Point',
-        //           coordinates: [44.014577865600586, 36.198745965010886],
-        //         },
-        //       },
-        //       {
-        //         type: 'Feature',
-        //         properties: { type: 'end' },
-        //         geometry: {
-        //           type: 'Point',
-        //           coordinates: [44.0097713470459, 36.21000040456822],
-        //         },
-        //       },
-        //     ],
-        //   };
-        bussesRef
-          .where('route_id', '==', id)
-          .limit(1)
-          .get()
-          .then((document) => {
-            const bus = document.docs[0].data();
-            route.bus = bus;
-            console.log(JSON.stringify(route));
-            setRoute(route);
-          });
-      });
-  }, []);
+    getRoute(id).then((route) => {
+      if (route) {
+        _mapRef.current
+          .getMap()
+          .fitBounds([
+            route.path.features[1].geometry.coordinates,
+            route.path.features[2].geometry.coordinates,
+          ]);
+        setRoute(route);
+      }
+    });
+  }, [id]);
+
   const _mapRef = useRef();
 
   useEffect(() => {
@@ -120,7 +58,7 @@ export default function Routedetails() {
         ref={_mapRef}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         onViewportChange={(viewport) => {
-          setViewport({ ...viewport, width: '100%', height: '100%' });
+          setViewport({ ...viewport, width: '100%', height: '250px' });
         }}
         mapStyle="mapbox://styles/shna/ckd4x2xmy02kh1ir3hihcr36m"
       >
@@ -188,4 +126,42 @@ export default function Routedetails() {
       )}
     </div>
   );
+}
+
+async function getRoute(id) {
+  if (window.isJest) return null;
+  const document = await routesRef.doc(id).get();
+  const route = document.data();
+  const path = JSON.parse(route.path);
+  const coordinates = path.geometry.coordinates;
+  const start = {
+    type: 'Feature',
+    properties: { type: 'start' },
+    geometry: {
+      type: 'Point',
+      coordinates: coordinates[0],
+    },
+  };
+  const end = {
+    type: 'Feature',
+    properties: { type: 'end' },
+    geometry: {
+      type: 'Point',
+      coordinates: coordinates[coordinates.length - 1],
+    },
+  };
+  route.path = {
+    type: 'FeatureCollection',
+    features: [path, start, end],
+  };
+
+  route.buses = [];
+
+  const busesDocs = await bussesRef.where('route_id', '==', id).get();
+
+  busesDocs.forEach((doc) => {
+    route.buses.push({ id: doc.id, ...doc.data() });
+  });
+
+  return route;
 }
