@@ -7,7 +7,7 @@ import about from './pages/about';
 import favorite from './pages/favorite';
 import history from './pages/history';
 import { AuthProvider } from './providers/AuthProvider';
-import route from './pages/routedetails';
+import route from './pages/route';
 
 function App() {
   return (
