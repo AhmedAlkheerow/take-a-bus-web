@@ -83,8 +83,8 @@ export default function Footer() {
           <p className="font-semibold text-2xl mb-3">Our Services</p>
           <ul className="list-disc ml-5">
             <li className="mb-3">Route list</li>
-            <li className="mb-3">Provide Busses</li>
-            <li className="mb-3">Time of busses</li>
+            <li className="mb-3">Provide Buses</li>
+            <li className="mb-3">Time of buses</li>
             <li className="mb-3">We love you</li>
             <li>Mobile Development</li>
           </ul>

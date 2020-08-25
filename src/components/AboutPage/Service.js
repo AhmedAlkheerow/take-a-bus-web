@@ -71,7 +71,7 @@ export default function Service() {
               <div className="mb-16">
                 <p className="text-3xl">Check the time </p>
                 <p>
-                  You can go to the route time of the busses and check the best
+                  You can go to the route time of the buses and check the best
                   time for you.
                 </p>
               </div>
