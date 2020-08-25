@@ -103,7 +103,6 @@ export default function FromDestinationForm({ setRoutes, setFetching }) {
     )
       .then((res) => res.json())
       .then((routes) => {
-        console.log(routes);
         routes.length && setRoutes(routes);
         setFetching(false);
       })

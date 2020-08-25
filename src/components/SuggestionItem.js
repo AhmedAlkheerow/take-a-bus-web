@@ -1,7 +1,10 @@
 import React from 'react';
 import moment from 'moment/moment.js';
+import Walking from '../assets/Walking.png';
+import Trip from '../assets/Trip.png';
 
 export default function SuggestionItem(props) {
+  console.log(props);
   // eslint-disable-next-line react/prop-types
   const busNo = props.plate_number;
   // eslint-disable-next-line react/prop-types
@@ -81,6 +84,53 @@ export default function SuggestionItem(props) {
           </div>
           <div data-testid="destination" className="font-semibold text-lg">
             {destination}
+          </div>
+        </div>
+
+        <div className="mt-4 flex justify-around">
+          <div className="flex">
+            <div>
+              <img
+                className="w-8 fill-current text-primary"
+                src={Walking}
+                alt="Walking png"
+              />
+            </div>
+            <div className="flex ml-5 mt-2">
+              <p className="font-semibold">
+                32
+                <span className="text-gray-500 text-sm font-semibold">
+                  {' '}
+                  min
+                </span>
+              </p>
+              <p className="font-semibold ml-5">
+                12
+                <span className="text-gray-500 text-sm font-semibold"> Km</span>
+              </p>
+            </div>
+          </div>
+          <div className="flex mt-2">
+            <div>
+              <img
+                className="w-8 fill-current text-primary"
+                src={Trip}
+                alt="Walking png"
+              />
+            </div>
+            <div className="flex ml-5">
+              <p className="font-semibold">
+                32
+                <span className="text-gray-500 text-sm font-semibold">
+                  {' '}
+                  min
+                </span>
+              </p>
+              <p className="font-semibold ml-5">
+                42
+                <span className="text-gray-500 text-sm font-semibold"> Km</span>
+              </p>
+            </div>
           </div>
         </div>
 
