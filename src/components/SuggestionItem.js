@@ -5,33 +5,24 @@ import Trip from '../assets/Trip.png';
 import PropTypes from 'prop-types';
 
 export default function SuggestionItem(props) {
-  // eslint-disable-next-line react/prop-types
-  const busNo = props.plate_number;
-  // eslint-disable-next-line react/prop-types
+  const plateNumber = props.plate_number;
   const plateRegion = props.plate_region;
-  // eslint-disable-next-line react/prop-types
   const origin = props.origin || 'Citadel';
-  // eslint-disable-next-line react/prop-types
   const destination = props.destination || 'Sami';
-  // eslint-disable-next-line react/prop-types
-  const duration = props.working_hours;
-  // eslint-disable-next-line react/prop-types
-  const fastest = props.fastest;
+  const availability = props.working_hours[0];
+  const isFastest = props.fastest;
   const originToBusDistance = props.originToBusDistance;
   const originToBusTime = props.originToBusTime;
   const tripDistance = props.tripDistance;
   const tripEST = props.tripEST;
 
-  const timeParse = (duration) => {
-    if (duration) {
-      // eslint-disable-next-line react/prop-types
-      const timeFrom = duration[0].substring(0, 4);
-      // eslint-disable-next-line react/prop-types
-      const timeTo = duration[0].substring(4, 8);
-      // eslint-disable-next-line react/prop-types
+  const timeParse = (timeString) => {
+    // timeString is a string like the follwoing '0000-2230'
+    if (timeString) {
+      const [start, end] = timeString.split('-');
       return `
-    ${moment(timeFrom, 'hhmm').format('HH:mm')}-${moment(timeTo, 'hhmm').format(
-        'HH:mm'
+    ${moment(start, 'HHmm').format('hh:mm a')}-${moment(end, 'HHmm').format(
+        'hh:mm a'
       )}`;
     }
   };
@@ -44,9 +35,9 @@ export default function SuggestionItem(props) {
           data-testid="bus-no"
         >
           <span>
-            <strong>Bus No.</strong> {`(${busNo} ${plateRegion} - IRQ)`}
+            <strong>Bus No.</strong> {`(${plateNumber} ${plateRegion} - IRQ)`}
           </span>
-          {fastest && (
+          {isFastest && (
             <span className="text-right text-green-400 text-xs">
               Fastest Route
             </span>
@@ -83,7 +74,7 @@ export default function SuggestionItem(props) {
               />
             </svg>
             <div className="text-center pt-2 text-sm" data-testid="duration">
-              {timeParse(duration)}
+              {timeParse(availability)}
             </div>
           </div>
           <div data-testid="destination" className="font-semibold text-lg">
@@ -102,14 +93,14 @@ export default function SuggestionItem(props) {
             </div>
             <div className="flex ml-5">
               <p className="font-semibold">
-                {tripEST}
+                {tripEST.toFixed()}
                 <span className="text-gray-500 text-sm font-semibold">
                   {' '}
                   min
                 </span>
               </p>
               <p className="font-semibold ml-5">
-                {tripDistance}
+                {tripDistance.toFixed(1)}
                 <span className="text-gray-500 text-sm font-semibold"> Km</span>
               </p>
             </div>
@@ -124,14 +115,14 @@ export default function SuggestionItem(props) {
             </div>
             <div className="flex ml-5 mt-2">
               <p className="font-semibold">
-                {originToBusTime}
+                {originToBusTime.toFixed()}
                 <span className="text-gray-500 text-sm font-semibold">
                   {' '}
                   min
                 </span>
               </p>
               <p className="font-semibold ml-5">
-                {originToBusDistance}
+                {originToBusDistance.toFixed(1)}
                 <span className="text-gray-500 text-sm font-semibold"> Km</span>
               </p>
             </div>
@@ -150,9 +141,14 @@ export default function SuggestionItem(props) {
 }
 
 SuggestionItem.propTypes = {
-  props: PropTypes.object.isRequired,
   originToBusDistance: PropTypes.number.isRequired,
   originToBusTime: PropTypes.number.isRequired,
   tripDistance: PropTypes.number.isRequired,
   tripEST: PropTypes.number.isRequired,
+  plate_number: PropTypes.string.isRequired,
+  plate_region: PropTypes.string.isRequired,
+  origin: PropTypes.string,
+  destination: PropTypes.string,
+  working_hours: PropTypes.arrayOf(PropTypes.string),
+  fastest: PropTypes.bool,
 };
