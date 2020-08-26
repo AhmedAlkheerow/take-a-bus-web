@@ -2,9 +2,9 @@ import React from 'react';
 import moment from 'moment/moment.js';
 import Walking from '../assets/Walking.svg';
 import Trip from '../assets/Trip.png';
+import PropTypes from 'prop-types';
 
 export default function SuggestionItem(props) {
-  console.log(props);
   // eslint-disable-next-line react/prop-types
   const busNo = props.plate_number;
   // eslint-disable-next-line react/prop-types
@@ -17,14 +17,10 @@ export default function SuggestionItem(props) {
   const duration = props.working_hours;
   // eslint-disable-next-line react/prop-types
   const fastest = props.fastest;
-  // eslint-disable-next-line react/prop-types
-  const originToBusDistance = props.originToBusDistance.toFixed(1);
-  // eslint-disable-next-line react/prop-types
-  const originToBusTime = props.originToBusTime.toFixed(1);
-  // eslint-disable-next-line react/prop-types
-  const tripDistance = props.tripDistance.toFixed(1);
-  // eslint-disable-next-line react/prop-types
-  const tripEST = props.tripEST.toFixed(1);
+  const originToBusDistance = props.originToBusDistance;
+  const originToBusTime = props.originToBusTime;
+  const tripDistance = props.tripDistance;
+  const tripEST = props.tripEST;
 
   const timeParse = (duration) => {
     if (duration) {
@@ -152,3 +148,11 @@ export default function SuggestionItem(props) {
     </>
   );
 }
+
+SuggestionItem.propTypes = {
+  props: PropTypes.object.isRequired,
+  originToBusDistance: PropTypes.number.isRequired,
+  originToBusTime: PropTypes.number.isRequired,
+  tripDistance: PropTypes.number.isRequired,
+  tripEST: PropTypes.number.isRequired,
+};

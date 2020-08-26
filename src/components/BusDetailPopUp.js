@@ -8,13 +8,13 @@ import VerticalLineDivide from './VerticalLineDivide';
 import BusNumberHeader from './BusNumberHeader';
 import Walking from '../assets/Walking.png';
 import Trip from '../assets/Trip.png';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-export default function BusDetailPopUp({ tripInfo }) {
-  const originToBusDistance = tripInfo[0].walking.originToBus.distance;
-  const originToBusTime = tripInfo[0].walking.originToBus.time;
-  const tripDistance = tripInfo[0].tripDistance;
-  const tripEST = tripInfo[0].tripEST;
+export default function BusDetailPopUp() {
+  // const originToBusDistance = tripInfo[0].walking.originToBus.distance;
+  // const originToBusTime = tripInfo[0].walking.originToBus.time;
+  // const tripDistance = tripInfo[0].tripDistance;
+  // const tripEST = tripInfo[0].tripEST;
 
   return (
     <div className="w-1/3 rounded-md">
@@ -33,11 +33,11 @@ export default function BusDetailPopUp({ tripInfo }) {
           </div>
           <div className="ml-5 mt-2">
             <p className="font-semibold">
-              {originToBusDistance.toFixed(1)}
+              {/* {originToBusDistance.toFixed(1)} */}
               <span className="text-gray-500 text-sm font-semibold"> min</span>
             </p>
             <p className="font-semibold">
-              {originToBusTime.toFixed(1)}
+              {/* {originToBusTime.toFixed(1)} */}
               <span className="text-gray-500 text-sm font-semibold"> Km</span>
             </p>
           </div>
@@ -52,11 +52,11 @@ export default function BusDetailPopUp({ tripInfo }) {
           </div>
           <div className="ml-5">
             <p className="font-semibold">
-              {tripDistance.toFixed(1)}
+              {/* {tripDistance.toFixed(1)} */}
               <span className="text-gray-500 text-sm font-semibold"> min</span>
             </p>
             <p className="font-semibold">
-              {tripEST.toFixed(1)}
+              {/* {tripEST.toFixed(1)} */}
               <span className="text-gray-500 text-sm font-semibold"> Km</span>
             </p>
           </div>
@@ -93,6 +93,6 @@ export default function BusDetailPopUp({ tripInfo }) {
   );
 }
 
-BusDetailPopUp.propTypes = {
-  tripInfo: PropTypes.array.isRequired,
-};
+// BusDetailPopUp.propTypes = {
+//   tripInfo: PropTypes.array.isRequired,
+// };

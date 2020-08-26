@@ -87,12 +87,14 @@ export default function SuggestionContainer({ suggestions }) {
                 <SuggestionItem
                   {...s}
                   fastest={idx === 0 ? true : null}
-                  originToBusDistance={
-                    suggestions[0].walking.originToBus.distance
-                  }
-                  originToBusTime={suggestions[0].walking.originToBus.time}
-                  tripDistance={suggestions[0].tripDistance}
-                  tripEST={suggestions[0].tripEST}
+                  originToBusDistance={suggestions[0].walking.originToBus.distance.toFixed(
+                    1
+                  )}
+                  originToBusTime={suggestions[0].walking.originToBus.time.toFixed(
+                    1
+                  )}
+                  tripDistance={suggestions[0].tripDistance.toFixed(1)}
+                  tripEST={suggestions[0].tripEST.toFixed(1)}
                 />
               </motion.div>
             </motion.div>
