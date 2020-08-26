@@ -82,7 +82,7 @@ export default function SuggestionContainer({ suggestions }) {
               <motion.div
                 whileHover={{ scale: 0.98 }}
                 whileTap={{ scale: 1 }}
-                onClick={() => onSuggestionClick(suggestions)}
+                onClick={() => onSuggestionClick(suggestions[0])}
               >
                 <SuggestionItem
                   {...s}
