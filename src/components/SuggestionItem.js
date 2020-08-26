@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment/moment.js';
-import Walking from '../assets/Walking.png';
+import Walking from '../assets/Walking.svg';
 import Trip from '../assets/Trip.png';
 
 export default function SuggestionItem(props) {
@@ -17,6 +17,14 @@ export default function SuggestionItem(props) {
   const duration = props.working_hours;
   // eslint-disable-next-line react/prop-types
   const fastest = props.fastest;
+  // eslint-disable-next-line react/prop-types
+  const originToBusDistance = props.originToBusDistance.toFixed(1);
+  // eslint-disable-next-line react/prop-types
+  const originToBusTime = props.originToBusTime.toFixed(1);
+  // eslint-disable-next-line react/prop-types
+  const tripDistance = props.tripDistance.toFixed(1);
+  // eslint-disable-next-line react/prop-types
+  const tripEST = props.tripEST.toFixed(1);
 
   const timeParse = (duration) => {
     if (duration) {
@@ -89,45 +97,45 @@ export default function SuggestionItem(props) {
 
         <div className="mt-4 flex justify-around">
           <div className="flex">
-            <div>
+            <div className="-mt-3">
               <img
-                className="w-8 fill-current text-primary"
+                className="w-16 fill-current text-primary"
                 src={Walking}
                 alt="Walking png"
               />
             </div>
             <div className="flex ml-5 mt-2">
               <p className="font-semibold">
-                32
+                {originToBusTime}
                 <span className="text-gray-500 text-sm font-semibold">
                   {' '}
                   min
                 </span>
               </p>
               <p className="font-semibold ml-5">
-                12
+                {originToBusDistance}
                 <span className="text-gray-500 text-sm font-semibold"> Km</span>
               </p>
             </div>
           </div>
           <div className="flex mt-2">
-            <div>
+            <div className="-mt-3">
               <img
-                className="w-8 fill-current text-primary"
+                className="w-10 fill-current text-primary"
                 src={Trip}
                 alt="Walking png"
               />
             </div>
             <div className="flex ml-5">
               <p className="font-semibold">
-                32
+                {tripEST}
                 <span className="text-gray-500 text-sm font-semibold">
                   {' '}
                   min
                 </span>
               </p>
               <p className="font-semibold ml-5">
-                42
+                {tripDistance}
                 <span className="text-gray-500 text-sm font-semibold"> Km</span>
               </p>
             </div>

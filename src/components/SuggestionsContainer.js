@@ -84,7 +84,16 @@ export default function SuggestionContainer({ suggestions }) {
                 whileTap={{ scale: 1 }}
                 onClick={() => onSuggestionClick(suggestions)}
               >
-                <SuggestionItem {...s} fastest={idx === 0 ? true : null} />
+                <SuggestionItem
+                  {...s}
+                  fastest={idx === 0 ? true : null}
+                  originToBusDistance={
+                    suggestions[0].walking.originToBus.distance
+                  }
+                  originToBusTime={suggestions[0].walking.originToBus.time}
+                  tripDistance={suggestions[0].tripDistance}
+                  tripEST={suggestions[0].tripEST}
+                />
               </motion.div>
             </motion.div>
           );
