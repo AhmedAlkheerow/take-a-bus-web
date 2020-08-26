@@ -90,11 +90,9 @@ export default function SuggestionContainer({ suggestions }) {
                   originToBusDistance={suggestions[0].walking.originToBus.distance.toFixed(
                     1
                   )}
-                  originToBusTime={suggestions[0].walking.originToBus.time.toFixed(
-                    1
-                  )}
+                  originToBusTime={suggestions[0].walking.originToBus.time.toFixed()}
                   tripDistance={suggestions[0].tripDistance.toFixed(1)}
-                  tripEST={suggestions[0].tripEST.toFixed(1)}
+                  tripEST={suggestions[0].tripEST.toFixed()}
                 />
               </motion.div>
             </motion.div>

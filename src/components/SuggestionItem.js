@@ -92,28 +92,6 @@ export default function SuggestionItem(props) {
         </div>
 
         <div className="mt-4 flex justify-around">
-          <div className="flex">
-            <div className="-mt-3">
-              <img
-                className="w-16 fill-current text-primary"
-                src={Walking}
-                alt="Walking png"
-              />
-            </div>
-            <div className="flex ml-5 mt-2">
-              <p className="font-semibold">
-                {originToBusTime}
-                <span className="text-gray-500 text-sm font-semibold">
-                  {' '}
-                  min
-                </span>
-              </p>
-              <p className="font-semibold ml-5">
-                {originToBusDistance}
-                <span className="text-gray-500 text-sm font-semibold"> Km</span>
-              </p>
-            </div>
-          </div>
           <div className="flex mt-2">
             <div className="-mt-3">
               <img
@@ -132,6 +110,28 @@ export default function SuggestionItem(props) {
               </p>
               <p className="font-semibold ml-5">
                 {tripDistance}
+                <span className="text-gray-500 text-sm font-semibold"> Km</span>
+              </p>
+            </div>
+          </div>
+          <div className="flex">
+            <div className="-mt-2">
+              <img
+                className="w-16 fill-current text-primary"
+                src={Walking}
+                alt="Walking png"
+              />
+            </div>
+            <div className="flex ml-5 mt-2">
+              <p className="font-semibold">
+                {originToBusTime}
+                <span className="text-gray-500 text-sm font-semibold">
+                  {' '}
+                  min
+                </span>
+              </p>
+              <p className="font-semibold ml-5">
+                {originToBusDistance}
                 <span className="text-gray-500 text-sm font-semibold"> Km</span>
               </p>
             </div>
