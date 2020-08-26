@@ -68,7 +68,7 @@ export default function Testimonial() {
             <div>
               <h1 className="Member-Name">Shna Rafeeq</h1>
               <div>I am 21 years old senior Software Engineer </div>
-              <div>estudent, who started her journey </div>
+              <div>student, who started her journey </div>
               <div>for the world of web developing with Re:coded.</div>
             </div>
           </div>
