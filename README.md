@@ -1,3 +1,6 @@
+Capstone project done with react and connected to firebase
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
